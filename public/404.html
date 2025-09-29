@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script>
+      // Redirect all paths back to index.html while preserving the path
+      var path = location.pathname + location.search + location.hash;
+      sessionStorage.redirect = path;
+      location.replace("/");
+    </script>
+  </head>
+  <body></body>
+</html>

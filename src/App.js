@@ -13,6 +13,18 @@ import Contact from "./pages/contact/Contact";
 import Projects from "./pages/projects/Projects"
 
 function App() {
+    if (sessionStorage.redirect) {
+        const redirectPath = sessionStorage.redirect;
+        sessionStorage.removeItem("redirect");
+        window.history.replaceState(null, "", redirectPath);
+    }
+
+    if (sessionStorage.redirect) {
+    const redirectPath = sessionStorage.redirect;
+    sessionStorage.removeItem("redirect");
+    window.history.replaceState(null, "", redirectPath);
+    }
+
     const [activeTabIndex, setActiveTabIndex] = useState(null)
     const [navbarHeight, setNavbarHeight] = useState(0)
 
@@ -27,15 +39,14 @@ function App() {
                 activeTabIndex={activeTabIndex}
                 setActiveTabIndex={setActiveTabIndex}
             />
+
             <div className="flex justify-center overflow-x-hidden">
                 <div className="w-[90%] shadow-2xl">
                     <Routes>
                         <Route path="/" element={<Home setActiveTabIndex={setActiveTabIndex} />} />
                         <Route path="/About" element={<About
                             topPadding={navbarHeight}
-                            setActiveTabIndex={setActiveTabIndex}
-                        />}
-                        />
+                            setActiveTabIndex={setActiveTabIndex} />} />
                         <Route path="/Services" element={<Service topPadding={navbarHeight} />} />
                         <Route path="/Projects" element={<Projects topPadding={navbarHeight} />} />
                         <Route path="/Contact" element={<Contact topPadding={navbarHeight} />} />
