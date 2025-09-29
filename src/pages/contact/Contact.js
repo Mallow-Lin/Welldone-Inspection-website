@@ -5,7 +5,7 @@ import emailjs from 'emailjs-com';
 const Contact = (props) => {
 
     return (
-        <div className='pb-10 min-h-screen items-center flex flex-col font-aleo' style={{ paddingTop: props.topPadding }}>
+        <div className='pb-10 min-h-screen items-center flex flex-col font-aleo mt-5' style={{ paddingTop: props.topPadding }}>
             <h1 className={`text-[20px] md:text-[35px]  font-semibold leading-[4rem]`}>Contact Us</h1>
             <p className={`text-sm md:text-xl text-gray-600`}>Get support anytime via chat, email, phone, or social media</p>
             {/* Email form */}
@@ -48,7 +48,7 @@ const ContactForm = ({ }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        emailjs.sendForm('service_matdhdd', 'template_bm8yifp', e.target, 'nC56A9vCQTFPqtabV')
+        emailjs.sendForm('service_47zticx', 'template_sajp3xc', e.target, 'nC56A9vCQTFPqtabV')
             .then((res) => {
                 console.log(res.text)
             }, (error) => {

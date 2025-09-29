@@ -1,32 +1,34 @@
 const projects = [
     {
-        title: "Project 1",
-        background: "https://p16-capcut-sign-va.ibyteimg.com/tos-alisg-v-643f9f/478de7a8db3a44cfa90b124aa8b8173a~tplv-nhvfeczskr-1:250:0.webp?lk3s=44acef4b&x-expires=1735558754&x-signature=zbZn70c6zaZEontOzQ2Vm4Xczyk%3D"
+        title: "270 Park Avenue, New York",
+        description: "JPMorgan Chase Tower Building",
+        background: "https://www.materialsource.co.uk/uploads/articles/78/78e6068d193ecbff2dedff3f94d76249661b6ab0_1152.jpeg"
     },
     {
-        title: "Project 2",
-        background: "https://images.pexels.com/photos/17249492/pexels-photo-17249492/free-photo-of-close-up-of-a-music-sheet-and-a-violin.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        title: "The Met, New York",
+        description: "Ancient Near Eastern and Cypriot Art renovation",
+        background: "https://www.takewalks.com/blog/wp-content/uploads/2012/03/Met-Lobby-600x800.jpg"
     },
     {
-        title: "Project 3",
-        background: "https://i.pinimg.com/564x/bb/26/c7/bb26c78aa5a812e8019cba5b606ef31f.jpg",
+        title: "The Frick Collection, New York",
+        description: "A premier museum and research center",
+        background: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Frick_Collection_New_York_cour.jpg/1200px-Frick_Collection_New_York_cour.jpg",
     },
     {
-        title: "Project 4",
-        background: "https://i.pinimg.com/564x/bb/26/c7/bb26c78aa5a812e8019cba5b606ef31f.jpg",
+        title: "PS 958 School, Brooklyn",
+        description: "New Building Special Inspection",
+        background: "https://images.squarespace-cdn.com/content/v1/61dc499ad8f43a769f3caff4/2b6f2fa1-7b8e-485c-a8e9-5e3185b5da82/PS958_BackgroundSq_2250px.jpg",
     },
     {
-        title: "Project 5",
-        background: "https://i.pinimg.com/564x/bb/26/c7/bb26c78aa5a812e8019cba5b606ef31f.jpg",
+        title: "John Jay College of Criminal Justice, New York",
+        description: "Facade repair",
+        background: "https://cdnassets.hw.net/d1/6c/bf26b8764f00a8be3c70cab3ed34/c01aa26d-d120-4e3d-ac3e-179117bc0c38.jpg",
     },
     {
-        title: "Project 6",
-        background: "https://i.pinimg.com/564x/bb/26/c7/bb26c78aa5a812e8019cba5b606ef31f.jpg",
-    },
-    {
-        title: "Project 7",
-        background: "https://i.pinimg.com/564x/bb/26/c7/bb26c78aa5a812e8019cba5b606ef31f.jpg",
-    },
+        title: "310 Hudson St, New York",
+        description: "The Walt Disney Company New York headquarters",
+        background: "https://thewaltdisneycompany.com/app/uploads/2024/12/Disneys-NY-Headquarters-Great-Room-by-Dave-Burk-SOM-%C2%A9-2024-Disney-400x614.jpg",
+    }
 ]
 
 export default projects

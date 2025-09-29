@@ -86,7 +86,7 @@ const Service = (props) => {
 const ServiceCard = ({ service }) => {
     return (
         <div className={`group size-[100px] md:size-[150px] lg:size-[200px] flex-shrink-0 rounded-xl shadow-card overflow-hidden relative duration-[0.8s]
-        bg-center bg-no-repeat bg-[length:300px]  hover:bg-left hover:bg-[length:600px]`}
+        bg-center bg-no-repeat bg-[length:100%_100%]  hover:bg-left hover:bg-[length:600px]`}
             style={{ backgroundImage: `url(${service.background})`}}>
             <p className='absolute text-[12px] md:text-sm lg:text-xl  font-bold top-0 w-full text-white p-3 bg-black group-hover:bg-transparent'>{service.title}</p>
         </div>

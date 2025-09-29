@@ -85,7 +85,7 @@ const Navbar = (props) => {
                     className={`${collapsed ? "scale-[0.8]" : "scale-100"} duration-500 cursor-pointer`}
                     onClick={handleLogoClick}
                 >
-                    <img src={mottoLogo} alt='logo' className="md:w-[300px] w-[150px] right-0"/>
+                    <img src={mottoLogo} alt='logo' className="md:w-[200px] w-[150px] right-0"/>
 
                 </div>
                 {/* Desktop menu */}

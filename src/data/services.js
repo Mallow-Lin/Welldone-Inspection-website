@@ -44,8 +44,8 @@ const services = [
         {
         title: "Engineering Design",
         name: "Engineering Design",
-        shortDescription: "Engineering Design, Filling, Consulting, PE stamp, Professional Certification, Engineer Calculation, Special Inspection, Local Law, ACP5, Sign off",
-        longDescription: "Engineering Design, Filling, Consultinge, PE stamp, Professional Certification, Engineer Calculation, Special Inspection, Local Law, ACP5, Sign off",
+        shortDescription: "Engineering Design, Engineering Calculation, Structual, Geotechnical, Mechanical",
+        longDescription: "Engineering Design, Engineering Calculation, Structual, Geotechnical, Mechanical",
         background: "https://www.strath.ac.uk/media/1newwebsite/courses/engineering/600x600/Design_engineering.jpg",
         link: ""
     }

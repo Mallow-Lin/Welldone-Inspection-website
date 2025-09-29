@@ -30,7 +30,7 @@ const ServiceCard = (props) => {
 
     return (
         <div className={`group h-[180px] w-[180px] md:h-[200px] md:w-[200px] lg:h-[260px] lg:w-[260px] bg-[#808080] rounded-xl shadow-card overflow-hidden flex relative justify-center items-center duration-[0.8s]
-        bg-center bg-no-repeat bg-[length:300px] hover:bg-left hover:bg-[length:600px]`}
+        bg-center bg-no-repeat bg-[length:100%_100%] hover:bg-left hover:bg-[length:600px]`}
             style={{ backgroundImage: `url(${service.background})` }}>
             <p className='absolute text-[12px] sm:text-sm md:text-sm lg:text-xl font-bold top-0 w-full text-white p-3 bg-black group-hover:bg-transparent'>{service.title}</p>
             <div className='h-[calc(100%-10px)] w-[calc(100%-10px)] rounded-xl duration-500  border-transparent justify-center items-center flex flex-col mt-[30px]

@@ -19,6 +19,11 @@ function App() {
         window.history.replaceState(null, "", redirectPath);
     }
 
+    if (sessionStorage.redirect) {
+    const redirectPath = sessionStorage.redirect;
+    sessionStorage.removeItem("redirect");
+    window.history.replaceState(null, "", redirectPath);
+    }
 
     const [activeTabIndex, setActiveTabIndex] = useState(null)
     const [navbarHeight, setNavbarHeight] = useState(0)
