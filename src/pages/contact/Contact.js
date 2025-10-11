@@ -10,7 +10,7 @@ const Contact = (props) => {
             <p className={`text-sm md:text-xl text-gray-600`}>Get support anytime via chat, email, phone, or social media</p>
             {/* Email form */}
             <div className='sm:flex  items-center justify-center w-[80%] py-6'>
-                <ContactForm/>
+                <ContactForm />
                 <div className='my-2 h-auto border-[#beb5b5] border-l-2 mx-10'></div>
                 <div className='flex flex-col text-[#6b6a6a] max-w-[600px]'>
                     <h1 className='text-black font-bold text-[15px] lg:text-[22px] mb-3'>We are easy to find—let us know your needs</h1>
@@ -48,7 +48,7 @@ const ContactForm = ({ }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        emailjs.sendForm('service_47zticx', 'template_sajp3xc', e.target, 'nC56A9vCQTFPqtabV')
+        emailjs.sendForm('service_47zticx', 'template_sajp3xc', e.target, 'CRGs6SWFjOm9s5AOr')
             .then((res) => {
                 console.log(res.text)
             }, (error) => {
@@ -62,7 +62,6 @@ const ContactForm = ({ }) => {
             phone: "",
             message: "",
         })
-        setErrors({})
     }
 
     return (
