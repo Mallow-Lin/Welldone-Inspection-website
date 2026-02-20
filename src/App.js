@@ -11,6 +11,7 @@ import Footer from "./components/Footer"
 import { useState } from "react";
 import Contact from "./pages/contact/Contact";
 import Projects from "./pages/projects/Projects"
+import WelcomePopup from "./components/WelcomePopup"
 
 function App() {
     if (sessionStorage.redirect) {
@@ -34,6 +35,7 @@ function App() {
 
     return (
         <Router>
+            <WelcomePopup />
             <Navbar
                 setNavbarHeight={handleSetNavbarHeight}
                 activeTabIndex={activeTabIndex}
