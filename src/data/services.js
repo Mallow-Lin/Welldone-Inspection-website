@@ -1,5 +1,3 @@
-import Services from "../pages/home/Services"
-
 const services = [
     {
         title: "TR1 Special Inspections",

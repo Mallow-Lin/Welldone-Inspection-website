@@ -1,28 +1,40 @@
 import React, { useState } from 'react'
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser'
+import siteConfig from '../../data/siteConfig'
 
+const EMAILJS_SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID
+const EMAILJS_TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID
+const EMAILJS_PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY
 
 const Contact = (props) => {
-
     return (
         <div className='pb-10 min-h-screen items-center flex flex-col font-aleo mt-5' style={{ paddingTop: props.topPadding }}>
-            <h1 className={`text-[20px] md:text-[35px]  font-semibold leading-[4rem]`}>Contact Us</h1>
-            <p className={`text-sm md:text-xl text-gray-600`}>Get support anytime via chat, email, phone, or social media</p>
-            {/* Email form */}
-            <div className='sm:flex  items-center justify-center w-[80%] py-6'>
-                <ContactForm/>
-                <div className='my-2 h-auto border-[#beb5b5] border-l-2 mx-10'></div>
-                <div className='flex flex-col text-[#6b6a6a] max-w-[600px]'>
-                    <h1 className='text-black font-bold text-[15px] lg:text-[22px] mb-3'>We are easy to find—let us know your needs</h1>
+            <h1 className='text-[20px] md:text-[35px] font-semibold leading-[4rem]'>Contact Us</h1>
+            <p className='text-sm md:text-xl text-gray-600'>Get support anytime via email or phone</p>
+            <div className='sm:flex items-center justify-center w-[80%] py-6'>
+                <ContactForm />
+                <div className='hidden sm:block my-2 h-auto border-[#beb5b5] border-l-2 mx-10' />
+                <div className='flex flex-col text-[#6b6a6a] max-w-[600px] mt-6 sm:mt-0'>
+                    <h2 className='text-black font-bold text-[15px] lg:text-[22px] mb-3'>We are easy to find—let us know your needs</h2>
                     <div className='mb-4'>
                         <h3 className='text-black text-[15px] lg:text-[18px] font-semibold mb-1'>Headquarters</h3>
-                        <p className='text-[15px] lg:text-[18px]'>10 Hallets Point</p>
-                        <p className='text-[15px] lg:text-[18px]'>Astoria, NY, 11102</p>
+                        <p className='text-[15px] lg:text-[18px]'>{siteConfig.address.street}</p>
+                        <p className='text-[15px] lg:text-[18px]'>{siteConfig.address.city}, {siteConfig.address.state}, {siteConfig.address.zip}</p>
                     </div>
                     <div className='mb-6'>
                         <h3 className='text-black text-[15px] lg:text-[18px] font-semibold mb-1'>Contacts</h3>
-                        <p className='text-[15px] lg:text-[18px]'>Email: welldoneinspect@gmail.com</p>
-                        <p className='text-[15px] lg:text-[18px]'>Phone: (917) 213-1886</p>
+                        <p className='text-[15px] lg:text-[18px]'>
+                            Email:{' '}
+                            <a href={`mailto:${siteConfig.email}`} className='text-[#1b6666] hover:underline'>
+                                {siteConfig.email}
+                            </a>
+                        </p>
+                        <p className='text-[15px] lg:text-[18px]'>
+                            Phone:{' '}
+                            <a href={`tel:${siteConfig.phoneTel}`} className='text-[#1b6666] hover:underline'>
+                                {siteConfig.phone}
+                            </a>
+                        </p>
                     </div>
                     <p className='text-[15px] lg:text-[18px]'>If you're a current or past client and have feedback for us, we want to hear from you. Please leave us a message or review here and let us know how we are doing!</p>
                 </div>
@@ -31,89 +43,117 @@ const Contact = (props) => {
     )
 }
 
-const ContactForm = ({ }) => {
+const ContactForm = () => {
     const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
+        name: '',
+        email: '',
+        phone: '',
+        message: '',
     })
+    const [status, setStatus] = useState('idle')
 
     const updateData = (e) => {
-        const name = e.target.name
-        const value = e.target.value
+        const { name, value } = e.target
         setFormData({ ...formData, [name]: value })
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        emailjs.sendForm('service_47zticx', 'template_sajp3xc', e.target, 'nC56A9vCQTFPqtabV')
-            .then((res) => {
-                console.log(res.text)
-            }, (error) => {
-                console.log(error.text)
+        if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+            setStatus('error')
+            return
+        }
+
+        setStatus('loading')
+
+        emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, e.target, EMAILJS_PUBLIC_KEY)
+            .then(() => {
+                setStatus('success')
+                setFormData({ name: '', email: '', phone: '', message: '' })
             })
-
-        console.log(`Form submitted`)
-        setFormData({
-            name: "",
-            email: "",
-            phone: "",
-            message: "",
-        })
-        setErrors({})
+            .catch(() => {
+                setStatus('error')
+            })
     }
 
     return (
         <form className='flex flex-col max-w-[400px] w-full' onSubmit={handleSubmit}>
             <div className='flex flex-col'>
+                <label htmlFor='name' className='sr-only'>Name</label>
                 <input
+                    id='name'
                     placeholder='Name'
                     name='name'
                     type='text'
                     value={formData.name}
                     onChange={updateData}
                     required
-                    className='bg-gray-100 p-3 my-3 rounded-md border border-gray-300'
+                    disabled={status === 'loading'}
+                    className='bg-gray-100 p-3 my-3 rounded-md border border-gray-300 disabled:opacity-50'
                 />
             </div>
             <div className='flex flex-col'>
+                <label htmlFor='email' className='sr-only'>Email</label>
                 <input
+                    id='email'
                     placeholder='Email'
                     name='email'
                     type='email'
                     value={formData.email}
                     onChange={updateData}
                     required
-                    className='bg-gray-100 p-3 my-3 rounded-md border border-gray-300'
+                    disabled={status === 'loading'}
+                    className='bg-gray-100 p-3 my-3 rounded-md border border-gray-300 disabled:opacity-50'
                 />
             </div>
             <div className='flex flex-col'>
+                <label htmlFor='phone' className='sr-only'>Phone</label>
                 <input
+                    id='phone'
                     placeholder='Phone'
                     name='phone'
                     type='tel'
                     value={formData.phone}
                     onChange={updateData}
                     required
-                    className='bg-gray-100 p-3 my-3 rounded-md border border-gray-300'
+                    disabled={status === 'loading'}
+                    className='bg-gray-100 p-3 my-3 rounded-md border border-gray-300 disabled:opacity-50'
                 />
             </div>
             <div className='flex flex-col'>
+                <label htmlFor='message' className='sr-only'>Message</label>
                 <textarea
+                    id='message'
                     rows='3'
                     placeholder='Message'
                     name='message'
                     value={formData.message}
                     onChange={updateData}
                     required
-                    className='bg-gray-100 p-3 my-3 rounded-md border border-gray-300'
+                    disabled={status === 'loading'}
+                    className='bg-gray-100 p-3 my-3 rounded-md border border-gray-300 disabled:opacity-50'
                 />
             </div>
+
+            {status === 'success' && (
+                <p className='text-green-700 bg-green-50 border border-green-200 rounded-md p-3 mb-3 text-sm' role='status'>
+                    Thank you! We received your message and will respond within 24 hours.
+                </p>
+            )}
+            {status === 'error' && (
+                <p className='text-red-700 bg-red-50 border border-red-200 rounded-md p-3 mb-3 text-sm' role='alert'>
+                    Something went wrong. Please call us at {siteConfig.phone} or email {siteConfig.email}.
+                </p>
+            )}
+
             <button
                 type='submit'
-                className='self-start border-2 border-black py-[7px] px-20 font-roboto bg-[#1b6666] text-[#ecb403] rounded-md text-[20px] md:text-[35px] font-semibold' >Submit</button>
+                disabled={status === 'loading'}
+                className='self-start border-2 border-black py-[7px] px-20 font-roboto bg-[#1b6666] text-[#ecb403] rounded-md text-[20px] md:text-[35px] font-semibold disabled:opacity-50'
+            >
+                {status === 'loading' ? 'Sending...' : 'Submit'}
+            </button>
         </form>
     )
 }
