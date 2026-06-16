@@ -79,3 +79,38 @@ export const buildBreadcrumbSchema = (
     item: item.path === '/' ? siteConfig.url : `${siteConfig.url}${item.path}`,
   })),
 })
+
+export const buildFaqSchema = (items: Array<{ question: string; answer: string }>) => ({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+})
+
+export const buildServiceSchema = (service: {
+  title: string
+  description: string
+  path: string
+}) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: service.title,
+  description: service.description,
+  provider: {
+    '@type': 'LocalBusiness',
+    name: siteConfig.companyName,
+    telephone: siteConfig.phone,
+    url: siteConfig.url,
+  },
+  areaServed: {
+    '@type': 'City',
+    name: 'New York City',
+  },
+  url: `${siteConfig.url}${service.path}`,
+})

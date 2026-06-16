@@ -8,6 +8,17 @@ const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
 const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
 const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
 
+const PROJECT_TYPES = [
+  'TR1 Special Inspections',
+  'Concrete Testing (TR2)',
+  'Pile Driving / Foundations (TR5)',
+  'Energy Code (TR8)',
+  'Engineering / Other',
+  'Not sure yet',
+]
+
+const CONTACT_METHODS = ['Email', 'Phone', 'Either']
+
 const ContactPage = () => {
   return (
     <div className='pb-10 min-h-screen items-center flex flex-col font-aleo mt-5'>
@@ -50,20 +61,20 @@ const ContactForm = () => {
     name: '',
     email: '',
     phone: '',
+    project_type: '',
+    contact_method: '',
     message: '',
   })
   const [status, setStatus] = useState('idle')
 
   const updateData = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
   }
 
-  const handleSubmit = (
-    e: React.FormEvent<HTMLFormElement>,
-  ) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
@@ -76,7 +87,14 @@ const ContactForm = () => {
     emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, e.currentTarget, EMAILJS_PUBLIC_KEY)
       .then(() => {
         setStatus('success')
-        setFormData({ name: '', email: '', phone: '', message: '' })
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          project_type: '',
+          contact_method: '',
+          message: '',
+        })
       })
       .catch(() => {
         setStatus('error')
@@ -128,11 +146,45 @@ const ContactForm = () => {
         />
       </div>
       <div className='flex flex-col'>
+        <label htmlFor='project_type' className='sr-only'>Project type</label>
+        <select
+          id='project_type'
+          name='project_type'
+          value={formData.project_type}
+          onChange={updateData}
+          required
+          disabled={status === 'loading'}
+          className='bg-gray-100 p-3 my-3 rounded-md border border-gray-300 disabled:opacity-50 text-gray-700'
+        >
+          <option value=''>Project type</option>
+          {PROJECT_TYPES.map((type) => (
+            <option key={type} value={type}>{type}</option>
+          ))}
+        </select>
+      </div>
+      <div className='flex flex-col'>
+        <label htmlFor='contact_method' className='sr-only'>Preferred contact method</label>
+        <select
+          id='contact_method'
+          name='contact_method'
+          value={formData.contact_method}
+          onChange={updateData}
+          required
+          disabled={status === 'loading'}
+          className='bg-gray-100 p-3 my-3 rounded-md border border-gray-300 disabled:opacity-50 text-gray-700'
+        >
+          <option value=''>Preferred contact method</option>
+          {CONTACT_METHODS.map((method) => (
+            <option key={method} value={method}>{method}</option>
+          ))}
+        </select>
+      </div>
+      <div className='flex flex-col'>
         <label htmlFor='message' className='sr-only'>Message</label>
         <textarea
           id='message'
           rows={3}
-          placeholder='Message'
+          placeholder='Message (include project address if known)'
           name='message'
           value={formData.message}
           onChange={updateData}
@@ -144,7 +196,7 @@ const ContactForm = () => {
 
       {status === 'success' && (
         <p className='text-green-700 bg-green-50 border border-green-200 rounded-md p-3 mb-3 text-sm' role='status'>
-          Thank you! We received your message and will respond within 24 hours.
+          Thank you! We received your message and will respond within 24 hours. For urgent inspections, call {siteConfig.phone}.
         </p>
       )}
       {status === 'error' && (

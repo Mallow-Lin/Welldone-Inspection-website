@@ -5,6 +5,7 @@ export type ServiceItem = {
   longDescription: string
   background: string
   link: string
+  slug?: string
 }
 
 const services: ServiceItem[] = [
@@ -15,6 +16,7 @@ const services: ServiceItem[] = [
     longDescription: 'Architectural, Structural, Mechanical, Plumbing, Electrical, Soil, Sprinkler, Standpipe, Facade, Curtain Wall',
     background: '/images/services/tr1-special-inspections.png',
     link: 'https://www.nyc.gov/assets/buildings/pdf/tr1_2014.pdf',
+    slug: 'tr1-special-inspections',
   },
   {
     title: 'TR2 Concrete Sampling and Testing',
@@ -23,6 +25,7 @@ const services: ServiceItem[] = [
     longDescription: 'Concrete test, Grout test, Mortar test, Soil test, Core test',
     background: '/images/services/tr2-concrete-testing.jpg',
     link: 'https://www.nyc.gov/assets/buildings/pdf/tr2.pdf',
+    slug: 'concrete-testing',
   },
   {
     title: 'TR3 Concrete Design Mix',
@@ -39,6 +42,7 @@ const services: ServiceItem[] = [
     longDescription: 'Steel H-pile, Micropile, Helical pile, Timber pile, Drilled Caissons',
     background: '/images/services/tr5-pile-driving.png',
     link: 'https://www.nyc.gov/assets/buildings/pdf/tr5.pdf',
+    slug: 'pile-driving-inspections',
   },
   {
     title: 'TR8 Energy Code Compliance',
@@ -47,6 +51,7 @@ const services: ServiceItem[] = [
     longDescription: 'Energy Code Compliance',
     background: '/images/services/tr8-energy-code.jpg',
     link: 'https://www.nyc.gov/assets/buildings/pdf/tr8.pdf',
+    slug: 'energy-code-compliance',
   },
   {
     title: 'Engineering Design',

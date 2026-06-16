@@ -1,14 +1,13 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import siteConfig from '@/data/siteConfig'
 
 const Hero = () => {
   return (
     <section className='relative flex flex-col items-center justify-center bg-brand-teal text-white my-20 md:my-0 md:min-h-[500px] lg:min-h-[600px] px-6 py-12 md:py-16'>
-      <div
-        className='absolute inset-0 opacity-10 bg-center bg-no-repeat bg-contain pointer-events-none'
-        style={{ backgroundImage: 'url(/logo.png)' }}
-        aria-hidden='true'
-      />
+      <div className='absolute inset-0 opacity-10 pointer-events-none flex items-center justify-center' aria-hidden='true'>
+        <Image src='/logo.png' alt='' width={400} height={400} className='object-contain' priority />
+      </div>
       <div className='relative z-10 flex flex-col items-center text-center max-w-3xl'>
         <span className='inline-block bg-brand-gold text-brand-teal text-xs md:text-sm font-bold px-4 py-1 rounded-full mb-4'>
           {siteConfig.mwbe}

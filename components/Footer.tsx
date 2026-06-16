@@ -1,3 +1,5 @@
+import Image from 'next/image'
+import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
 import siteConfig from '@/data/siteConfig'
@@ -7,17 +9,16 @@ const Footer = () => {
     <div className='flex flex-col justify-center bg-brand-teal lg:mt-5'>
       <div className='flex flex-col md:flex-row justify-center items-center md:items-start md:h-[260px] py-10 md:py-14 px-4 gap-8 md:gap-0'>
         <div className='flex flex-col w-full md:w-[320px] space-y-2 md:mx-10 lg:mx-20 items-center md:items-start text-center md:text-left'>
-          <img src='/images/logos/logo_with_motto.png' alt='WellDone Inspection logo' className='w-[200px]' />
+          <Image src='/images/logos/logo_with_motto.png' alt='WellDone Inspection logo' width={200} height={80} className='w-[200px] h-auto' />
           <p className='text-brand-gold font-serif text-[10px] md:text-[12px] lg:text-[15px]'>{siteConfig.mwbe}</p>
         </div>
         <div className='hidden md:block border-[#3f3f3f] border-l-[1px] border-solid h-full' />
         <div className='flex flex-col w-full md:w-[250px] justify-center items-center space-y-2 text-brand-gold md:mx-10 lg:mx-20'>
           <p className='text-[15px] md:text-[20px] lg:text-[30px] font-bold font-oswald'>Services</p>
-          <p className='font-merriweather text-[10px] md:text-[12px] lg:text-[15px]'>TR Inspections</p>
-          <p className='font-merriweather text-[10px] md:text-[12px] lg:text-[15px]'>Engineering</p>
-          <p className='font-merriweather text-[10px] md:text-[12px] lg:text-[15px]'>TPP</p>
-          <p className='font-merriweather text-[10px] md:text-[12px] lg:text-[15px]'>SSP</p>
-          <p className='font-merriweather text-[10px] md:text-[12px] lg:text-[15px] text-center'>Structural Shop Drawings</p>
+          <Link href='/services/tr1-special-inspections' className='font-merriweather text-[10px] md:text-[12px] lg:text-[15px] hover:underline'>TR1 Inspections</Link>
+          <Link href='/services/concrete-testing' className='font-merriweather text-[10px] md:text-[12px] lg:text-[15px] hover:underline'>Concrete Testing</Link>
+          <Link href='/faq' className='font-merriweather text-[10px] md:text-[12px] lg:text-[15px] hover:underline'>FAQ</Link>
+          <Link href='/service-areas' className='font-merriweather text-[10px] md:text-[12px] lg:text-[15px] hover:underline'>Service Areas</Link>
         </div>
         <div className='hidden md:block border-[#3f3f3f] border-l-[1px] border-solid h-full' />
         <div className='flex flex-col items-center md:items-start space-y-4 text-brand-gold md:mx-10 lg:mx-20'>

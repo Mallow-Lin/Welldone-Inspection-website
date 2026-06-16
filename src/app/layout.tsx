@@ -5,6 +5,7 @@ import SiteShell from '@/components/SiteShell'
 import JsonLd from '@/components/JsonLd'
 import siteConfig from '@/data/siteConfig'
 import { localBusinessSchema, metadataBase } from '@/lib/seo'
+import { fontVariables } from '@/lib/fonts'
 
 const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX'
 
@@ -41,7 +42,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body>
+      <body className={fontVariables}>
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
           strategy='afterInteractive'

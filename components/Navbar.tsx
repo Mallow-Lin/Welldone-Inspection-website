@@ -1,6 +1,7 @@
 'use client'
 
 import { FaBars, FaTimes } from 'react-icons/fa'
+import Image from 'next/image'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -27,10 +28,12 @@ const Navbar = ({ setNavbarHeight }: NavbarProps) => {
   const [collapsed, setCollapsed] = useState(false)
   const [nav, setNav] = useState(false)
 
-  const activeTabIndex = useMemo(
-    () => tabs.findIndex((tab) => tab.path === pathname),
-    [pathname],
-  )
+  const activeTabIndex = useMemo(() => {
+    if (pathname === '/') return -1
+    return tabs.findIndex(
+      (tab) => pathname === tab.path || pathname.startsWith(`${tab.path}/`),
+    )
+  }, [pathname])
 
   const setTabPosition = (activeTabIdx: number) => {
     if (activeTabIdx < 0) {
@@ -91,7 +94,7 @@ const Navbar = ({ setNavbarHeight }: NavbarProps) => {
           className={`${collapsed ? 'scale-[0.8]' : 'scale-100'} duration-500 cursor-pointer bg-transparent border-none p-0`}
           aria-label='Go to homepage'
         >
-          <img src='/images/logos/logo_with_motto.png' alt='WellDone Inspection logo' className='md:w-[200px] w-[150px]' />
+          <Image src='/images/logos/logo_with_motto.png' alt='WellDone Inspection logo' width={200} height={80} className='md:w-[200px] w-[150px] h-auto' priority />
         </Link>
 
         <div className='hidden md:flex w-[550px] items-center h-12 font-semibold duration-500 relative'>

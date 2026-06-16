@@ -14,12 +14,10 @@ module.exports = {
                 'brand-gold': '#ecb403',
             },
             fontFamily: {
-                oswald:
-                    ["Oswald",
-                        'sans-serif'],
-                aleo: ["Aleo", "sans-serif"],
-                merriweather: ["Merriweather", "sans-serif"],
-                roboto: ["Roboto", "sans-serif"],
+                oswald: ['var(--font-oswald)', 'sans-serif'],
+                aleo: ['var(--font-aleo)', 'sans-serif'],
+                merriweather: ['var(--font-merriweather)', 'serif'],
+                roboto: ['var(--font-roboto)', 'sans-serif'],
             },
             boxShadow: {
                 'card': '0 70px 63px -60px #000',
