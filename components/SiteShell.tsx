@@ -15,10 +15,8 @@ const SiteShell = ({ children }: SiteShellProps) => {
   return (
     <>
       <Navbar setNavbarHeight={setNavbarHeight} />
-      <main className='flex justify-center overflow-x-hidden'>
-        <div className='w-[90%] shadow-2xl' style={{ paddingTop: navbarHeight }}>
-          {children}
-        </div>
+      <main className='w-full overflow-x-hidden' style={{ paddingTop: navbarHeight }}>
+        {children}
       </main>
       <Footer />
       <StickyQuoteButton />

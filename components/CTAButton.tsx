@@ -1,13 +1,22 @@
 import Link from 'next/link'
 
+type CTAVariant = 'primary' | 'secondary' | 'outline'
+
 type CTAButtonProps = {
   href: string
   children: React.ReactNode
+  variant?: CTAVariant
   className?: string
 }
 
-const CTAButton = ({ href, children, className = '' }: CTAButtonProps) => {
-  const classes = `inline-block border-2 border-black py-[7px] px-[15px] font-roboto hover:bg-brand-teal hover:text-brand-gold duration-300 text-[12px] md:text-md ${className}`
+const variantClasses: Record<CTAVariant, string> = {
+  primary: 'bg-brand-gold text-brand-teal border-2 border-transparent hover:bg-[#d4a003]',
+  secondary: 'bg-brand-teal text-white border-2 border-transparent hover:bg-[#155252]',
+  outline: 'border-2 border-brand-teal text-brand-teal hover:bg-brand-teal hover:text-white',
+}
+
+const CTAButton = ({ href, children, variant = 'outline', className = '' }: CTAButtonProps) => {
+  const classes = `inline-block rounded font-roboto font-medium tracking-wide text-sm py-2.5 px-6 transition-colors duration-300 ${variantClasses[variant]} ${className}`
 
   if (href.startsWith('http')) {
     return (

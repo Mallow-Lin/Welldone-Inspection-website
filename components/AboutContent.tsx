@@ -1,49 +1,56 @@
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faComments } from '@fortawesome/free-solid-svg-icons'
+import { faComments, faCheck } from '@fortawesome/free-solid-svg-icons'
+import SectionHeading from '@/components/SectionHeading'
 
 type AboutContentProps = {
   compact?: boolean
   showContactCta?: boolean
 }
 
+const whatWeDo = [
+  'Structural Steel & Welding Inspections',
+  'Concrete Placement & Rebar',
+  'Soils, Footings, and Deep Foundations (Piles, Caissons, Helical Piers)',
+  'Wood Framing & Shear Walls',
+  'EIFS & Fireproofing',
+  'Excavation and Underpinning Oversight',
+]
+
 const AboutContent = ({ compact = false, showContactCta = false }: AboutContentProps) => {
   if (compact) {
     return (
-      <div className='flex flex-col md:mt-5 px-5 md:px-10 lg:px-40'>
-        <div className='flex flex-row'>
-          <div className='flex flex-col justify-between flex-grow lg:mt-5'>
-            <div className='flex items-center'>
-              <p className='md:text-[35px] font-bold text-[20px]'>About Us</p>
-              <hr className='border-1 border-black flex-grow mx-4' />
-            </div>
-            <h2 className='font-serif md:text-[20px] text-[15px] mt-3 mb-3'>
-              <p>WellDone Inspection, Inc. is a New York City-based DOB-registered Special Inspection Agency dedicated to delivering accurate, code-compliant, and timely special inspections for construction projects of all scales. As a small business, we pride ourselves on offering the attention to detail, responsiveness, and accountability that larger firms often cannot match.</p>
-            </h2>
+      <section className='section py-12 md:py-16'>
+        <SectionHeading title='About Us' />
+        <div className='flex flex-col md:flex-row md:items-start gap-6 md:gap-10'>
+          <div className='flex-grow'>
+            <p className='text-base md:text-lg text-gray-700 leading-relaxed'>
+              WellDone Inspection, Inc. is a New York City-based DOB-registered Special Inspection Agency dedicated to delivering accurate, code-compliant, and timely special inspections for construction projects of all scales. As a small business, we pride ourselves on offering the attention to detail, responsiveness, and accountability that larger firms often cannot match.
+            </p>
           </div>
-          <div className='group relative ml-2 md:ml-5 flex-none size-[100px] md:size-[150px]'>
-            <img src='/images/logos/logo_no_motto.png' alt='WellDone Inspection logo' className='absolute w-full h-full object-fill border-2 rounded-3xl bg-white group-hover:translate-x-[-10px] group-hover:translate-y-[-10px] duration-500 z-10' />
-            <div className='bg-white border-4 w-full h-full rounded-3xl flex items-end justify-center p-1 ml-[15px] mt-[35px] md:ml-[0px] md:mt-[10px] md:group-hover:translate-x-[10px] md:group-hover:translate-y-[30px] duration-500'>
-              <p className='font-bold text-[10px] md:text-sm'>James Jiang, P.E., Director</p>
+          <div className='group relative mx-auto md:mx-0 flex-none size-[120px] md:size-[150px]'>
+            <img src='/images/logos/logo_no_motto.png' alt='WellDone Inspection logo' className='absolute w-full h-full object-fill border border-gray-200 rounded-3xl bg-white group-hover:translate-x-[-8px] group-hover:translate-y-[-8px] duration-500 z-10' />
+            <div className='bg-white border-2 border-gray-200 w-full h-full rounded-3xl flex items-end justify-center p-2 ml-[10px] mt-[20px] md:ml-0 md:mt-[8px] md:group-hover:translate-x-[8px] md:group-hover:translate-y-[24px] duration-500'>
+              <p className='font-semibold text-xs md:text-sm text-gray-800 text-center'>James Jiang, P.E., Director</p>
             </div>
           </div>
         </div>
-        <div>
-          <p className='mb-3 font-serif text-[15px] md:text-[20px]'>
-            Founded by a licensed professional engineer with over 10 years of experience in structural engineering and construction oversight, our mission is simple: support builders, owners, and developers in building safe, durable, and code-compliant structures.
-          </p>
-          <p className='mb-3 font-bold text-[20px]'>What We Do</p>
-          <div className='font-serif text-[15px] md:text-[20px]'>
-            <p>We provide third-party Special Inspections as required by the NYC Building Code (Chapter 17), including but not limited to:</p>
-            <li>Structural Steel & Welding Inspections</li>
-            <li>Concrete Placement & Rebar</li>
-            <li>Soils, Footings, and Deep Foundations (Piles, Caissons, Helical Piers)</li>
-            <li>Wood Framing & Shear Walls</li>
-            <li>EIFS & Fireproofing</li>
-            <li>Excavation and Underpinning Oversight</li>
-          </div>
-        </div>
-      </div>
+        <p className='mt-6 text-base md:text-lg text-gray-700 leading-relaxed'>
+          Founded by a licensed professional engineer with over 10 years of experience in structural engineering and construction oversight, our mission is simple: support builders, owners, and developers in building safe, durable, and code-compliant structures.
+        </p>
+        <h3 className='mt-8 font-oswald text-xl md:text-2xl font-semibold text-gray-900'>What We Do</h3>
+        <p className='mt-2 text-base md:text-lg text-gray-700 leading-relaxed'>
+          We provide third-party Special Inspections as required by the NYC Building Code (Chapter 17), including but not limited to:
+        </p>
+        <ul className='mt-4 grid sm:grid-cols-2 gap-x-8 gap-y-3'>
+          {whatWeDo.map((item) => (
+            <li key={item} className='flex items-start gap-3 text-base text-gray-700'>
+              <FontAwesomeIcon icon={faCheck} className='text-brand-teal mt-1 shrink-0' />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
     )
   }
 

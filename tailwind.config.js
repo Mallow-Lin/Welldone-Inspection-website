@@ -20,7 +20,14 @@ module.exports = {
                 roboto: ['var(--font-roboto)', 'sans-serif'],
             },
             boxShadow: {
-                'card': '0 70px 63px -60px #000',
+                'card': '0 10px 30px -12px rgba(15, 23, 42, 0.18)',
+                'soft': '0 2px 8px rgba(15, 23, 42, 0.06)',
+                'elevated': '0 18px 40px -20px rgba(15, 23, 42, 0.28)',
+            },
+            fontSize: {
+                'display': ['3rem', { lineHeight: '1.1' }],
+                'heading': ['2.25rem', { lineHeight: '1.15' }],
+                'subheading': ['1.5rem', { lineHeight: '1.25' }],
             }
         },
     },

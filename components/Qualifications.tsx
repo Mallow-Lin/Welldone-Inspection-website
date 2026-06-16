@@ -1,22 +1,33 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCertificate } from '@fortawesome/free-solid-svg-icons'
+import SectionHeading from '@/components/SectionHeading'
+
+const qualifications = [
+  'NY / NJ State Licensed P.E. with Structural and Geotechnical Background',
+  'AWS Certified Welding Inspector',
+  'ICC Master of Special Inspection',
+  'ICC Certified Concrete, Masonry, Welding, Bolting, Mechanical',
+  'ACI Concrete Certified Inspector / Technician',
+  'LEED AP',
+  'PMI Project Management Professionals',
+]
+
 const Qualifications = () => {
   return (
-    <div className='flex space-x-8 mt-5 px-5 md:px-10 lg:px-40'>
-      <div className='flex flex-col justify-between flex-grow'>
-        <div className='flex items-center'>
-          <p className='md:text-[35px] font-bold text-[20px]'>Qualifications</p>
-          <hr className='border-1 border-black flex-grow mx-4' />
-        </div>
-        <h2 className='font-serif gap-4 mt-3 md:text-[20px] text-[15px]'>
-          <p>NY / NJ State Licensed P.E. with Structural and Geotechnical Background</p>
-          <p>AWS Certified Welding Inspector</p>
-          <p>ICC Master of Special Inspection</p>
-          <p>ICC Certified Concrete, Masonry, Welding, Bolting, Mechanical</p>
-          <p>ACI Concrete Certified Inspector / Technician</p>
-          <p>LEED AP</p>
-          <p>PMI Project Management Professionals</p>
-        </h2>
-      </div>
-    </div>
+    <section className='section py-12 md:py-16'>
+      <SectionHeading title='Qualifications' />
+      <ul className='grid sm:grid-cols-2 gap-x-8 gap-y-4'>
+        {qualifications.map((item) => (
+          <li
+            key={item}
+            className='flex items-start gap-3 rounded-lg border border-gray-100 bg-white px-4 py-3 shadow-soft'
+          >
+            <FontAwesomeIcon icon={faCertificate} className='text-brand-gold mt-1 shrink-0' />
+            <span className='text-base text-gray-700 leading-relaxed'>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
   )
 }
 

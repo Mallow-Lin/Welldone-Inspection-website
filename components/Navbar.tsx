@@ -24,7 +24,7 @@ const Navbar = ({ setNavbarHeight }: NavbarProps) => {
   const tabsRef = useRef<Array<HTMLAnchorElement | null>>([])
   const [tabUnderlineWidth, setTabUnderlineWidth] = useState(0)
   const [tabUnderlineLeft, setTabUnderlineLeft] = useState(0)
-  const [navbarStyle, setNavbarStyle] = useState('bg-white text-black pt-8')
+  const [scrolled, setScrolled] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
   const [nav, setNav] = useState(false)
 
@@ -48,18 +48,23 @@ const Navbar = ({ setNavbarHeight }: NavbarProps) => {
   }
 
   useEffect(() => {
+    let frame = 0
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setNavbarStyle('bg-black bg-opacity-40 text-white py-4')
-        setCollapsed(true)
-      } else {
-        setNavbarStyle('bg-white text-black pt-8')
-        setCollapsed(false)
-      }
+      if (frame) return
+      frame = window.requestAnimationFrame(() => {
+        const isScrolled = window.scrollY > 50
+        setScrolled(isScrolled)
+        setCollapsed(isScrolled)
+        frame = 0
+      })
     }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (frame) window.cancelAnimationFrame(frame)
+    }
   }, [])
 
   useEffect(() => {
@@ -86,15 +91,17 @@ const Navbar = ({ setNavbarHeight }: NavbarProps) => {
   return (
     <nav
       ref={navbarRef}
-      className={`z-20 fixed w-full py-4 md:px-20 px-10 border-b-2 border-b-gray-400 ${navbarStyle} transition-all duration-500`}
+      className={`z-20 fixed w-full md:px-20 px-6 sm:px-10 bg-white text-gray-900 border-b transition-all duration-300 ease-out ${
+        scrolled ? 'py-2 shadow-soft border-gray-200' : 'py-4 border-gray-100'
+      }`}
     >
       <div className='flex justify-between items-center'>
         <Link
           href='/'
-          className={`${collapsed ? 'scale-[0.8]' : 'scale-100'} duration-500 cursor-pointer bg-transparent border-none p-0`}
+          className={`origin-left ${collapsed ? 'scale-95' : 'scale-100'} transition-transform duration-300 ease-out cursor-pointer bg-transparent border-none p-0`}
           aria-label='Go to homepage'
         >
-          <Image src='/images/logos/logo_with_motto.png' alt='WellDone Inspection logo' width={200} height={80} className='md:w-[200px] w-[150px] h-auto' priority />
+          <Image src='/images/logos/logo_with_motto.png' alt='WellDone Inspection logo' width={200} height={80} className='md:w-[190px] w-[150px] h-auto' priority />
         </Link>
 
         <div className='hidden md:flex w-[550px] items-center h-12 font-semibold duration-500 relative'>
@@ -111,7 +118,7 @@ const Navbar = ({ setNavbarHeight }: NavbarProps) => {
                   tabsRef.current[index] = elem
                 }}
                 href={tab.path}
-                className={`px-4 duration-100 ${collapsed ? 'text-lg' : 'text-xl'} ${isActive ? 'text-brand-gold' : 'hover:text-brand-gold'}`}
+                className={`px-4 transition-colors duration-200 ${collapsed ? 'text-base' : 'text-lg'} ${isActive ? 'text-brand-gold' : 'text-gray-700 hover:text-brand-teal'}`}
               >
                 {tab.label}
               </Link>
@@ -130,17 +137,21 @@ const Navbar = ({ setNavbarHeight }: NavbarProps) => {
         <button
           type='button'
           onClick={() => setNav((prev) => !prev)}
-          className='md:hidden z-10 py-8 cursor-pointer bg-transparent border-none'
+          className='md:hidden z-10 p-2 -mr-2 text-brand-teal cursor-pointer bg-transparent border-none'
           aria-label={nav ? 'Close menu' : 'Open menu'}
           aria-expanded={nav}
         >
           {!nav ? <FaBars className='size-[20px]' /> : <FaTimes />}
         </button>
 
-        <ul className={!nav ? 'hidden' : 'md:hidden absolute top-12 right-5 w-40 bg-brand-teal flex flex-col justify-center items-center rounded-3xl py-4'}>
+        <ul className={!nav ? 'hidden' : 'md:hidden absolute top-full right-4 mt-2 w-48 bg-brand-teal flex flex-col rounded-2xl py-2 shadow-elevated'}>
           {tabs.map((tab) => (
-            <li key={tab.path} className='my-2 text-md text-white cursor-pointer'>
-              <Link href={tab.path} onClick={() => setNav(false)}>
+            <li key={tab.path}>
+              <Link
+                href={tab.path}
+                onClick={() => setNav(false)}
+                className='block px-5 py-2.5 text-sm font-semibold text-white hover:text-brand-gold transition-colors'
+              >
                 {tab.label}
               </Link>
             </li>
@@ -148,7 +159,7 @@ const Navbar = ({ setNavbarHeight }: NavbarProps) => {
         </ul>
       </div>
       {activeTabIndex === -1 && (
-        <div className={`flex justify-center font-bold md:text-xl text-sm overflow-hidden transition-all ${collapsed ? 'max-h-0 opacity-0' : 'max-h-20 opacity-100'} duration-300`}>
+        <div className={`flex justify-center font-oswald font-medium tracking-wide text-brand-teal md:text-lg text-sm overflow-hidden transition-all ${collapsed ? 'max-h-0 opacity-0 mt-0' : 'max-h-20 opacity-100 mt-1'} duration-300`}>
           Welcome to WellDone Inspection!
         </div>
       )}

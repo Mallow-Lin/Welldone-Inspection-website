@@ -17,15 +17,15 @@ const HomePage = () => {
       <Qualifications />
       <HomeServices />
       <Testimonials />
-      <div className='w-full justify-center flex lg:mt-5'>
+      <section className='section pb-16 md:pb-20'>
         <Link
           href='/projects'
-          className='flex justify-center items-center group space-x-4 w-2/3 sm:w-1/2 hover:w-3/5 hover:text-brand-gold border-[3px] px-6 py-3 my-6 font-semibold rounded-xl border-gray-300 hover:border-brand-gold hover:bg-brand-teal duration-500'
+          className='group mx-auto flex max-w-xl items-center justify-center gap-3 rounded-xl border border-gray-200 px-6 py-4 font-oswald font-medium text-gray-800 hover:border-brand-teal hover:text-brand-teal transition-colors'
         >
-          <p className='-mr-6 group-hover:mr-0 duration-500 text-[10px] md:text-[15px] lg:text-[18px]'>Check out our latest projects.</p>
-          <FontAwesomeIcon icon={faScrewdriverWrench} className='opacity-0 group-hover:flex group-hover:opacity-100 duration-500' />
+          <span className='text-base md:text-lg'>Check out our latest projects</span>
+          <FontAwesomeIcon icon={faScrewdriverWrench} className='transition-transform duration-300 group-hover:translate-x-1' />
         </Link>
-      </div>
+      </section>
     </div>
   )
 }

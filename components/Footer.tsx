@@ -6,47 +6,58 @@ import siteConfig from '@/data/siteConfig'
 
 const Footer = () => {
   return (
-    <div className='flex flex-col justify-center bg-brand-teal lg:mt-5'>
-      <div className='flex flex-col md:flex-row justify-center items-center md:items-start md:h-[260px] py-10 md:py-14 px-4 gap-8 md:gap-0'>
-        <div className='flex flex-col w-full md:w-[320px] space-y-2 md:mx-10 lg:mx-20 items-center md:items-start text-center md:text-left'>
-          <Image src='/images/logos/logo_with_motto.png' alt='WellDone Inspection logo' width={200} height={80} className='w-[200px] h-auto' />
-          <p className='text-brand-gold font-serif text-[10px] md:text-[12px] lg:text-[15px]'>{siteConfig.mwbe}</p>
-        </div>
-        <div className='hidden md:block border-[#3f3f3f] border-l-[1px] border-solid h-full' />
-        <div className='flex flex-col w-full md:w-[250px] justify-center items-center space-y-2 text-brand-gold md:mx-10 lg:mx-20'>
-          <p className='text-[15px] md:text-[20px] lg:text-[30px] font-bold font-oswald'>Services</p>
-          <Link href='/services/tr1-special-inspections' className='font-merriweather text-[10px] md:text-[12px] lg:text-[15px] hover:underline'>TR1 Inspections</Link>
-          <Link href='/services/concrete-testing' className='font-merriweather text-[10px] md:text-[12px] lg:text-[15px] hover:underline'>Concrete Testing</Link>
-          <Link href='/faq' className='font-merriweather text-[10px] md:text-[12px] lg:text-[15px] hover:underline'>FAQ</Link>
-          <Link href='/service-areas' className='font-merriweather text-[10px] md:text-[12px] lg:text-[15px] hover:underline'>Service Areas</Link>
-        </div>
-        <div className='hidden md:block border-[#3f3f3f] border-l-[1px] border-solid h-full' />
-        <div className='flex flex-col items-center md:items-start space-y-4 text-brand-gold md:mx-10 lg:mx-20'>
-          <p className='text-[15px] md:text-[20px] lg:text-[30px] font-bold font-oswald'>Contact</p>
-          <div className='flex space-x-2 sm:space-x-4 items-center text-[10px] md:text-[12px] lg:text-[15px]'>
-            <FontAwesomeIcon icon={faMapMarkerAlt} />
-            <p className='font-merriweather'>{siteConfig.address.full}</p>
+    <footer className='bg-brand-teal text-white'>
+      <div className='mx-auto max-w-6xl px-6 md:px-8 lg:px-12 py-12 md:py-16'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12'>
+          <div className='flex flex-col items-center sm:items-start text-center sm:text-left'>
+            <Image src='/images/logos/logo_with_motto.png' alt='WellDone Inspection logo' width={200} height={80} className='w-[180px] h-auto' />
+            <p className='mt-3 text-brand-gold font-merriweather text-sm leading-relaxed max-w-[260px]'>{siteConfig.mwbe}</p>
           </div>
-          <div className='flex space-x-2 sm:space-x-4 items-center text-[10px] md:text-[12px] lg:text-[15px]'>
-            <FontAwesomeIcon icon={faEnvelope} />
-            <a href={`mailto:${siteConfig.email}`} className='font-merriweather hover:underline'>
-              {siteConfig.email}
-            </a>
+
+          <div className='flex flex-col items-center sm:items-start text-center sm:text-left'>
+            <h2 className='font-oswald text-xl font-semibold text-brand-gold mb-4'>Services</h2>
+            <ul className='space-y-2.5'>
+              <li><Link href='/services/tr1-special-inspections' className='font-merriweather text-sm text-gray-100 hover:text-brand-gold transition-colors'>TR1 Inspections</Link></li>
+              <li><Link href='/services/concrete-testing' className='font-merriweather text-sm text-gray-100 hover:text-brand-gold transition-colors'>Concrete Testing</Link></li>
+              <li><Link href='/faq' className='font-merriweather text-sm text-gray-100 hover:text-brand-gold transition-colors'>FAQ</Link></li>
+              <li><Link href='/service-areas' className='font-merriweather text-sm text-gray-100 hover:text-brand-gold transition-colors'>Service Areas</Link></li>
+            </ul>
           </div>
-          <div className='flex space-x-2 sm:space-x-4 items-center text-[10px] md:text-[12px] lg:text-[15px]'>
-            <FontAwesomeIcon icon={faPhone} />
-            <a href={`tel:${siteConfig.phoneTel}`} className='font-merriweather hover:underline'>
-              {siteConfig.phone}
-            </a>
+
+          <div className='flex flex-col items-center sm:items-start text-center sm:text-left'>
+            <h2 className='font-oswald text-xl font-semibold text-brand-gold mb-4'>Contact</h2>
+            <ul className='space-y-3 text-sm'>
+              <li className='flex items-start gap-3 justify-center sm:justify-start'>
+                <FontAwesomeIcon icon={faMapMarkerAlt} className='text-brand-gold mt-1 shrink-0' />
+                <span className='font-merriweather text-gray-100'>{siteConfig.address.full}</span>
+              </li>
+              <li className='flex items-center gap-3 justify-center sm:justify-start'>
+                <FontAwesomeIcon icon={faEnvelope} className='text-brand-gold shrink-0' />
+                <a href={`mailto:${siteConfig.email}`} className='font-merriweather text-gray-100 hover:text-brand-gold transition-colors break-all'>
+                  {siteConfig.email}
+                </a>
+              </li>
+              <li className='flex items-center gap-3 justify-center sm:justify-start'>
+                <FontAwesomeIcon icon={faPhone} className='text-brand-gold shrink-0' />
+                <a href={`tel:${siteConfig.phoneTel}`} className='font-merriweather text-gray-100 hover:text-brand-gold transition-colors'>
+                  {siteConfig.phone}
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-      <div className='flex flex-col sm:flex-row justify-center items-center bg-[#3f3f3f] space-y-2 sm:space-y-0 sm:space-x-4 text-[8px] md:text-[12px] lg:text-[15px] py-2 px-4'>
-        <p className='text-white font-semibold'>© 2025 {siteConfig.companyName} All rights reserved.</p>
-        <p className='font-medium text-blue-400'>Terms of Service</p>
-        <p className='font-medium text-blue-400'>Privacy Policy</p>
+
+      <div className='border-t border-white/10'>
+        <div className='mx-auto max-w-6xl px-6 md:px-8 lg:px-12 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-200'>
+          <p>© 2025 {siteConfig.companyName} All rights reserved.</p>
+          <div className='flex items-center gap-5'>
+            <Link href='#' className='hover:text-brand-gold transition-colors'>Terms of Service</Link>
+            <Link href='#' className='hover:text-brand-gold transition-colors'>Privacy Policy</Link>
+          </div>
+        </div>
       </div>
-    </div>
+    </footer>
   )
 }
 
