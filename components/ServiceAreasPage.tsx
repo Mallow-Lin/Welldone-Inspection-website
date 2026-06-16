@@ -1,49 +1,52 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import serviceAreas from '@/data/serviceAreas'
 import CTAButton from '@/components/CTAButton'
+import SectionHeading from '@/components/SectionHeading'
+import PageHeader from '@/components/PageHeader'
 import siteConfig from '@/data/siteConfig'
 
 const ServiceAreasPage = () => {
   return (
-    <div className='font-aleo pb-16 px-6 max-w-4xl mx-auto'>
-      <h1 className='text-[20px] md:text-[35px] font-semibold mt-5 mb-2'>{serviceAreas.headline}</h1>
-      <p className='text-sm md:text-lg text-gray-700 mb-8 leading-relaxed'>{serviceAreas.intro}</p>
+    <section className='section py-12 md:py-16'>
+      <PageHeader title={serviceAreas.headline} intro={serviceAreas.intro} />
 
-      <div className='grid md:grid-cols-2 gap-4 mb-10'>
+      <div className='grid md:grid-cols-2 gap-5 mb-12'>
         {serviceAreas.boroughs.map((borough) => (
-          <div key={borough.name} className='bg-gray-50 rounded-xl p-5 border-l-4 border-brand-teal'>
-            <h2 className='font-oswald text-lg font-bold text-brand-teal mb-2'>{borough.name}</h2>
-            <p className='text-sm md:text-base text-gray-700'>{borough.description}</p>
+          <div key={borough.name} className='rounded-xl border border-gray-100 bg-white p-5 shadow-soft border-l-4 border-l-brand-teal'>
+            <h3 className='font-oswald text-lg font-semibold text-brand-teal mb-2'>{borough.name}</h3>
+            <p className='text-base text-gray-700 leading-relaxed'>{borough.description}</p>
           </div>
         ))}
       </div>
 
-      <section className='mb-10'>
-        <h2 className='font-oswald text-xl font-bold text-brand-teal mb-3'>New Jersey</h2>
-        <p className='text-sm md:text-base text-gray-700 leading-relaxed'>{serviceAreas.newJersey}</p>
+      <section className='mb-12'>
+        <SectionHeading title='New Jersey' />
+        <p className='text-base text-gray-700 leading-relaxed'>{serviceAreas.newJersey}</p>
       </section>
 
-      <section className='mb-10'>
-        <h2 className='font-oswald text-xl font-bold text-brand-teal mb-3'>Credentials</h2>
-        <ul className='space-y-2'>
+      <section className='mb-12'>
+        <SectionHeading title='Credentials' />
+        <ul className='grid sm:grid-cols-2 gap-x-8 gap-y-3'>
           {serviceAreas.certifications.map((cert) => (
-            <li key={cert} className='text-sm md:text-base text-gray-700 flex items-center'>
-              <span className='text-brand-gold mr-2'>✓</span>
-              {cert}
+            <li key={cert} className='flex items-start gap-3 text-base text-gray-700'>
+              <FontAwesomeIcon icon={faCheck} className='text-brand-teal mt-1 shrink-0' />
+              <span>{cert}</span>
             </li>
           ))}
         </ul>
       </section>
 
-      <div className='bg-gray-100 rounded-xl p-6 text-center'>
-        <p className='mb-2 font-semibold'>Headquarters: {siteConfig.address.full}</p>
-        <p className='text-sm text-gray-600 mb-4'>
+      <div className='rounded-xl border border-gray-100 bg-gray-50 p-6 md:p-8 shadow-soft text-center'>
+        <p className='font-oswald text-lg font-semibold text-gray-900 mb-2'>Headquarters: {siteConfig.address.full}</p>
+        <p className='text-sm text-gray-600 mb-5'>
           <a href={`tel:${siteConfig.phoneTel}`} className='text-brand-teal hover:underline'>{siteConfig.phone}</a>
           {' · '}
           <a href={`mailto:${siteConfig.email}`} className='text-brand-teal hover:underline'>{siteConfig.email}</a>
         </p>
-        <CTAButton href='/contact'>Request an Inspection Quote</CTAButton>
+        <CTAButton href='/contact' variant='primary'>Request an Inspection Quote</CTAButton>
       </div>
-    </div>
+    </section>
   )
 }
 

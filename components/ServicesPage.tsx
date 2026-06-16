@@ -3,45 +3,42 @@ import services from '@/data/services'
 import otherServices from '@/data/otherServices'
 import ImageCard from '@/components/ImageCard'
 import CTAButton from '@/components/CTAButton'
+import PageHeader from '@/components/PageHeader'
 
-const ServiceRow = ({
+const ServiceCard = ({
   title,
   description,
   background,
   link,
   slug,
-  reverse,
 }: {
   title: string
   description: string
   background: string
   link: string
   slug?: string
-  reverse: boolean
 }) => {
   const internalHref = slug ? `/services/${slug}` : null
 
   return (
-    <div className={`flex ${reverse ? 'flex-row-reverse' : 'flex-row'} space-x-4 md:space-x-10 border-t-2 border-gray-400 py-4 w-full`}>
-      <div className={reverse ? 'mr-4 md:mr-10' : ''}>
-        <ImageCard
-          title={title}
-          background={background}
-          className='size-[100px] md:size-[150px] lg:size-[200px] flex-shrink-0'
-        />
-      </div>
-      <div className='flex flex-col justify-center items-start space-y-6 text-[12px] md:text-md lg:text-lg'>
-        <p>{description}</p>
+    <div className='flex gap-4 rounded-xl border border-gray-100 bg-white p-4 shadow-soft md:gap-5 md:p-5'>
+      <ImageCard
+        title={title}
+        background={background}
+        className='size-[110px] shrink-0 md:size-[140px]'
+      />
+      <div className='flex min-w-0 flex-col justify-between gap-4 py-1'>
+        <p className='text-sm md:text-base text-gray-700 leading-relaxed'>{description}</p>
         {internalHref ? (
-          <CTAButton href={internalHref} className='text-[12px] md:text-md'>
+          <CTAButton href={internalHref} variant='secondary' className='self-start'>
             Learn More
           </CTAButton>
         ) : link ? (
-          <CTAButton href={link} className='text-[12px] md:text-md'>
+          <CTAButton href={link} variant='outline' className='self-start'>
             DOB Form
           </CTAButton>
         ) : (
-          <CTAButton href='/contact' className='text-[12px] md:text-md'>
+          <CTAButton href='/contact' variant='outline' className='self-start'>
             Contact us for details
           </CTAButton>
         )}
@@ -51,45 +48,36 @@ const ServiceRow = ({
 }
 
 const ServicesPage = () => {
+  const allServices = [...services, ...otherServices]
+
   return (
-    <div className='flex flex-col p-10 overflow-x-hidden'>
-      <p className='font-semibold font-aleo md:text-[35px] font-bold text-[20px]'>Services</p>
-      <p className='text-sm text-gray-600 mb-4'>
-        Explore our{' '}
-        <Link href='/services/tr1-special-inspections' className='text-brand-teal hover:underline'>TR1</Link>,{' '}
-        <Link href='/services/concrete-testing' className='text-brand-teal hover:underline'>concrete testing</Link>,{' '}
-        <Link href='/services/pile-driving-inspections' className='text-brand-teal hover:underline'>pile driving</Link>, and{' '}
-        <Link href='/services/energy-code-compliance' className='text-brand-teal hover:underline'>energy code</Link>{' '}
-        service pages for details.
-      </p>
-      <div className='md:flex md:space-x-5'>
-        <div className='md:w-1/2'>
-          {services.map((service, index) => (
-            <ServiceRow
-              key={service.title}
-              title={service.title}
-              description={service.longDescription}
-              background={service.background}
-              link={service.link}
-              slug={service.slug}
-              reverse={index % 2 !== 0}
-            />
-          ))}
-        </div>
-        <div className='md:w-1/2'>
-          {otherServices.map((service, index) => (
-            <ServiceRow
-              key={service.title}
-              title={service.title}
-              description={service.longDescription}
-              background={service.background}
-              link={service.link}
-              reverse={index % 2 !== 0}
-            />
-          ))}
-        </div>
+    <section className='section py-12 md:py-16'>
+      <PageHeader
+        title='Services'
+        intro={
+          <>
+            Explore our{' '}
+            <Link href='/services/tr1-special-inspections' className='text-brand-teal hover:underline'>TR1</Link>,{' '}
+            <Link href='/services/concrete-testing' className='text-brand-teal hover:underline'>concrete testing</Link>,{' '}
+            <Link href='/services/pile-driving-inspections' className='text-brand-teal hover:underline'>pile driving</Link>, and{' '}
+            <Link href='/services/energy-code-compliance' className='text-brand-teal hover:underline'>energy code</Link>{' '}
+            service pages for details.
+          </>
+        }
+      />
+      <div className='grid gap-5 md:gap-6 lg:grid-cols-2'>
+        {allServices.map((service) => (
+          <ServiceCard
+            key={service.title}
+            title={service.title}
+            description={service.longDescription}
+            background={service.background}
+            link={service.link}
+            slug={service.slug}
+          />
+        ))}
       </div>
-    </div>
+    </section>
   )
 }
 

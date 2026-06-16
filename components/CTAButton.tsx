@@ -26,6 +26,14 @@ const CTAButton = ({ href, children, variant = 'outline', className = '' }: CTAB
     )
   }
 
+  if (href.startsWith('tel:') || href.startsWith('mailto:')) {
+    return (
+      <a href={href} className={classes}>
+        {children}
+      </a>
+    )
+  }
+
   return (
     <Link href={href} className={classes}>
       {children}

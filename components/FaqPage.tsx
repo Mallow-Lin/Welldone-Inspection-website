@@ -1,35 +1,41 @@
 'use client'
 
 import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import faqItems from '@/data/faq'
 import CTAButton from '@/components/CTAButton'
+import PageHeader from '@/components/PageHeader'
 
 const FaqPage = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <div className='font-aleo pb-16 px-6 max-w-3xl mx-auto'>
-      <h1 className='text-[20px] md:text-[35px] font-semibold mt-5 mb-2'>Frequently Asked Questions</h1>
-      <p className='text-sm md:text-lg text-gray-600 mb-8'>
-        Common questions about NYC special inspections, DOB requirements, and working with WellDone Inspection.
-      </p>
+    <section className='section max-w-3xl py-12 md:py-16'>
+      <PageHeader
+        title='Frequently Asked Questions'
+        intro='Common questions about NYC special inspections, DOB requirements, and working with WellDone Inspection.'
+      />
 
       <div className='space-y-3'>
         {faqItems.map((item, index) => {
           const isOpen = openIndex === index
           return (
-            <div key={item.question} className='border border-gray-200 rounded-lg overflow-hidden'>
+            <div key={item.question} className='rounded-lg border border-gray-100 bg-white shadow-soft overflow-hidden'>
               <button
                 type='button'
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className='w-full text-left px-4 py-4 bg-gray-50 hover:bg-gray-100 font-semibold text-sm md:text-base flex justify-between items-center'
+                className='flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-oswald font-semibold text-base md:text-lg text-gray-900 hover:bg-gray-50 transition-colors'
                 aria-expanded={isOpen}
               >
                 {item.question}
-                <span className='text-brand-teal ml-4'>{isOpen ? '−' : '+'}</span>
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  className={`shrink-0 text-brand-teal transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                />
               </button>
               {isOpen && (
-                <div className='px-4 py-4 text-sm md:text-base text-gray-700 leading-relaxed'>
+                <div className='px-5 pb-5 pt-1 text-base text-gray-700 leading-relaxed'>
                   {item.answer}
                 </div>
               )}
@@ -38,13 +44,13 @@ const FaqPage = () => {
         })}
       </div>
 
-      <div className='mt-10 bg-brand-teal text-white rounded-xl p-6 text-center'>
-        <p className='font-semibold mb-3'>Still have questions?</p>
-        <CTAButton href='/contact' className='bg-white text-brand-teal border-white hover:bg-brand-gold hover:text-brand-teal hover:border-brand-gold'>
+      <div className='mt-12 rounded-xl bg-brand-teal text-white p-8 text-center shadow-card'>
+        <p className='font-oswald text-lg md:text-xl font-semibold mb-4'>Still have questions?</p>
+        <CTAButton href='/contact' variant='primary'>
           Contact Us
         </CTAButton>
       </div>
-    </div>
+    </section>
   )
 }
 

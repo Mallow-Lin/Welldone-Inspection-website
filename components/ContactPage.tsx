@@ -2,7 +2,10 @@
 
 import { useState } from 'react'
 import emailjs from '@emailjs/browser'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLocationDot, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
 import siteConfig from '@/data/siteConfig'
+import PageHeader from '@/components/PageHeader'
 
 const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
 const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
@@ -21,40 +24,65 @@ const CONTACT_METHODS = ['Email', 'Phone', 'Either']
 
 const ContactPage = () => {
   return (
-    <div className='pb-10 min-h-screen items-center flex flex-col font-aleo mt-5'>
-      <h1 className='text-[20px] md:text-[35px] font-semibold leading-[4rem]'>Contact Us</h1>
-      <p className='text-sm md:text-xl text-gray-600'>Get support anytime via email or phone</p>
-      <div className='sm:flex items-center justify-center w-[80%] py-6'>
+    <section className='section py-12 md:py-16'>
+      <PageHeader title='Contact Us' intro='Get support anytime via email or phone' />
+      <div className='grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-12'>
         <ContactForm />
-        <div className='hidden sm:block my-2 h-auto border-[#beb5b5] border-l-2 mx-10' />
-        <div className='flex flex-col text-[#6b6a6a] max-w-[600px] mt-6 sm:mt-0'>
-          <h2 className='text-black font-bold text-[15px] lg:text-[22px] mb-3'>We are easy to find—let us know your needs</h2>
-          <div className='mb-4'>
-            <h3 className='text-black text-[15px] lg:text-[18px] font-semibold mb-1'>Headquarters</h3>
-            <p className='text-[15px] lg:text-[18px]'>{siteConfig.address.street}</p>
-            <p className='text-[15px] lg:text-[18px]'>{siteConfig.address.city}, {siteConfig.address.state}, {siteConfig.address.zip}</p>
-          </div>
-          <div className='mb-6'>
-            <h3 className='text-black text-[15px] lg:text-[18px] font-semibold mb-1'>Contacts</h3>
-            <p className='text-[15px] lg:text-[18px]'>
-              Email:{' '}
-              <a href={`mailto:${siteConfig.email}`} className='text-brand-teal hover:underline'>
-                {siteConfig.email}
-              </a>
-            </p>
-            <p className='text-[15px] lg:text-[18px]'>
-              Phone:{' '}
-              <a href={`tel:${siteConfig.phoneTel}`} className='text-brand-teal hover:underline'>
-                {siteConfig.phone}
-              </a>
-            </p>
-          </div>
-          <p className='text-[15px] lg:text-[18px]'>If you&apos;re a current or past client and have feedback for us, we want to hear from you. Please leave us a message or review here and let us know how we are doing!</p>
-        </div>
+        <ContactDetails />
       </div>
-    </div>
+    </section>
   )
 }
+
+const ContactDetails = () => {
+  return (
+    <aside className='rounded-xl border border-gray-100 bg-gray-50 p-6 md:p-8 shadow-soft'>
+      <h2 className='font-oswald text-xl md:text-2xl font-semibold text-gray-900'>
+        We are easy to find—let us know your needs
+      </h2>
+
+      <div className='mt-6 space-y-6 text-base text-gray-700'>
+        <div className='flex items-start gap-3'>
+          <FontAwesomeIcon icon={faLocationDot} className='mt-1 shrink-0 text-brand-teal' />
+          <div>
+            <h3 className='font-oswald text-base font-semibold text-gray-900'>Headquarters</h3>
+            <p className='mt-1 leading-relaxed'>{siteConfig.address.street}</p>
+            <p className='leading-relaxed'>{siteConfig.address.city}, {siteConfig.address.state}, {siteConfig.address.zip}</p>
+          </div>
+        </div>
+
+        <div className='flex items-start gap-3'>
+          <FontAwesomeIcon icon={faEnvelope} className='mt-1 shrink-0 text-brand-teal' />
+          <div>
+            <h3 className='font-oswald text-base font-semibold text-gray-900'>Email</h3>
+            <a href={`mailto:${siteConfig.email}`} className='mt-1 inline-block text-brand-teal hover:underline'>
+              {siteConfig.email}
+            </a>
+          </div>
+        </div>
+
+        <div className='flex items-start gap-3'>
+          <FontAwesomeIcon icon={faPhone} className='mt-1 shrink-0 text-brand-teal' />
+          <div>
+            <h3 className='font-oswald text-base font-semibold text-gray-900'>Phone</h3>
+            <a href={`tel:${siteConfig.phoneTel}`} className='mt-1 inline-block text-brand-teal hover:underline'>
+              {siteConfig.phone}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <p className='mt-6 border-t border-gray-200 pt-6 text-sm leading-relaxed text-gray-600'>
+        If you&apos;re a current or past client and have feedback for us, we want to hear from you. Please leave us a message or review here and let us know how we are doing!
+      </p>
+    </aside>
+  )
+}
+
+const inputClasses =
+  'w-full rounded-md border border-gray-300 bg-white px-3.5 py-2.5 text-base text-gray-900 placeholder:text-gray-400 transition-colors focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal/30 disabled:opacity-50'
+
+const labelClasses = 'mb-1.5 block font-roboto text-sm font-medium text-gray-700'
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -102,105 +130,122 @@ const ContactForm = () => {
   }
 
   return (
-    <form className='flex flex-col max-w-[400px] w-full' onSubmit={handleSubmit}>
-      <div className='flex flex-col'>
-        <label htmlFor='name' className='sr-only'>Name</label>
-        <input
-          id='name'
-          placeholder='Name'
-          name='name'
-          type='text'
-          value={formData.name}
-          onChange={updateData}
-          required
-          disabled={status === 'loading'}
-          className='bg-gray-100 p-3 my-3 rounded-md border border-gray-300 disabled:opacity-50'
-        />
-      </div>
-      <div className='flex flex-col'>
-        <label htmlFor='email' className='sr-only'>Email</label>
-        <input
-          id='email'
-          placeholder='Email'
-          name='email'
-          type='email'
-          value={formData.email}
-          onChange={updateData}
-          required
-          disabled={status === 'loading'}
-          className='bg-gray-100 p-3 my-3 rounded-md border border-gray-300 disabled:opacity-50'
-        />
-      </div>
-      <div className='flex flex-col'>
-        <label htmlFor='phone' className='sr-only'>Phone</label>
-        <input
-          id='phone'
-          placeholder='Phone'
-          name='phone'
-          type='tel'
-          value={formData.phone}
-          onChange={updateData}
-          required
-          disabled={status === 'loading'}
-          className='bg-gray-100 p-3 my-3 rounded-md border border-gray-300 disabled:opacity-50'
-        />
-      </div>
-      <div className='flex flex-col'>
-        <label htmlFor='project_type' className='sr-only'>Project type</label>
-        <select
-          id='project_type'
-          name='project_type'
-          value={formData.project_type}
-          onChange={updateData}
-          required
-          disabled={status === 'loading'}
-          className='bg-gray-100 p-3 my-3 rounded-md border border-gray-300 disabled:opacity-50 text-gray-700'
-        >
-          <option value=''>Project type</option>
-          {PROJECT_TYPES.map((type) => (
-            <option key={type} value={type}>{type}</option>
-          ))}
-        </select>
-      </div>
-      <div className='flex flex-col'>
-        <label htmlFor='contact_method' className='sr-only'>Preferred contact method</label>
-        <select
-          id='contact_method'
-          name='contact_method'
-          value={formData.contact_method}
-          onChange={updateData}
-          required
-          disabled={status === 'loading'}
-          className='bg-gray-100 p-3 my-3 rounded-md border border-gray-300 disabled:opacity-50 text-gray-700'
-        >
-          <option value=''>Preferred contact method</option>
-          {CONTACT_METHODS.map((method) => (
-            <option key={method} value={method}>{method}</option>
-          ))}
-        </select>
-      </div>
-      <div className='flex flex-col'>
-        <label htmlFor='message' className='sr-only'>Message</label>
-        <textarea
-          id='message'
-          rows={3}
-          placeholder='Message (include project address if known)'
-          name='message'
-          value={formData.message}
-          onChange={updateData}
-          required
-          disabled={status === 'loading'}
-          className='bg-gray-100 p-3 my-3 rounded-md border border-gray-300 disabled:opacity-50'
-        />
+    <form
+      className='rounded-xl border border-gray-100 bg-white p-6 md:p-8 shadow-card'
+      onSubmit={handleSubmit}
+    >
+      <div className='grid gap-5 sm:grid-cols-2'>
+        <div>
+          <label htmlFor='name' className={labelClasses}>
+            Name <span className='text-red-500'>*</span>
+          </label>
+          <input
+            id='name'
+            placeholder='Jane Doe'
+            name='name'
+            type='text'
+            value={formData.name}
+            onChange={updateData}
+            required
+            disabled={status === 'loading'}
+            className={inputClasses}
+          />
+        </div>
+        <div>
+          <label htmlFor='email' className={labelClasses}>
+            Email <span className='text-red-500'>*</span>
+          </label>
+          <input
+            id='email'
+            placeholder='you@company.com'
+            name='email'
+            type='email'
+            value={formData.email}
+            onChange={updateData}
+            required
+            disabled={status === 'loading'}
+            className={inputClasses}
+          />
+        </div>
+        <div>
+          <label htmlFor='phone' className={labelClasses}>
+            Phone <span className='text-red-500'>*</span>
+          </label>
+          <input
+            id='phone'
+            placeholder='(917) 000-0000'
+            name='phone'
+            type='tel'
+            value={formData.phone}
+            onChange={updateData}
+            required
+            disabled={status === 'loading'}
+            className={inputClasses}
+          />
+        </div>
+        <div>
+          <label htmlFor='project_type' className={labelClasses}>
+            Project type <span className='text-red-500'>*</span>
+          </label>
+          <select
+            id='project_type'
+            name='project_type'
+            value={formData.project_type}
+            onChange={updateData}
+            required
+            disabled={status === 'loading'}
+            className={`${inputClasses} ${formData.project_type === '' ? 'text-gray-400' : ''}`}
+          >
+            <option value=''>Select a project type</option>
+            {PROJECT_TYPES.map((type) => (
+              <option key={type} value={type} className='text-gray-900'>{type}</option>
+            ))}
+          </select>
+        </div>
+        <div className='sm:col-span-2'>
+          <label htmlFor='contact_method' className={labelClasses}>
+            Preferred contact method <span className='text-red-500'>*</span>
+          </label>
+          <select
+            id='contact_method'
+            name='contact_method'
+            value={formData.contact_method}
+            onChange={updateData}
+            required
+            disabled={status === 'loading'}
+            className={`${inputClasses} ${formData.contact_method === '' ? 'text-gray-400' : ''}`}
+          >
+            <option value=''>Select a contact method</option>
+            {CONTACT_METHODS.map((method) => (
+              <option key={method} value={method} className='text-gray-900'>{method}</option>
+            ))}
+          </select>
+        </div>
+        <div className='sm:col-span-2'>
+          <label htmlFor='message' className={labelClasses}>
+            Message <span className='text-red-500'>*</span>
+          </label>
+          <textarea
+            id='message'
+            rows={4}
+            placeholder='Message (include project address if known)'
+            name='message'
+            value={formData.message}
+            onChange={updateData}
+            required
+            disabled={status === 'loading'}
+            className={inputClasses}
+          />
+        </div>
       </div>
 
       {status === 'success' && (
-        <p className='text-green-700 bg-green-50 border border-green-200 rounded-md p-3 mb-3 text-sm' role='status'>
+        <p className='mt-5 rounded-md border border-green-200 bg-green-50 p-3 text-sm text-green-700' role='status'>
           Thank you! We received your message and will respond within 24 hours. For urgent inspections, call {siteConfig.phone}.
         </p>
       )}
       {status === 'error' && (
-        <p className='text-red-700 bg-red-50 border border-red-200 rounded-md p-3 mb-3 text-sm' role='alert'>
+        <p className='mt-5 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700' role='alert'>
           Something went wrong. Please call us at {siteConfig.phone} or email {siteConfig.email}.
         </p>
       )}
@@ -208,7 +253,7 @@ const ContactForm = () => {
       <button
         type='submit'
         disabled={status === 'loading'}
-        className='self-start border-2 border-black py-[7px] px-20 font-roboto bg-brand-teal text-brand-gold rounded-md text-[20px] md:text-[35px] font-semibold disabled:opacity-50'
+        className='mt-6 inline-block w-full rounded font-roboto font-medium tracking-wide text-base py-3 px-8 transition-colors duration-300 bg-brand-gold text-brand-teal border-2 border-transparent hover:bg-[#d4a003] disabled:opacity-50 sm:w-auto'
       >
         {status === 'loading' ? 'Sending...' : 'Submit'}
       </button>
