@@ -35,8 +35,21 @@ const ContactPage = () => {
 }
 
 const ContactDetails = () => {
+  const { founder } = siteConfig
   return (
     <aside className='rounded-xl border border-gray-100 bg-gray-50 p-6 md:p-8 shadow-soft'>
+      <div className='mb-6 flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-soft'>
+        <img
+          src={founder.photoContact}
+          alt={`${founder.name}, ${founder.title} of ${siteConfig.companyName}`}
+          className='h-16 w-16 flex-none rounded-full object-cover object-top'
+        />
+        <div>
+          <p className='text-xs font-medium uppercase tracking-wide text-gray-500'>Work directly with</p>
+          <p className='font-oswald text-base font-semibold text-gray-900'>{founder.name}</p>
+          <p className='text-sm text-brand-teal'>{founder.title}</p>
+        </div>
+      </div>
       <h2 className='font-oswald text-xl md:text-2xl font-semibold text-gray-900'>
         We are easy to find—let us know your needs
       </h2>

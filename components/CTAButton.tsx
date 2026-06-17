@@ -11,7 +11,7 @@ type CTAButtonProps = {
 
 const variantClasses: Record<CTAVariant, string> = {
   primary: 'bg-brand-gold text-brand-teal border-2 border-transparent hover:bg-[#d4a003]',
-  secondary: 'bg-brand-teal text-white border-2 border-transparent hover:bg-[#155252]',
+  secondary: 'bg-brand-teal text-white border-2 border-transparent hover:bg-[#1a6b6b]',
   outline: 'border-2 border-brand-teal text-brand-teal hover:bg-brand-teal hover:text-white',
 }
 

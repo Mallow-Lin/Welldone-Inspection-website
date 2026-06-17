@@ -1,7 +1,7 @@
 const siteConfig = {
   companyName: 'WellDone Inspection, Inc.',
   tagline: 'NYC DOB-Registered Special Inspection Agency',
-  email: 'info@welldoneinspection.com',
+  email: 'welldoneinspect@gmail.com',
   phone: '(917) 213-1886',
   phoneTel: '+19172131886',
   address: {
@@ -15,13 +15,16 @@ const siteConfig = {
   founder: {
     name: 'James Jiang, P.E.',
     title: 'Founder & Director',
-    photo: '/images/logos/Qiufan-Jiang.png',
-    // Add the NYS P.E. license number here to display it publicly, e.g. '123456'.
-    peLicense: '',
+    photoHome: '/images/team/james-jiang-1.png',
+    photoAbout: '/images/team/james-jiang-3.png',
+    photoContact: '/images/team/james-jiang-2.png',
+    peLicense: '106880',
     credentials: [
-      'NY / NJ Licensed Professional Engineer',
-      'ICC Master of Special Inspection',
-      'AWS Certified Welding Inspector',
+      'NY PE #106880',
+      'Asbestos Investigator #164992',
+      'GC License #627042',
+      'Master Electrician #011902',
+      'M/WBE Certified (NYS & NYC)',
     ],
   },
   certifications: [

@@ -25,7 +25,7 @@ const ImageCard = ({
   return (
     <div className={`group relative overflow-hidden rounded-xl shadow-card bg-brand-teal ${className}`}>
       {useBrandedTile ? (
-        <div className='absolute inset-0 bg-gradient-to-br from-brand-teal via-[#155252] to-[#0c3a3a]' aria-hidden='true'>
+        <div className='absolute inset-0 bg-gradient-to-br from-brand-teal via-[#1a6b6b] to-[#124f4f]' aria-hidden='true'>
           <div className='absolute inset-0 flex items-center justify-center transition-transform duration-500 ease-out group-hover:scale-110'>
             <FontAwesomeIcon
               icon={icon!}

@@ -28,9 +28,11 @@ const serviceAreas = {
     'We hold NY and NJ Professional Engineer licenses and support select New Jersey projects where our credentials and inspection qualifications apply. Contact us to confirm scope for your NJ site.',
   certifications: [
     'NYC DOB-registered Special Inspection Agency',
-    'NY / NJ Licensed Professional Engineer',
-    'ICC Master of Special Inspection',
-    'MWBE-certified',
+    'NY PE #106880',
+    'Asbestos Investigator #164992',
+    'GC License #627042',
+    'Master Electrician #011902',
+    'M/WBE Certified (NYS & NYC)',
   ],
 }
 

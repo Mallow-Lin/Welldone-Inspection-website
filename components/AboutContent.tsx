@@ -19,15 +19,15 @@ const whatWeDo = [
   'Excavation and Underpinning Oversight',
 ]
 
-const FounderCard = ({ compact = false }: { compact?: boolean }) => {
+const FounderCard = ({ compact = false, photo }: { compact?: boolean; photo: string }) => {
   const { founder } = siteConfig
   return (
     <div className={`flex-none mx-auto md:mx-0 ${compact ? 'w-[200px]' : 'w-[220px]'}`}>
       <div className='overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-soft'>
         <img
-          src={founder.photo}
+          src={photo}
           alt={`${founder.name}, ${founder.title} of ${siteConfig.companyName}`}
-          className='aspect-square w-full object-cover'
+          className='aspect-square w-full object-cover object-top'
         />
         <div className='p-4 text-center'>
           <p className='font-oswald text-base font-semibold text-gray-900'>{founder.name}</p>
@@ -57,7 +57,7 @@ const AboutContent = ({ compact = false, showContactCta = false }: AboutContentP
               Founded by {founder.name}, a licensed professional engineer with over 10 years of experience in structural engineering and construction oversight, our mission is simple: support builders, owners, and developers in building safe, durable, and code-compliant structures.
             </p>
           </div>
-          <FounderCard compact />
+          <FounderCard compact photo={founder.photoHome} />
         </div>
         <h3 className='mt-8 font-oswald text-xl md:text-2xl font-semibold text-gray-900'>What We Do</h3>
         <p className='mt-2 text-base md:text-lg text-gray-700 leading-relaxed'>
@@ -86,18 +86,19 @@ const AboutContent = ({ compact = false, showContactCta = false }: AboutContentP
           <p className='mt-4 text-base md:text-lg text-gray-700 leading-relaxed'>
             The firm is led by {founder.name}, a licensed professional engineer with over 10 years of experience in structural engineering and construction oversight. When you work with us, you work directly with a licensed P.E.—not a rotating field tech—so you get engineering-level answers when your schedule depends on them.
           </p>
-          <ul className='mt-5 flex flex-wrap gap-2'>
-            {founder.credentials.map((cred) => (
-              <li
-                key={cred}
-                className='rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-sm text-gray-700'
-              >
-                {cred}
-              </li>
-            ))}
-          </ul>
+          <div className='mt-6'>
+            <h3 className='font-oswald text-lg font-semibold text-gray-900'>Licenses &amp; Certifications</h3>
+            <ul className='mt-3 grid sm:grid-cols-2 gap-x-8 gap-y-2'>
+              {founder.credentials.map((cred) => (
+                <li key={cred} className='flex items-start gap-2 text-base text-gray-700'>
+                  <FontAwesomeIcon icon={faCheck} className='text-brand-teal mt-1 shrink-0' />
+                  <span>{cred}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <FounderCard />
+        <FounderCard photo={founder.photoAbout} />
       </div>
 
       <h3 className='mt-10 font-oswald text-xl md:text-2xl font-semibold text-gray-900'>What We Do</h3>

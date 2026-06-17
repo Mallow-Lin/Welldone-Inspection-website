@@ -26,9 +26,10 @@ const Navbar = ({ setNavbarHeight }: NavbarProps) => {
   const tabsRef = useRef<Array<HTMLAnchorElement | null>>([])
   const [tabUnderlineWidth, setTabUnderlineWidth] = useState(0)
   const [tabUnderlineLeft, setTabUnderlineLeft] = useState(0)
-  const [scrolled, setScrolled] = useState(false)
-  const [collapsed, setCollapsed] = useState(false)
+  const [progress, setProgress] = useState(0)
   const [nav, setNav] = useState(false)
+
+  const lerp = (from: number, to: number, t: number) => from + (to - from) * t
 
   const activeTabIndex = useMemo(() => {
     if (pathname === '/') return -1
@@ -51,12 +52,12 @@ const Navbar = ({ setNavbarHeight }: NavbarProps) => {
 
   useEffect(() => {
     let frame = 0
+    const SCROLL_RANGE = 64
     const handleScroll = () => {
       if (frame) return
       frame = window.requestAnimationFrame(() => {
-        const isScrolled = window.scrollY > 50
-        setScrolled(isScrolled)
-        setCollapsed(isScrolled)
+        const next = Math.min(Math.max(window.scrollY / SCROLL_RANGE, 0), 1)
+        setProgress((prev) => (Math.abs(prev - next) < 0.001 ? prev : next))
         frame = 0
       })
     }
@@ -71,7 +72,10 @@ const Navbar = ({ setNavbarHeight }: NavbarProps) => {
 
   useEffect(() => {
     setTabPosition(activeTabIndex)
-  }, [activeTabIndex, collapsed])
+    const handleResize = () => setTabPosition(activeTabIndex)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [activeTabIndex])
 
   useEffect(() => {
     if (!navbarRef.current) {
@@ -93,21 +97,29 @@ const Navbar = ({ setNavbarHeight }: NavbarProps) => {
   return (
     <nav
       ref={navbarRef}
-      className={`z-20 fixed w-full md:px-20 px-6 sm:px-10 bg-white text-gray-900 border-b transition-all duration-300 ease-out ${
-        scrolled ? 'py-2 shadow-soft border-gray-200' : 'py-4 border-gray-100'
-      }`}
+      className='z-20 fixed w-full md:px-20 px-6 sm:px-10 bg-white text-gray-900 border-b transition-[padding,box-shadow,border-color] duration-200 ease-out'
+      style={{
+        paddingTop: `${lerp(16, 8, progress)}px`,
+        paddingBottom: `${lerp(16, 8, progress)}px`,
+        boxShadow: `0 4px 14px rgba(15, 23, 42, ${lerp(0, 0.08, progress)})`,
+        borderBottomColor: progress > 0.02 ? '#e5e7eb' : '#f3f4f6',
+      }}
     >
       <div className='flex justify-between items-center'>
         <Link
           href='/'
-          className={`origin-left ${collapsed ? 'scale-95' : 'scale-100'} transition-transform duration-300 ease-out cursor-pointer bg-transparent border-none p-0`}
+          className='origin-left transition-transform duration-200 ease-out cursor-pointer bg-transparent border-none p-0'
+          style={{ transform: `scale(${lerp(1, 0.95, progress)})` }}
           aria-label='Go to homepage'
         >
           <Image src='/images/logos/logo_with_motto.png' alt='WellDone Inspection logo' width={200} height={80} className='md:w-[190px] w-[150px] h-auto' priority />
         </Link>
 
         <div className='hidden md:flex items-center gap-2 lg:gap-4'>
-          <div className='flex items-center h-12 font-semibold duration-500 relative'>
+          <div
+            className='flex items-center h-12 font-semibold relative transition-transform duration-200 ease-out'
+            style={{ transform: `scale(${lerp(1, 0.88, progress)})`, transformOrigin: 'right center' }}
+          >
             <span
               className='absolute top-0 bottom-0 -z-10 flex overflow-hidden rounded-xl bg-brand-teal duration-300'
               style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
@@ -121,7 +133,7 @@ const Navbar = ({ setNavbarHeight }: NavbarProps) => {
                     tabsRef.current[index] = elem
                   }}
                   href={tab.path}
-                  className={`whitespace-nowrap px-2.5 lg:px-3 transition-colors duration-200 ${collapsed ? 'text-sm lg:text-base' : 'text-base lg:text-lg'} ${isActive ? 'text-brand-gold' : 'text-gray-700 hover:text-brand-teal'}`}
+                  className={`whitespace-nowrap px-2.5 lg:px-3 text-base lg:text-lg transition-colors duration-200 ${isActive ? 'text-brand-gold' : 'text-gray-700 hover:text-brand-teal'}`}
                 >
                   {tab.label}
                 </Link>

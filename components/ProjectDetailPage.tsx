@@ -34,7 +34,7 @@ const ProjectDetailPage = ({ project }: ProjectDetailPageProps) => {
                 priority
               />
             ) : (
-              <div className='absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-teal via-[#155252] to-[#0c3a3a]'>
+              <div className='absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-teal via-[#1a6b6b] to-[#124f4f]'>
                 {project.icon && (
                   <FontAwesomeIcon icon={project.icon} className='text-brand-gold/90 text-6xl md:text-7xl' />
                 )}

@@ -10,7 +10,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'brand-teal': '#1b6666',
+                'brand-teal': '#208080',
                 'brand-gold': '#ecb403',
             },
             fontFamily: {
