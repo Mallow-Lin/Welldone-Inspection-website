@@ -11,6 +11,8 @@ const tabs = [
   { label: 'About', path: '/about' },
   { label: 'Services', path: '/services' },
   { label: 'Projects', path: '/projects' },
+  { label: 'Service Areas', path: '/service-areas' },
+  { label: 'FAQ', path: '/faq' },
   { label: 'Contact', path: '/contact' },
 ]
 
@@ -104,26 +106,44 @@ const Navbar = ({ setNavbarHeight }: NavbarProps) => {
           <Image src='/images/logos/logo_with_motto.png' alt='WellDone Inspection logo' width={200} height={80} className='md:w-[190px] w-[150px] h-auto' priority />
         </Link>
 
-        <div className='hidden md:flex w-[550px] items-center h-12 font-semibold duration-500 relative'>
-          <span
-            className='absolute top-0 bottom-0 -z-10 flex overflow-hidden rounded-xl bg-brand-teal duration-300'
-            style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
-          />
-          {tabs.map((tab, index) => {
-            const isActive = activeTabIndex === index
-            return (
-              <Link
-                key={tab.path}
-                ref={(elem) => {
-                  tabsRef.current[index] = elem
-                }}
-                href={tab.path}
-                className={`px-4 transition-colors duration-200 ${collapsed ? 'text-base' : 'text-lg'} ${isActive ? 'text-brand-gold' : 'text-gray-700 hover:text-brand-teal'}`}
-              >
-                {tab.label}
-              </Link>
-            )
-          })}
+        <div className='hidden md:flex items-center gap-2 lg:gap-4'>
+          <div className='flex items-center h-12 font-semibold duration-500 relative'>
+            <span
+              className='absolute top-0 bottom-0 -z-10 flex overflow-hidden rounded-xl bg-brand-teal duration-300'
+              style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
+            />
+            {tabs.map((tab, index) => {
+              const isActive = activeTabIndex === index
+              return (
+                <Link
+                  key={tab.path}
+                  ref={(elem) => {
+                    tabsRef.current[index] = elem
+                  }}
+                  href={tab.path}
+                  className={`whitespace-nowrap px-2.5 lg:px-3 transition-colors duration-200 ${collapsed ? 'text-sm lg:text-base' : 'text-base lg:text-lg'} ${isActive ? 'text-brand-gold' : 'text-gray-700 hover:text-brand-teal'}`}
+                >
+                  {tab.label}
+                </Link>
+              )
+            })}
+          </div>
+
+          <div className='hidden lg:flex items-center gap-3 pl-2 border-l border-gray-200'>
+            <a
+              href={`tel:${siteConfig.phoneTel}`}
+              className='text-sm font-bold text-brand-teal hover:text-brand-gold transition-colors whitespace-nowrap'
+              aria-label={`Call ${siteConfig.phone}`}
+            >
+              {siteConfig.phone}
+            </a>
+            <Link
+              href='/contact'
+              className='rounded-lg bg-brand-gold px-4 py-2 text-sm font-bold text-brand-teal hover:bg-[#d4a003] transition-colors whitespace-nowrap'
+            >
+              Get a Quote
+            </Link>
+          </div>
         </div>
 
         <a
@@ -144,25 +164,41 @@ const Navbar = ({ setNavbarHeight }: NavbarProps) => {
           {!nav ? <FaBars className='size-[20px]' /> : <FaTimes />}
         </button>
 
-        <ul className={!nav ? 'hidden' : 'md:hidden absolute top-full right-4 mt-2 w-48 bg-brand-teal flex flex-col rounded-2xl py-2 shadow-elevated'}>
-          {tabs.map((tab) => (
-            <li key={tab.path}>
-              <Link
-                href={tab.path}
-                onClick={() => setNav(false)}
-                className='block px-5 py-2.5 text-sm font-semibold text-white hover:text-brand-gold transition-colors'
-              >
-                {tab.label}
-              </Link>
-            </li>
-          ))}
+        {nav && (
+          <button
+            type='button'
+            aria-label='Close menu'
+            onClick={() => setNav(false)}
+            className='md:hidden fixed inset-0 z-[5] bg-black/40 cursor-default border-none'
+          />
+        )}
+
+        <ul className={!nav ? 'hidden' : 'md:hidden absolute top-full right-4 mt-3 w-60 bg-white border border-gray-100 flex flex-col rounded-2xl py-2 shadow-elevated z-10'}>
+          {tabs.map((tab) => {
+            const isActive = pathname === tab.path || pathname.startsWith(`${tab.path}/`)
+            return (
+              <li key={tab.path}>
+                <Link
+                  href={tab.path}
+                  onClick={() => setNav(false)}
+                  className={`block px-5 py-3 text-base font-semibold transition-colors ${isActive ? 'text-brand-gold' : 'text-gray-800 hover:bg-gray-50 hover:text-brand-teal'}`}
+                >
+                  {tab.label}
+                </Link>
+              </li>
+            )
+          })}
+          <li className='mt-1 px-3 pt-2 border-t border-gray-100'>
+            <Link
+              href='/contact'
+              onClick={() => setNav(false)}
+              className='block rounded-lg bg-brand-gold px-5 py-3 text-center text-base font-bold text-brand-teal hover:bg-[#d4a003] transition-colors'
+            >
+              Get a Quote
+            </Link>
+          </li>
         </ul>
       </div>
-      {activeTabIndex === -1 && (
-        <div className={`flex justify-center font-oswald font-medium tracking-wide text-brand-teal md:text-lg text-sm overflow-hidden transition-all ${collapsed ? 'max-h-0 opacity-0 mt-0' : 'max-h-20 opacity-100 mt-1'} duration-300`}>
-          Welcome to WellDone Inspection!
-        </div>
-      )}
     </nav>
   )
 }

@@ -1,9 +1,13 @@
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
+
 export type ServiceLanding = {
   slug: string
   title: string
   metaTitle: string
   metaDescription: string
-  heroImage: string
+  heroImage?: string
+  heroIcon?: IconDefinition
   dobForm: string
   dobLink: string
   summary: string
@@ -18,7 +22,7 @@ const serviceLandings: ServiceLanding[] = [
     metaTitle: 'TR1 Special Inspections NYC | WellDone Inspection',
     metaDescription:
       'DOB-registered TR1 special inspections in NYC for structural steel, concrete, MEP, facade, and curtain wall. Chapter 17 compliance for all project scales.',
-    heroImage: '/images/services/tr1-special-inspections.png',
+    heroIcon: faClipboardCheck,
     dobForm: 'TR1',
     dobLink: 'https://www.nyc.gov/assets/buildings/pdf/tr1_2014.pdf',
     summary:

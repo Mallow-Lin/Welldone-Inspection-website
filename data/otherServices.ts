@@ -1,3 +1,9 @@
+import {
+  faCalendarCheck,
+  faHardHat,
+  faFileSignature,
+  faIdCard,
+} from '@fortawesome/free-solid-svg-icons'
 import type { ServiceItem } from './services'
 
 const otherServices: ServiceItem[] = [
@@ -14,7 +20,7 @@ const otherServices: ServiceItem[] = [
     name: 'TPP',
     shortDescription: 'TPP Filing and Weekly Inspection',
     longDescription: 'TPP Filing and Weekly Inspection',
-    background: '/images/services/tpp.jpg',
+    icon: faCalendarCheck,
     link: '',
   },
   {
@@ -22,7 +28,7 @@ const otherServices: ServiceItem[] = [
     name: 'Site Safety Plan',
     shortDescription: 'Site Safety Plan, DOT Plan, Superintendent, SSC, SSM',
     longDescription: 'Site Safety Plan, DOT Plan, Superintendent, SSC, SSM',
-    background: '/images/services/site-safety-plan.jpg',
+    icon: faHardHat,
     link: '',
   },
   {
@@ -30,7 +36,7 @@ const otherServices: ServiceItem[] = [
     name: 'Expediting',
     shortDescription: 'DOB Filing, DOB Violations, ECB Violations',
     longDescription: 'DOB Filing, DOB Violations, ECB Violations',
-    background: '/images/services/expediting.webp',
+    icon: faFileSignature,
     link: '',
   },
   {
@@ -42,11 +48,11 @@ const otherServices: ServiceItem[] = [
     link: '',
   },
   {
-    title: 'License Contractor',
-    name: 'License Contractor',
+    title: 'Licensed Contractor',
+    name: 'Licensed Contractor',
     shortDescription: 'Permit Application: GC, SOE, FO, ST, MEP',
     longDescription: 'Permit Application: GC, SOE, FO, ST, MEP',
-    background: '/images/services/license-contractor.jpg',
+    icon: faIdCard,
     link: '',
   },
 ]

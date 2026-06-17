@@ -1,9 +1,13 @@
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+import { faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
+
 export type ServiceItem = {
   title: string
   name: string
   shortDescription: string
   longDescription: string
-  background: string
+  background?: string
+  icon?: IconDefinition
   link: string
   slug?: string
 }
@@ -14,7 +18,7 @@ const services: ServiceItem[] = [
     name: 'Special Inspections',
     shortDescription: 'Architectural, Structural, Mechanical, Plumbing, Electrical, Soil, Sprinkler, Standpipe, Facade, Curtain Wall',
     longDescription: 'Architectural, Structural, Mechanical, Plumbing, Electrical, Soil, Sprinkler, Standpipe, Facade, Curtain Wall',
-    background: '/images/services/tr1-special-inspections.png',
+    icon: faClipboardCheck,
     link: 'https://www.nyc.gov/assets/buildings/pdf/tr1_2014.pdf',
     slug: 'tr1-special-inspections',
   },

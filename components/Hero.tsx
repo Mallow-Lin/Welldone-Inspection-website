@@ -5,8 +5,8 @@ import siteConfig from '@/data/siteConfig'
 const Hero = () => {
   return (
     <section className='relative flex flex-col items-center justify-center bg-brand-teal text-white min-h-[460px] md:min-h-[540px] lg:min-h-[620px] px-6 py-16 md:py-20'>
-      <div className='absolute inset-0 opacity-[0.07] pointer-events-none flex items-center justify-center' aria-hidden='true'>
-        <Image src='/logo.png' alt='' width={400} height={400} className='object-contain' priority />
+      <div className='absolute inset-0 opacity-[0.04] pointer-events-none flex items-center justify-center' aria-hidden='true'>
+        <Image src='/logo.png' alt='' width={420} height={420} className='w-[260px] md:w-[420px] h-auto object-contain' priority />
       </div>
       <div className='relative z-10 flex flex-col items-center text-center max-w-3xl'>
         <span className='inline-block bg-brand-gold text-brand-teal text-xs md:text-sm font-semibold tracking-wide px-4 py-1.5 rounded-full mb-6'>
@@ -36,7 +36,7 @@ const Hero = () => {
           {siteConfig.certifications.map((cert) => (
             <span
               key={cert}
-              className='bg-white/10 text-gray-100 text-[11px] md:text-xs font-medium px-3 py-1 rounded-full border border-white/20'
+              className='bg-white/15 text-white text-[11px] md:text-xs font-medium px-3 py-1 rounded-full border border-white/30'
             >
               {cert}
             </span>

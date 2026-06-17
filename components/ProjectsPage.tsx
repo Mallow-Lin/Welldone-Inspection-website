@@ -14,8 +14,10 @@ const ProjectsPage = () => {
               title={project.title}
               description={project.description}
               background={project.background}
+              icon={project.icon}
               className='aspect-[3/4] w-full'
               descriptionClassName='text-sm md:text-base'
+              iconClassName='text-5xl md:text-6xl'
             />
             <p className='text-center text-brand-teal text-sm mt-3 font-semibold group-hover:underline'>
               View project →

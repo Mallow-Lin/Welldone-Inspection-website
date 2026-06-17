@@ -1,8 +1,12 @@
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+import { faBuildingColumns } from '@fortawesome/free-solid-svg-icons'
+
 export type ProjectItem = {
   slug: string
   title: string
   description: string
-  background: string
+  background?: string
+  icon?: IconDefinition
   detail: string
   scope: string[]
 }
@@ -30,7 +34,7 @@ const projects: ProjectItem[] = [
     slug: 'the-frick-collection',
     title: 'The Frick Collection, New York',
     description: 'A premier museum and research center',
-    background: '/images/projects/the-frick-collection.jpg',
+    icon: faBuildingColumns,
     detail:
       'Inspection support for renovation and preservation work at The Frick Collection, balancing code compliance with sensitive historic building conditions.',
     scope: ['Structural inspections', 'Facade-related coordination', 'Museum renovation support'],

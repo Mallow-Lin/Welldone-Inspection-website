@@ -28,14 +28,20 @@ const ServiceLandingPage = ({ landing }: ServiceLandingPageProps) => {
 
       <div className='section max-w-4xl py-10 md:py-12'>
         <div className='relative w-full h-48 md:h-64 rounded-xl overflow-hidden mb-10 shadow-card'>
-          <Image
-            src={landing.heroImage}
-            alt={landing.title}
-            fill
-            className='object-cover'
-            sizes='(max-width: 768px) 100vw, 896px'
-            priority
-          />
+          {landing.heroImage ? (
+            <Image
+              src={landing.heroImage}
+              alt={landing.title}
+              fill
+              className='object-cover'
+              sizes='(max-width: 768px) 100vw, 896px'
+              priority
+            />
+          ) : (
+            <div className='absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-teal via-[#155252] to-[#0c3a3a]'>
+              <FontAwesomeIcon icon={landing.heroIcon ?? faCheck} className='text-brand-gold/90 text-6xl md:text-7xl' />
+            </div>
+          )}
         </div>
 
         {landing.sections.map((section) => (

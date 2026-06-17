@@ -19,8 +19,10 @@ const HomeServices = () => {
                     title={service.title}
                     description={service.shortDescription}
                     background={service.background}
+                    icon={service.icon}
                     className='aspect-square w-full'
                     descriptionClassName='text-xs sm:text-sm md:text-base px-2'
+                    iconClassName='text-5xl md:text-6xl'
                   />
                 </Link>
                 <CTAButton href={learnMoreHref} variant='outline' className='mt-4'>
