@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Website Inquiry Privacy',
   description: 'How this website handles project inquiry information.',
+  alternates: { canonical: '/privacy' },
 };
 export default function Privacy() {
   return (
@@ -9,14 +10,14 @@ export default function Privacy() {
       <p className="eyebrow dark">PRIVACY</p>
       <h1>Your project inquiry.</h1>
       <p>
-        The inquiry form prepares an email draft on your device. It does not
-        submit or store your form details in a website database. Information you
-        enter is lost when you reload or leave the page.
+        The inquiry form sends the information you provide to WellDone
+        Inspection when online delivery is configured. This website does not
+        include a separate customer database for inquiry details.
       </p>
       <p>
-        When you open your email app and send the message, the information is
-        delivered through your email provider to welldoneinspect@gmail.com. You
-        can review and edit the message before sending.
+        If online delivery is unavailable, the form prepares an email draft on
+        your device. You can review and edit that message before sending it to
+        welldoneinspect@gmail.com through your own email provider.
       </p>
       <p>
         Include only the information needed to discuss your project. Please do

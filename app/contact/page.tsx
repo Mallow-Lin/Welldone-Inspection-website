@@ -1,12 +1,27 @@
 import type { Metadata } from 'next';
 import { Phone, Mail, MapPin, ArrowUpRight } from 'lucide-react';
 import { InquiryForm } from '@/components/inquiry-form';
+import { services } from '@/lib/services';
 export const metadata: Metadata = {
   title: 'Request an Inspection or Get a Quote in NYC',
   description:
     'Contact WellDone Inspection for NYC Special Inspections, Asbestos Surveys / ACP-5, and Engineering Reports. Call (917) 213-1886 or send your project details.',
+  alternates: { canonical: '/contact' },
 };
-export default function Contact() {
+export default async function Contact({
+  searchParams,
+}: {
+  searchParams: Promise<{ service?: string; intent?: string }>;
+}) {
+  const query = await searchParams;
+  const intent = query.intent === 'inspection' ? 'inspection' : 'quote';
+  const initialService = services.some(
+    (service) => service.key === query.service,
+  )
+    ? query.service!
+    : intent === 'inspection'
+      ? 'special-inspection'
+      : '';
   return (
     <section className="section contact-page">
       <div>
@@ -38,14 +53,18 @@ export default function Contact() {
           <div>
             <MapPin size={19} />
             <span>
-              <small>BASED IN NEW YORK CITY</small>10 Hallets Point
+              <small>BASED IN NEW YORK CITY</small>10 Halletts Point
               <br />
-              Astoria, NY 11102
+              Queens, NY 11102
             </span>
           </div>
         </div>
       </div>
-      <InquiryForm />
+      <InquiryForm
+        key={`${initialService}:${intent}`}
+        initialService={initialService}
+        intent={intent}
+      />
     </section>
   );
 }

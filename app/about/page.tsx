@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
-import { Check, ArrowUpRight } from 'lucide-react';
+import { Check } from 'lucide-react';
+import Image from 'next/image';
 import { CTA } from '@/components/cta';
 export const metadata: Metadata = {
   title: 'About Our NYC Inspection & Engineering Practice',
   description:
     'Meet WellDone Inspection, a NYC-based, engineer-led Special Inspection Agency founded by James Jiang, P.E. Technical expertise with personal accountability.',
+  alternates: { canonical: '/about' },
 };
 export default function About() {
   return (
@@ -22,9 +24,12 @@ export default function About() {
         </p>
       </section>
       <section className="about-feature">
-        <img
+        <Image
           src="/construction.png"
           alt="Construction work supported by a tower crane"
+          width={2586}
+          height={1355}
+          sizes="(max-width: 680px) 100vw, 48vw"
         />
         <div>
           <p className="eyebrow">ENGINEER-LED, FROM THE START</p>

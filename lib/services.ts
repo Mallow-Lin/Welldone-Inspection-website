@@ -1,14 +1,14 @@
 export const services = [
   {
-    slug: 'nyc-special-inspections',
+    slug: 'special-inspections',
     key: 'special-inspection',
     number: '01',
-    short: 'NYC Special Inspection',
+    short: 'NYC Special Inspections',
     label: 'INSPECTIONS & TESTING',
-    title: 'NYC Special Inspections',
-    seoTitle: 'NYC Special Inspections & Testing',
+    title: 'NYC Special Inspection Services',
+    seoTitle: 'NYC Special Inspection Services | TR1 & TR8',
     description:
-      'Engineer-led special inspections and testing for NYC construction projects. Discuss structural, foundation, building-system, and energy inspection needs with WellDone.',
+      'NYC Special Inspection services for TR1, TR8, structural steel, welding, bolting, concrete, masonry, and post-installed anchors.',
     headline: 'Build with confidence.\nInspect with expertise.',
     intro:
       'Special inspections and testing for New York City construction projects. Bring us your plans and inspection requirements—we’ll help define the scope and next steps.',
@@ -17,7 +17,7 @@ export const services = [
     scope: [
       [
         'TR1 · Special inspections',
-        'Structural steel and welding, concrete and reinforcing steel, soils and foundations, wood framing, building systems, and envelope inspections.',
+        'Structural steel, welding, high-strength bolting, concrete, masonry, post-installed anchors, soils and foundations, wood framing, building systems, and envelope inspections, as applicable.',
       ],
       [
         'TR2 / TR3 · Concrete',
@@ -58,15 +58,15 @@ export const services = [
     ],
   },
   {
-    slug: 'asbestos-survey-acp5-nyc',
+    slug: 'asbestos-survey-acp5',
     key: 'asbestos-acp5',
     number: '02',
     short: 'Asbestos Survey / ACP-5',
     label: 'SURVEYS & DOCUMENTATION',
-    title: 'NYC Asbestos Surveys & ACP-5',
-    seoTitle: 'Asbestos Survey & ACP-5 Support in NYC',
+    title: 'NYC Asbestos Survey, Inspection & ACP-5 Services',
+    seoTitle: 'NYC Asbestos Survey, Inspection & ACP-5 Services',
     description:
-      'Planning a renovation in NYC? Discuss an asbestos survey and ACP-5 assessment documentation with WellDone Inspection. Share your project scope for a quote.',
+      'NYC asbestos surveys, inspections, sampling, reporting, and ACP-5 project support for renovation and demolition scopes when applicable.',
     headline: 'Know the conditions.\nPlan your next step.',
     intro:
       'Asbestos survey and ACP-5 support for planned renovations and alterations in NYC. Start with a clear picture of the areas affected by your work.',
@@ -74,20 +74,20 @@ export const services = [
     cta: 'Get a quote',
     scope: [
       [
-        'Project scope review',
-        'Start with the property address, proposed work, and available plans to establish which areas need assessment.',
+        'When a survey may be needed',
+        'Renovation, demolition, and construction work may require an asbestos survey depending on the building, affected materials, and project scope.',
       ],
       [
-        'Asbestos survey',
-        'Assess affected areas through the survey process required for your project, with sampling as appropriate to the scope.',
+        'Site survey, inspection & sampling',
+        'Assess the affected work areas and collect material samples when appropriate to the agreed survey scope.',
       ],
       [
-        'ACP-5 assessment documentation',
-        'The survey findings and work scope determine whether an ACP-5 Asbestos Assessment Report is the appropriate filing.',
+        'Reporting & ACP-5 support',
+        'Document findings and determine whether an ACP-5 Asbestos Assessment Report is the appropriate filing based on the survey and work scope.',
       ],
       [
-        'Clear next steps',
-        'Understand what the findings mean for the proposed work and which documentation or follow-up may be needed.',
+        'Renovation & demolition coordination',
+        'Coordinate survey information with the planned work and identify additional documentation or follow-up when required.',
       ],
     ],
     audience: 'For owners, architects, and renovation teams',
@@ -120,18 +120,18 @@ export const services = [
     },
   },
   {
-    slug: 'engineering-reports-assessments',
+    slug: 'engineering-reports',
     key: 'engineering-report',
     number: '03',
     short: 'Engineering Reports / Assessments',
     label: 'REPORTS & ASSESSMENTS',
-    title: 'Engineering Reports & Assessments',
-    seoTitle: 'Engineering Reports & Building Assessments in NYC',
+    title: 'NYC Engineering Reports, Assessments & Evaluations',
+    seoTitle: 'NYC Engineering Reports & Structural Assessments',
     description:
-      'Engineering reports and building condition assessments in NYC. Discuss observed issues, documentation needs, and project decisions with WellDone Inspection.',
+      'NYC engineering reports, structural assessments, building condition evaluations, crack investigations, and damage assessments.',
     headline: 'Understand your building.\nMake informed decisions.',
     intro:
-      'Engineering reports and assessments that help you understand observed conditions, document findings, and determine the next steps for your property.',
+      'Need an engineer to evaluate a building condition? We provide focused site assessments and professional reports to document findings and help determine practical next steps.',
     card: 'Evaluate building conditions and document findings to support informed project decisions.',
     cta: 'Get a quote',
     scope: [
@@ -140,16 +140,16 @@ export const services = [
         'Discuss the conditions you have observed and define a focused assessment of the relevant building areas.',
       ],
       [
-        'Engineering reports',
-        'Document observations, engineering evaluation, and recommendations within an agreed scope.',
+        'Engineering reports & documentation',
+        'Document observations, engineering evaluation, and recommendations within an agreed scope, including signed and sealed documentation when applicable.',
       ],
       [
-        'Structural concerns',
-        'Bring us questions about visible distress, cracks, deterioration, or other conditions that need engineering review.',
+        'Cracks, damage & structural concerns',
+        'Evaluate visible distress, cracking, deterioration, damage, or other conditions that need professional engineering review.',
       ],
       [
-        'Project decision support',
-        'Use assessment findings to inform further investigation, repair planning, or coordination with your project team.',
+        'Repair recommendations',
+        'Use assessment findings to inform further investigation, repair recommendations, or coordination with your project team.',
       ],
     ],
     audience: 'For property owners, managers, and project teams',

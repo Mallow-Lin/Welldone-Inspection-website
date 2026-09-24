@@ -5,9 +5,12 @@ const legacyPaths: Record<string, string> = {
   '/Services': '/services',
   '/Projects': '/projects',
   '/Contact': '/contact',
+  '/nyc-special-inspections': '/special-inspections',
+  '/asbestos-survey-acp5-nyc': '/asbestos-survey-acp5',
+  '/engineering-reports-assessments': '/engineering-reports',
 };
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const destination = legacyPaths[request.nextUrl.pathname];
   if (!destination) return NextResponse.next();
   const url = request.nextUrl.clone();

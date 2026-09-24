@@ -17,7 +17,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_ORIGIN),
   title: {
-    default: 'WellDone Inspection | NYC Inspections, ACP-5 & Engineering',
+    default:
+      'WellDone Inspection | NYC Special Inspections, Asbestos & Engineering',
     template: '%s | WellDone Inspection',
   },
   description:
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'WellDone Inspection',
-    title: 'WellDone Inspection — Confidence. Built in.',
+    title: 'WellDone Inspection — NYC Inspection & Engineering Services',
     description:
       'NYC Special Inspections · Asbestos Surveys / ACP-5 · Engineering Reports',
     images: [
@@ -34,13 +35,13 @@ export const metadata: Metadata = {
         url: '/og.png',
         width: 1733,
         height: 907,
-        alt: 'WellDone Inspection — Confidence. Built in.',
+        alt: 'WellDone Inspection — NYC Inspection and Engineering Services',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'WellDone Inspection — Confidence. Built in.',
+    title: 'WellDone Inspection — NYC Inspection & Engineering Services',
     description:
       'NYC Special Inspections · Asbestos Surveys / ACP-5 · Engineering Reports',
     images: ['/og.png'],
@@ -74,8 +75,8 @@ export default function RootLayout({
               email: 'welldoneinspect@gmail.com',
               address: {
                 '@type': 'PostalAddress',
-                streetAddress: '10 Hallets Point',
-                addressLocality: 'Astoria',
+                streetAddress: '10 Halletts Point',
+                addressLocality: 'Queens',
                 addressRegion: 'NY',
                 postalCode: '11102',
                 addressCountry: 'US',

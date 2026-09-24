@@ -1,3 +1,4 @@
+import Link from 'next/link';
 export default function NotFound() {
   return (
     <section className="section page-heading">
@@ -12,12 +13,12 @@ export default function NotFound() {
         your project.
       </p>
       <div className="actions">
-        <a href="/" className="action primary">
+        <Link href="/" className="action primary">
           Back to home
-        </a>
-        <a href="/services" className="text-link dark">
+        </Link>
+        <Link href="/services" className="text-link dark">
           Explore services
-        </a>
+        </Link>
       </div>
     </section>
   );

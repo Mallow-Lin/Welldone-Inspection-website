@@ -1,44 +1,13 @@
 import type { Metadata } from 'next';
 import { ArrowUpRight } from 'lucide-react';
 import { CTA } from '@/components/cta';
+import { projects } from '@/lib/projects';
 export const metadata: Metadata = {
   title: 'Selected NYC Project Experience',
   description:
     'Explore selected New York City project experience highlighted by WellDone Inspection, including commercial, cultural, and educational buildings.',
+  alternates: { canonical: '/projects' },
 };
-const projects = [
-  ['01', '270 Park Avenue', 'JPMorgan Chase Tower', 'COMMERCIAL · MANHATTAN'],
-  [
-    '02',
-    'The Metropolitan Museum of Art',
-    'Ancient Near Eastern and Cypriot Art renovation',
-    'CULTURAL · MANHATTAN',
-  ],
-  [
-    '03',
-    'The Frick Collection',
-    'Museum and research center',
-    'CULTURAL · MANHATTAN',
-  ],
-  [
-    '04',
-    'PS 958 School',
-    'New building special inspection',
-    'EDUCATION · BROOKLYN',
-  ],
-  [
-    '05',
-    'John Jay College of Criminal Justice',
-    'Facade repair',
-    'EDUCATION · MANHATTAN',
-  ],
-  [
-    '06',
-    'Disney’s New York Headquarters',
-    '310 Hudson Street',
-    'COMMERCIAL · MANHATTAN',
-  ],
-];
 export default function Projects() {
   return (
     <>
@@ -56,13 +25,13 @@ export default function Projects() {
         </p>
       </section>
       <section className="section project-list">
-        {projects.map(([n, title, detail, type]) => (
-          <article key={n}>
-            <span>{n}</span>
+        {projects.map((project) => (
+          <article key={project.number}>
+            <span>{project.number}</span>
             <div>
-              <p className="eyebrow dark">{type}</p>
-              <h2>{title}</h2>
-              <p>{detail}</p>
+              <p className="eyebrow dark">{project.type}</p>
+              <h2>{project.title}</h2>
+              <p>{project.detail}</p>
             </div>
             <ArrowUpRight size={22} />
           </article>

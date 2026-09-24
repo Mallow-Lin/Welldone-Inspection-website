@@ -1,5 +1,6 @@
 'use client';
-import { useEffect, useState, type FormEvent } from 'react';
+import Link from 'next/link';
+import { useEffect, useState, type SubmitEvent } from 'react';
 import { flushSync } from 'react-dom';
 import { ArrowUpRight, Copy, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -23,22 +24,23 @@ type ModelContext = {
     options: { signal: AbortSignal },
   ) => void | Promise<void>;
 };
-export function InquiryForm() {
-  const [service, setService] = useState('');
-  const [intent, setIntent] = useState('quote');
+export function InquiryForm({
+  initialService,
+  intent,
+}: {
+  initialService: string;
+  intent: 'quote' | 'inspection';
+}) {
+  const [service, setService] = useState(initialService);
   const [draft, setDraft] = useState<{ body: string; href: string } | null>(
     null,
   );
   const [copyStatus, setCopyStatus] = useState('');
+  const [formError, setFormError] = useState('');
+  const [submitStatus, setSubmitStatus] = useState<
+    'idle' | 'sending' | 'sent' | 'fallback'
+  >('idle');
   useEffect(() => {
-    const query = new URLSearchParams(window.location.search);
-    const selected = query.get('service');
-    const purpose = query.get('intent');
-    if (services.some((s) => s.key === selected)) setService(selected!);
-    if (purpose === 'inspection') {
-      setIntent('inspection');
-      if (!selected) setService('special-inspection');
-    }
     const context = (document as Document & { modelContext?: ModelContext })
       .modelContext;
     if (!context?.registerTool) return;
@@ -81,18 +83,54 @@ export function InquiryForm() {
     } catch {}
     return () => lifecycle.abort();
   }, []);
-  function prepare(event: FormEvent<HTMLFormElement>) {
+  async function submit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const field = (name: string, fallback = '') => {
+      const value = data.get(name);
+      return typeof value === 'string' ? value.trim() || fallback : fallback;
+    };
+    if (!field('name') || !field('email') || !field('address')) {
+      setDraft(null);
+      setFormError('Please enter your name, email, and project address.');
+      return;
+    }
+    setFormError('');
+    setSubmitStatus('sending');
     const title =
       services.find((s) => s.key === service)?.short ||
       'General project inquiry';
-    const body = `Hello WellDone Inspection,\n\nI would like to ${intent === 'inspection' ? 'request an inspection' : 'request a quote'}.\n\nService: ${title}\nName: ${String(data.get('name')).trim()}\nEmail: ${String(data.get('email')).trim()}\nPhone: ${String(data.get('phone') || 'Not provided').trim()}\nProject address: ${String(data.get('address')).trim()}\n\nProject details:\n${String(data.get('details') || 'Please contact me to discuss.').trim()}\n\nThank you.`;
-    setCopyStatus('');
-    setDraft({
+    const body = `Hello WellDone Inspection,\n\nI would like to ${intent === 'inspection' ? 'request an inspection' : 'request a quote'}.\n\nService: ${title}\nName: ${field('name')}\nCompany: ${field('company', 'Not provided')}\nEmail: ${field('email')}\nPhone: ${field('phone', 'Not provided')}\nProject address: ${field('address')}\n\nProject details:\n${field('details', 'Please contact me to discuss.')}\n\nThank you.`;
+    const emailDraft = {
       body,
       href: `mailto:welldoneinspect@gmail.com?subject=${encodeURIComponent(`${intent === 'inspection' ? 'Inspection request' : 'Quote request'} — ${title}`)}&body=${encodeURIComponent(body)}`,
-    });
+    };
+    setCopyStatus('');
+    setDraft(emailDraft);
+    try {
+      const response = await fetch('/api/inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          intent,
+          service,
+          name: field('name'),
+          company: field('company'),
+          email: field('email'),
+          phone: field('phone'),
+          address: field('address'),
+          details: field('details'),
+          website: field('website'),
+        }),
+      });
+      if (response.ok) {
+        setSubmitStatus('sent');
+        return;
+      }
+      setSubmitStatus('fallback');
+    } catch {
+      setSubmitStatus('fallback');
+    }
   }
   async function copy() {
     if (!draft) return;
@@ -116,20 +154,33 @@ export function InquiryForm() {
           : 'Get a project quote'}
       </h2>
       <p className="form-explanation">
-        Prepare your inquiry here, then review and send it from your email app.
-        Or call us directly.
+        Share the project address, service, and scope. If online delivery is not
+        configured yet, you can still send the prepared inquiry from your email
+        app.
       </p>
       <form
-        onSubmit={prepare}
+        onSubmit={submit}
         onChange={() => {
           setDraft(null);
           setCopyStatus('');
+          setFormError('');
+          setSubmitStatus('idle');
         }}
       >
+        <div className="form-honeypot" aria-hidden="true">
+          <label htmlFor="inquiry-website">Website</label>
+          <input
+            id="inquiry-website"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
         <div className="form-grid">
-          <label>
+          <label htmlFor="inquiry-name">
             Your name <span>*</span>
             <Input
+              id="inquiry-name"
               name="name"
               autoComplete="name"
               placeholder="Full name"
@@ -137,9 +188,10 @@ export function InquiryForm() {
               maxLength={100}
             />
           </label>
-          <label>
+          <label htmlFor="inquiry-email">
             Email address <span>*</span>
             <Input
+              id="inquiry-email"
               name="email"
               type="email"
               autoComplete="email"
@@ -149,9 +201,20 @@ export function InquiryForm() {
             />
           </label>
         </div>
-        <label>
+        <label htmlFor="inquiry-company">
+          Company
+          <Input
+            id="inquiry-company"
+            name="company"
+            autoComplete="organization"
+            placeholder="Company or organization"
+            maxLength={120}
+          />
+        </label>
+        <label htmlFor="inquiry-phone">
           Phone number
           <Input
+            id="inquiry-phone"
             name="phone"
             type="tel"
             autoComplete="tel"
@@ -181,9 +244,10 @@ export function InquiryForm() {
             Not sure — let’s discuss
           </NativeSelectOption>
         </NativeSelect>
-        <label>
+        <label htmlFor="inquiry-address">
           Project address <span>*</span>
           <Input
+            id="inquiry-address"
             name="address"
             autoComplete="street-address"
             placeholder="Street address and borough"
@@ -191,29 +255,51 @@ export function InquiryForm() {
             maxLength={250}
           />
         </label>
-        <label>
+        <label htmlFor="inquiry-details">
           Tell us about your project
           <Textarea
+            id="inquiry-details"
             name="details"
             placeholder="Work scope, areas of concern, preferred timing, or questions…"
             maxLength={1800}
             rows={5}
           />
         </label>
-        <Button type="submit" className="form-submit">
-          Prepare email inquiry <ArrowUpRight size={18} />
+        <p className="form-error" aria-live="polite">
+          {formError}
+        </p>
+        <Button
+          type="submit"
+          className="form-submit"
+          disabled={submitStatus === 'sending'}
+        >
+          {submitStatus === 'sending'
+            ? 'Sending…'
+            : intent === 'inspection'
+              ? 'Request inspection'
+              : 'Request quote'}{' '}
+          <ArrowUpRight size={18} />
         </Button>
         <p className="form-note">
-          Your details stay in this form until you choose to send the email.{' '}
-          <a href="/privacy">Privacy</a>
+          Do not include sensitive personal records.{' '}
+          <Link href="/privacy">Privacy information</Link>
         </p>
       </form>
-      {draft && (
-        <div className="draft-result" aria-live="polite">
-          <h3>Your email draft is ready.</h3>
+      {submitStatus === 'sent' && (
+        <div className="draft-result form-success" aria-live="polite">
+          <h3>Your request has been sent.</h3>
           <p>
-            Open your email app, review the details, and send to our team. Your
-            inquiry has not been sent yet.
+            Thank you. WellDone will review the project details and follow up
+            using the contact information provided.
+          </p>
+        </div>
+      )}
+      {draft && submitStatus === 'fallback' && (
+        <div className="draft-result" aria-live="polite">
+          <h3>Send the prepared email to complete your request.</h3>
+          <p>
+            Online delivery is not configured in this preview. Open your email
+            app, review the details, and send the message to our team.
           </p>
           <a className="action primary" href={draft.href}>
             <Mail size={17} />
@@ -224,7 +310,7 @@ export function InquiryForm() {
             <Copy size={16} />
             Copy inquiry
           </Button>
-          <p role="status">{copyStatus}</p>
+          <output className="copy-status">{copyStatus}</output>
           <details>
             <summary>View email draft</summary>
             <pre>{draft.body}</pre>

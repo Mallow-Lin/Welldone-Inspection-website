@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { ArrowUpRight } from 'lucide-react';
 import { services } from '@/lib/services';
@@ -6,6 +7,7 @@ export const metadata: Metadata = {
   title: 'NYC Inspection, Asbestos & Engineering Services',
   description:
     'Explore NYC Special Inspections, Asbestos Surveys and ACP-5 support, and Engineering Reports and Assessments from WellDone Inspection.',
+  alternates: { canonical: '/services' },
 };
 export default function Services() {
   return (
@@ -24,7 +26,7 @@ export default function Services() {
       </section>
       <section className="section service-directory">
         {services.map((s) => (
-          <a key={s.key} href={`/${s.slug}`}>
+          <Link key={s.key} href={`/${s.slug}`}>
             <span className="directory-number">{s.number}</span>
             <div>
               <p className="eyebrow dark">{s.label}</p>
@@ -32,7 +34,7 @@ export default function Services() {
               <p>{s.card}</p>
             </div>
             <ArrowUpRight size={30} />
-          </a>
+          </Link>
         ))}
       </section>
       <CTA />

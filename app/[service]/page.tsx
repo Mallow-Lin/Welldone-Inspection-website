@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ArrowUpRight, Phone, Check, ArrowRight } from 'lucide-react';
@@ -46,9 +47,9 @@ export default async function ServicePage({
     <>
       <section className="service-hero section">
         <div className="breadcrumbs">
-          <a href="/">Home</a>
+          <Link href="/">Home</Link>
           <span>/</span>
-          <a href="/services">Services</a>
+          <Link href="/services">Services</Link>
           <span>/</span>
           <span>{s.short}</span>
         </div>
@@ -58,10 +59,10 @@ export default async function ServicePage({
             <h1>{s.title}</h1>
             <p className="landing-intro">{s.intro}</p>
             <div className="actions">
-              <a className="action primary" href={inquiryLink(s)}>
+              <Link className="action primary" href={inquiryLink(s)}>
                 {s.cta}
                 <ArrowUpRight size={19} />
-              </a>
+              </Link>
               <a className="text-link" href="tel:+19172131886">
                 <Phone size={16} />
                 Call (917) 213-1886
@@ -121,9 +122,9 @@ export default async function ServicePage({
               </li>
             ))}
           </ul>
-          <a className="text-link dark" href={inquiryLink(s)}>
+          <Link className="text-link dark" href={inquiryLink(s)}>
             Start your inquiry <ArrowRight size={17} />
-          </a>
+          </Link>
         </div>
       </section>
       <section className="section faq-section">
@@ -143,17 +144,17 @@ export default async function ServicePage({
         </div>
         <FAQ items={s.faqs} />
       </section>
-      <CTA href={inquiryLink(s)} />
+      <CTA href={`/contact?service=${s.key}&intent=quote`} />
       <section className="section related">
         <p className="eyebrow dark">OTHER WAYS WE CAN HELP</p>
         <div>
           {services
             .filter((x) => x.key !== s.key)
             .map((x) => (
-              <a key={x.key} href={`/${x.slug}`}>
+              <Link key={x.key} href={`/${x.slug}`}>
                 {x.short}
                 <ArrowUpRight size={19} />
-              </a>
+              </Link>
             ))}
         </div>
       </section>

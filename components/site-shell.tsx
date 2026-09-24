@@ -1,25 +1,40 @@
+import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowUpRight, Phone } from 'lucide-react';
 import { MobileNav, MobileContactBar } from '@/components/mobile-nav';
 import { services } from '@/lib/services';
 export function Header() {
   return (
     <header className="site-header">
-      <a className="brand" href="/" aria-label="WellDone Inspection home">
-        WellDone<span>INSPECTION & ENGINEERING</span>
-      </a>
+      <Link className="brand" href="/" aria-label="WellDone Inspection home">
+        <Image src="/welldone-mark.png" alt="" width={54} height={54} />
+        <span className="brand-type">
+          WellDone<small>INSPECTION &amp; ENGINEERING</small>
+        </span>
+      </Link>
       <nav aria-label="Main navigation">
-        <a href="/services">Services</a>
-        <a href="/projects">Experience</a>
-        <a href="/about">About us</a>
-        <a href="/contact">Contact</a>
+        <div className="services-nav-item">
+          <Link href="/services">Services</Link>
+          <div className="services-nav-panel">
+            {services.map((service) => (
+              <Link key={service.key} href={`/${service.slug}`}>
+                <small>{service.number}</small>
+                {service.short}
+              </Link>
+            ))}
+          </div>
+        </div>
+        <Link href="/projects">Projects</Link>
+        <Link href="/about">About</Link>
+        <Link href="/contact">Contact</Link>
       </nav>
       <a className="header-phone" href="tel:+19172131886">
         <Phone size={15} />
         <span>(917) 213-1886</span>
       </a>
-      <a className="header-cta" href="/contact?intent=quote">
-        Get a quote <ArrowUpRight size={18} />
-      </a>
+      <Link className="header-cta" href="/contact?intent=inspection">
+        Request inspection <ArrowUpRight size={18} />
+      </Link>
       <MobileNav />
     </header>
   );
@@ -29,14 +44,17 @@ export function Footer() {
     <>
       <footer className="site-footer">
         <div className="footer-main">
-          <a className="brand" href="/">
-            WellDone<span>INSPECTION & ENGINEERING</span>
-          </a>
+          <Link className="brand" href="/">
+            <Image src="/welldone-mark.png" alt="" width={54} height={54} />
+            <span className="brand-type">
+              WellDone<small>INSPECTION &amp; ENGINEERING</small>
+            </span>
+          </Link>
           <div className="footer-services">
             {services.map((s) => (
-              <a key={s.key} href={`/${s.slug}`}>
+              <Link key={s.key} href={`/${s.slug}`}>
                 {s.short}
-              </a>
+              </Link>
             ))}
           </div>
           <div>
@@ -46,17 +64,17 @@ export function Footer() {
             <a href="tel:+19172131886">(917) 213-1886</a>
           </div>
           <address>
-            10 Hallets Point
+            10 Halletts Point
             <br />
-            Astoria, NY 11102
+            Queens, NY 11102
           </address>
         </div>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} WellDone Inspection, Inc.</span>
-          <a href="/privacy">Privacy</a>
-          <a href="/contact">
+          <Link href="/privacy">Privacy</Link>
+          <Link href="/contact">
             Start a conversation <ArrowUpRight size={14} />
-          </a>
+          </Link>
         </div>
       </footer>
       <MobileContactBar />
