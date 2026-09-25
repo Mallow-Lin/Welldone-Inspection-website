@@ -31,6 +31,7 @@ export default function About() {
             width={1280}
             height={688}
             sizes="(max-width: 680px) 82vw, 42vw"
+            loading="eager"
           />
           <div>
             <span>NEW YORK CITY</span>
@@ -69,8 +70,14 @@ export default function About() {
           </p>
         </div>
         <ul>
+          <li className="pe-license-item">
+            <Check size={16} />
+            <span>
+              Licensed Professional Engineer in <strong>NY</strong>, NJ, CT, PA,
+              FL, KY, TX, VA, MA, MD, UT, MS, LA, and AL
+            </span>
+          </li>
           {[
-            'NY / NJ licensed Professional Engineer',
             'Structural and geotechnical background',
             'AWS Certified Welding Inspector',
             'ICC Master of Special Inspection',

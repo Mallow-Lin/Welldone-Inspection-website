@@ -3,25 +3,25 @@ import { ArrowUpRight } from 'lucide-react';
 import { CTA } from '@/components/cta';
 import { projects } from '@/lib/projects';
 export const metadata: Metadata = {
-  title: 'Selected NYC Project Experience',
+  title: 'Selected Professional Experience',
   description:
-    'Explore selected New York City project experience highlighted by Welldone Inspection, including commercial, cultural, and educational buildings.',
+    'Selected professional experience reflecting the engineering and inspection background behind Welldone across commercial, cultural, and educational buildings.',
   alternates: { canonical: '/projects' },
 };
 export default function Projects() {
   return (
     <>
       <section className="section page-heading">
-        <p className="eyebrow dark">SELECTED PROJECT EXPERIENCE</p>
+        <p className="eyebrow dark">SELECTED PROFESSIONAL EXPERIENCE</p>
         <h1>
-          Part of New York’s
+          Engineering and inspection
           <br />
-          built environment.
+          experience in New York.
         </h1>
         <p>
-          Project experience across commercial, cultural, and educational
-          buildings. Contact us to discuss relevant inspection scope and
-          references for your project.
+          Selected professional experience reflecting the engineering and
+          inspection background behind Welldone. Contact us to discuss relevant
+          scope and references for your project.
         </p>
       </section>
       <section className="section project-list">

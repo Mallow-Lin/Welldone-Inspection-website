@@ -5,14 +5,14 @@ import { projects } from '@/lib/projects';
 import { services } from '@/lib/services';
 
 export const metadata = {
-  title: 'NYC Special Inspections, Asbestos Surveys & Engineering',
+  title: 'NYC Inspection & Engineering Services',
   description:
-    'Welldone Inspection supports NYC property owners, contractors, architects, and project teams with Special Inspections, Asbestos Surveys / ACP-5, and Engineering Assessments.',
+    'Special inspections, asbestos surveys, and engineering reports for construction and existing buildings across New York City.',
   alternates: { canonical: '/' },
 };
 
 const qualifications = [
-  'NY / NJ licensed Professional Engineer',
+  'Licensed P.E. — NY + Multiple States',
   'NYC DOB-registered Special Inspection Agency',
   'AWS Certified Welding Inspector',
   'ICC Master of Special Inspection',
@@ -53,14 +53,10 @@ export default function Home() {
             <span className="status-dot" /> NEW YORK CITY · INSPECTION &amp;
             ENGINEERING SERVICES
           </p>
-          <h1>
-            NYC Special Inspections, Asbestos Surveys &amp; Engineering
-            Assessments
-          </h1>
+          <h1>NYC Inspection &amp; Engineering Services</h1>
           <p className="hero-description">
-            Welldone supports New York City property owners, contractors,
-            architects, and project teams with focused inspection, survey, and
-            engineering-related services.
+            Special inspections, asbestos surveys, and engineering reports for
+            construction and existing buildings across New York City.
           </p>
           <div className="actions">
             <Link className="action primary" href="/contact?intent=inspection">
@@ -72,7 +68,6 @@ export default function Home() {
           </div>
           <div className="hero-proof">
             <span>DOB-registered Special Inspection Agency</span>
-            <span aria-hidden="true">·</span>
             <span>NYC-based</span>
           </div>
         </div>
@@ -100,7 +95,7 @@ export default function Home() {
 
       <div className="credential-strip" aria-label="Professional credentials">
         <span>ENGINEER-LED. DETAIL-DRIVEN.</span>
-        <span>NY &amp; NJ Licensed P.E.</span>
+        <span>Multi-State Licensed Professional Engineer</span>
         <span>AWS · ICC · ACI</span>
         <span>MWBE Certified</span>
       </div>
@@ -109,7 +104,7 @@ export default function Home() {
         <div className="section-heading">
           <p className="eyebrow dark">01 / PRIMARY SERVICES</p>
           <div>
-            <h2>Three core services for NYC properties and construction.</h2>
+            <h2>Core services for NYC buildings and construction projects.</h2>
             <p>
               Each service has a dedicated page for project-specific information
               and a direct path to request an inspection or quote.
@@ -186,12 +181,12 @@ export default function Home() {
 
       <section className="section selected-projects">
         <div className="section-heading">
-          <p className="eyebrow dark">04 / SELECTED EXPERIENCE</p>
+          <p className="eyebrow dark">04 / PROFESSIONAL EXPERIENCE</p>
           <div>
-            <h2>Experience across New York’s built environment.</h2>
+            <h2>Selected Professional Experience</h2>
             <p>
-              Selected experience from the existing Welldone portfolio across
-              commercial, cultural, and educational buildings.
+              Selected professional experience reflecting the engineering and
+              inspection background behind Welldone.
             </p>
           </div>
           <Link className="text-link dark" href="/projects">
