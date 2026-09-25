@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRight, ArrowUpRight, Check, Phone } from 'lucide-react';
 import { CTA } from '@/components/cta';
 import { projects } from '@/lib/projects';
@@ -142,7 +143,7 @@ export default function Home() {
       </section>
 
       <section className="intro-band section qualifications-band">
-        <div>
+        <div className="qualification-intro">
           <p className="eyebrow">02 / QUALIFICATIONS &amp; EXPERIENCE</p>
           <h2>
             Engineering experience.
@@ -158,6 +159,17 @@ export default function Home() {
             Review our qualifications <ArrowUpRight size={18} />
           </Link>
         </div>
+        <figure className="qualification-portrait">
+          <Image
+            src="/images/team/james-jiang-pe.webp"
+            alt="James Jiang, P.E."
+            width={800}
+            height={1000}
+            sizes="(max-width: 680px) 65vw, (max-width: 1000px) 22vw, 19vw"
+            loading="eager"
+          />
+          <figcaption>James Jiang, P.E.</figcaption>
+        </figure>
         <ul className="home-qualification-list">
           {qualifications.map((qualification) => (
             <li key={qualification}>

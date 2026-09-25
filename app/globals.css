@@ -2807,3 +2807,71 @@ body,
     gap: 26px;
   }
 }
+
+/* Phase 1.2 — approved professional portrait */
+.qualifications-band {
+  grid-template-columns: minmax(0, 1.16fr) minmax(210px, 0.64fr) minmax(0, 1fr);
+  gap: 4.5%;
+  align-items: center;
+}
+
+.qualification-portrait {
+  width: min(100%, 300px);
+  margin: 0;
+  justify-self: center;
+}
+
+.qualification-portrait img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.qualification-portrait figcaption {
+  padding-top: 13px;
+  color: #314a44;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+
+@media (max-width: 1000px) {
+  .qualifications-band {
+    grid-template-columns: minmax(0, 1.08fr) minmax(180px, 0.62fr) minmax(
+        0,
+        1fr
+      );
+    gap: 3.5%;
+  }
+
+  .qualification-portrait {
+    width: min(100%, 240px);
+  }
+
+  .home-qualification-list li {
+    padding-block: 13px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 680px) {
+  .qualifications-band {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    align-items: start;
+  }
+
+  .qualification-portrait {
+    width: min(65vw, 240px);
+    justify-self: start;
+  }
+
+  .qualification-portrait figcaption {
+    padding-top: 11px;
+  }
+
+  .home-qualification-list {
+    margin-top: 0;
+  }
+}
