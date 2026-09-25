@@ -5,6 +5,7 @@ import { ArrowUpRight, Phone, Check, ArrowRight } from 'lucide-react';
 import { services, inquiryLink } from '@/lib/services';
 import { FAQ } from '@/components/faq';
 import { CTA } from '@/components/cta';
+import { SpecialInspectionsPage } from '@/components/special-inspections-page';
 
 export function generateStaticParams() {
   return services.map((s) => ({ service: s.slug }));
@@ -43,6 +44,7 @@ export default async function ServicePage({
   const { service } = await params;
   const s = services.find((x) => x.slug === service);
   if (!s) notFound();
+  if (s.key === 'special-inspection') return <SpecialInspectionsPage />;
   return (
     <>
       <section className="service-hero section">

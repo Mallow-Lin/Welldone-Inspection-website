@@ -14,9 +14,9 @@ export const services = [
     ],
     label: 'INSPECTIONS & TESTING',
     title: 'NYC Special Inspection Services',
-    seoTitle: 'NYC Special Inspection Services | TR1 & TR8',
+    seoTitle: 'NYC Special Inspection Services',
     description:
-      'NYC Special Inspection services for TR1, TR8, structural steel, welding, bolting, concrete, masonry, and post-installed anchors.',
+      'NYC special inspection services for structural steel, welding, bolting, concrete, masonry, post-installed anchors, TR1, TR8, and construction projects.',
     headline: 'Build with confidence.\nInspect with expertise.',
     intro:
       'Special inspections and testing for New York City construction projects. Bring us your plans and inspection requirements—we’ll help define the scope and next steps.',

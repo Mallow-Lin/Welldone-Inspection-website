@@ -2,12 +2,14 @@ import Link from 'next/link';
 import { ArrowUpRight, Phone } from 'lucide-react';
 export function CTA({
   title = 'Your next project. Our full attention.',
+  description,
   href = '/contact?intent=quote',
   label,
   secondaryHref,
   secondaryLabel,
 }: {
   title?: string;
+  description?: string;
   href?: string;
   label?: string;
   secondaryHref?: string;
@@ -21,6 +23,7 @@ export function CTA({
       <div>
         <p className="eyebrow">LET’S TALK ABOUT WHAT’S NEXT</p>
         <h2>{title}</h2>
+        {description && <p className="cta-description">{description}</p>}
       </div>
       <div className="cta-actions">
         <Link className="action primary" href={href}>
