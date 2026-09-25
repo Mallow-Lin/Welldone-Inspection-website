@@ -6,7 +6,7 @@ import { CTA } from '@/components/cta';
 export const metadata: Metadata = {
   title: 'NYC Inspection, Asbestos & Engineering Services',
   description:
-    'Explore NYC Special Inspections, Asbestos Surveys and ACP-5 support, and Engineering Reports and Assessments from WellDone Inspection.',
+    'Explore NYC Special Inspections, Asbestos Surveys and ACP-5 support, and Engineering Reports and Assessments from Welldone Inspection.',
   alternates: { canonical: '/services' },
 };
 export default function Services() {

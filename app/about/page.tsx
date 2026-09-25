@@ -5,7 +5,7 @@ import { CTA } from '@/components/cta';
 export const metadata: Metadata = {
   title: 'About Our NYC Inspection & Engineering Practice',
   description:
-    'Meet WellDone Inspection, a NYC-based, engineer-led Special Inspection Agency founded by James Jiang, P.E. Technical expertise with personal accountability.',
+    'Meet Welldone Inspection, a NYC-based, engineer-led Special Inspection Agency founded by James Jiang, P.E. Technical expertise with personal accountability.',
   alternates: { canonical: '/about' },
 };
 export default function About() {
@@ -24,13 +24,19 @@ export default function About() {
         </p>
       </section>
       <section className="about-feature">
-        <Image
-          src="/construction.png"
-          alt="Construction work supported by a tower crane"
-          width={2586}
-          height={1355}
-          sizes="(max-width: 680px) 100vw, 48vw"
-        />
+        <div className="about-brand-panel">
+          <Image
+            src="/welldone-logo.png"
+            alt="Welldone Inspection Inc."
+            width={1280}
+            height={688}
+            sizes="(max-width: 680px) 82vw, 42vw"
+          />
+          <div>
+            <span>NEW YORK CITY</span>
+            <span>INSPECTION + ENGINEERING</span>
+          </div>
+        </div>
         <div>
           <p className="eyebrow">ENGINEER-LED, FROM THE START</p>
           <h2>
@@ -39,7 +45,7 @@ export default function About() {
             reaches the field.
           </h2>
           <p>
-            WellDone Inspection, Inc. is a New York City–based, DOB-registered
+            Welldone Inspection Inc. is a New York City–based, DOB-registered
             Special Inspection Agency led by James Jiang, P.E.
           </p>
           <p>

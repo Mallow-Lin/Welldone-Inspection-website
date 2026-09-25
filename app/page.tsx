@@ -1,11 +1,15 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ArrowUpRight, Check, Phone } from 'lucide-react';
 import { CTA } from '@/components/cta';
 import { projects } from '@/lib/projects';
 import { services } from '@/lib/services';
 
-export const metadata = { alternates: { canonical: '/' } };
+export const metadata = {
+  title: 'NYC Special Inspections, Asbestos Surveys & Engineering',
+  description:
+    'Welldone Inspection supports NYC property owners, contractors, architects, and project teams with Special Inspections, Asbestos Surveys / ACP-5, and Engineering Assessments.',
+  alternates: { canonical: '/' },
+};
 
 const qualifications = [
   'NY / NJ licensed Professional Engineer',
@@ -25,6 +29,21 @@ const clientTypes = [
   'Commercial Clients',
 ];
 
+const reasons = [
+  [
+    'Engineer-led perspective',
+    'Structural engineering and construction oversight experience informs how we approach field conditions and project requirements.',
+  ],
+  [
+    'Focused project scope',
+    'We start with the address, plans, observed conditions, and intended use so the service can be defined around the actual project.',
+  ],
+  [
+    'Direct communication',
+    'As a small business, Welldone emphasizes responsiveness, attention to detail, and accountability throughout the engagement.',
+  ],
+];
+
 export default function Home() {
   return (
     <>
@@ -39,8 +58,9 @@ export default function Home() {
             Assessments
           </h1>
           <p className="hero-description">
-            Engineer-led field services, clear documentation, and responsive
-            project support for New York City properties and construction.
+            Welldone supports New York City property owners, contractors,
+            architects, and project teams with focused inspection, survey, and
+            engineering-related services.
           </p>
           <div className="actions">
             <Link className="action primary" href="/contact?intent=inspection">
@@ -56,24 +76,26 @@ export default function Home() {
             <span>NYC-based</span>
           </div>
         </div>
-        <div className="hero-image">
-          <Image
-            src="/construction.png"
-            alt="Construction site and tower crane in New York City"
-            width={2586}
-            height={1355}
-            sizes="(max-width: 680px) 100vw, 48vw"
-            fetchPriority="high"
-          />
-          <div className="image-caption">
-            <span>
-              FIELD EXPERIENCE.
-              <br />
-              CLEAR DIRECTION.
-            </span>
-            <span className="image-caption-number">NYC / 01</span>
+        <aside className="hero-technical" aria-label="Primary service areas">
+          <div className="technical-grid-label">
+            <span>WELLDONE / NYC</span>
+            <span>FIELD + REPORTING SERVICES</span>
           </div>
-        </div>
+          <div className="hero-service-index">
+            {services.map((service) => (
+              <Link href={`/${service.slug}`} key={service.key}>
+                <span>{service.number}</span>
+                <strong>{service.short}</strong>
+                <ArrowUpRight size={18} />
+              </Link>
+            ))}
+          </div>
+          <div className="technical-footer">
+            <span>INSPECTION</span>
+            <span>SURVEY</span>
+            <span>ASSESSMENT</span>
+          </div>
+        </aside>
       </section>
 
       <div className="credential-strip" aria-label="Professional credentials">
@@ -87,10 +109,10 @@ export default function Home() {
         <div className="section-heading">
           <p className="eyebrow dark">01 / PRIMARY SERVICES</p>
           <div>
-            <h2>Three ways we help move NYC projects forward.</h2>
+            <h2>Three core services for NYC properties and construction.</h2>
             <p>
-              Focused inspection, survey, and engineering support for building
-              owners and project teams.
+              Each service has a dedicated page for project-specific information
+              and a direct path to request an inspection or quote.
             </p>
           </div>
           <Link className="text-link dark" href="/services">
@@ -111,6 +133,11 @@ export default function Home() {
               <span className="small-label">{service.label}</span>
               <h3>{service.short}</h3>
               <p>{service.card}</p>
+              <ul className="service-card-details">
+                {service.homeItems.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
               <span className="service-card-link">
                 Explore service <ArrowRight size={15} />
               </span>
@@ -121,19 +148,19 @@ export default function Home() {
 
       <section className="intro-band section qualifications-band">
         <div>
-          <p className="eyebrow">02 / WHY WELLDONE</p>
+          <p className="eyebrow">02 / QUALIFICATIONS &amp; EXPERIENCE</p>
           <h2>
-            Technical expertise.
+            Engineering experience.
             <br />
-            <span>Personal accountability.</span>
+            <span>Applied in the field.</span>
           </h2>
           <p className="qualifications-copy">
-            Led by James Jiang, P.E., WellDone brings more than 10 years of
-            structural engineering and construction oversight experience to the
-            field—backed by direct communication and careful documentation.
+            Led by James Jiang, P.E., Welldone brings more than 10 years of
+            structural engineering and construction oversight experience to its
+            inspection and engineering-related work.
           </p>
           <Link href="/about" className="text-link">
-            About our qualifications <ArrowUpRight size={18} />
+            Review our qualifications <ArrowUpRight size={18} />
           </Link>
         </div>
         <ul className="home-qualification-list">
@@ -145,15 +172,26 @@ export default function Home() {
         </ul>
       </section>
 
+      <section className="section client-types">
+        <div>
+          <p className="eyebrow dark">03 / WHO WE SERVE</p>
+          <h2>Professional support for every side of the project.</h2>
+        </div>
+        <div className="client-type-grid">
+          {clientTypes.map((client) => (
+            <span key={client}>{client}</span>
+          ))}
+        </div>
+      </section>
+
       <section className="section selected-projects">
         <div className="section-heading">
-          <p className="eyebrow dark">03 / SELECTED EXPERIENCE</p>
+          <p className="eyebrow dark">04 / SELECTED EXPERIENCE</p>
           <div>
             <h2>Experience across New York’s built environment.</h2>
             <p>
-              Selected project experience from the existing WellDone portfolio.
-              Ask us about relevant inspection scope and experience for your
-              building type.
+              Selected experience from the existing Welldone portfolio across
+              commercial, cultural, and educational buildings.
             </p>
           </div>
           <Link className="text-link dark" href="/projects">
@@ -172,54 +210,30 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section client-types">
-        <div>
-          <p className="eyebrow dark">04 / WHO WE SUPPORT</p>
-          <h2>Professional support for every side of the project.</h2>
-        </div>
-        <div className="client-type-grid">
-          {clientTypes.map((client) => (
-            <span key={client}>{client}</span>
-          ))}
-        </div>
-      </section>
-
-      <section className="section home-process">
+      <section className="section why-welldone">
         <div className="section-heading">
-          <p className="eyebrow dark">05 / A CLEAR NEXT STEP</p>
+          <p className="eyebrow dark">05 / WHY WELLDONE</p>
           <div>
-            <h2>From first call to defined scope.</h2>
+            <h2>Serious technical work. Direct project support.</h2>
           </div>
         </div>
         <div className="process-grid">
-          {[
-            [
-              '01',
-              'Share your project',
-              'Tell us the address, scope, and service you need. Plans and photos help us understand the work.',
-            ],
-            [
-              '02',
-              'Define the scope',
-              'We review your needs and discuss the appropriate services, pricing, and scheduling.',
-            ],
-            [
-              '03',
-              'Move forward',
-              'With the scope agreed, we coordinate the next steps for your inspection, survey, or assessment.',
-            ],
-          ].map(([number, title, description]) => (
-            <article key={number}>
-              <span>{number}</span>
+          {reasons.map(([title, description], index) => (
+            <article key={title}>
+              <span>0{index + 1}</span>
               <h3>{title}</h3>
               <p>{description}</p>
             </article>
           ))}
         </div>
       </section>
+
       <CTA
         title="Tell us what your project needs."
         href="/contact?intent=inspection"
+        label="Request an inspection"
+        secondaryHref="/contact?intent=quote"
+        secondaryLabel="Get a quote"
       />
     </>
   );

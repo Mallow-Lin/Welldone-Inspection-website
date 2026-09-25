@@ -4,10 +4,14 @@ export function CTA({
   title = 'Your next project. Our full attention.',
   href = '/contact?intent=quote',
   label,
+  secondaryHref,
+  secondaryLabel,
 }: {
   title?: string;
   href?: string;
   label?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
 }) {
   const actionLabel =
     label ||
@@ -22,6 +26,11 @@ export function CTA({
         <Link className="action primary" href={href}>
           {actionLabel} <ArrowUpRight size={18} />
         </Link>
+        {secondaryHref && secondaryLabel && (
+          <Link className="action secondary-action" href={secondaryHref}>
+            {secondaryLabel} <ArrowUpRight size={18} />
+          </Link>
+        )}
         <a className="text-link" href="tel:+19172131886">
           <Phone size={16} />
           (917) 213-1886

@@ -5,7 +5,7 @@ import { projects } from '@/lib/projects';
 export const metadata: Metadata = {
   title: 'Selected NYC Project Experience',
   description:
-    'Explore selected New York City project experience highlighted by WellDone Inspection, including commercial, cultural, and educational buildings.',
+    'Explore selected New York City project experience highlighted by Welldone Inspection, including commercial, cultural, and educational buildings.',
   alternates: { canonical: '/projects' },
 };
 export default function Projects() {

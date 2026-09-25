@@ -1968,7 +1968,7 @@ a {
 .mobile-menu-panel {
   position: fixed;
   z-index: 50;
-  top: 80px;
+  top: 100px;
   right: 0;
   bottom: calc(63px + env(safe-area-inset-bottom));
   width: min(90vw, 390px);
@@ -2039,6 +2039,9 @@ a {
 }
 
 @media (max-width: 680px) {
+  .mobile-menu-panel {
+    top: 80px;
+  }
   .brand > img {
     width: 34px;
     height: 34px;
@@ -2143,5 +2146,218 @@ a {
   .mobile-contact-bar a {
     gap: 5px;
     font-size: 10px;
+  }
+}
+
+/* Image-light engineering direction */
+.hero-technical {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 590px;
+  padding: 42px 7% 38px;
+  overflow: hidden;
+  background-color: #1b3b36;
+  background-image:
+    linear-gradient(rgb(220 231 217 / 9%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(220 231 217 / 9%) 1px, transparent 1px);
+  background-size: 72px 72px;
+  border-left: 1px solid #4c635a;
+}
+.hero-technical::before {
+  position: absolute;
+  top: 15%;
+  right: -12%;
+  width: 54%;
+  aspect-ratio: 1;
+  border: 1px solid rgb(216 170 43 / 55%);
+  content: '';
+  transform: rotate(45deg);
+}
+.technical-grid-label,
+.technical-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  color: #bdcabe;
+  font:
+    11px/1.4 var(--font-geist-mono),
+    monospace;
+  letter-spacing: 1px;
+}
+.hero-service-index {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid #5b7168;
+}
+.hero-service-index a {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  gap: 18px;
+  align-items: center;
+  min-height: 82px;
+  border-bottom: 1px solid #5b7168;
+}
+.hero-service-index a > span {
+  color: #d8aa2b;
+  font:
+    12px var(--font-geist-mono),
+    monospace;
+}
+.hero-service-index strong {
+  max-width: 360px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.hero-service-index a:hover strong {
+  color: #e5bd4b;
+}
+.service-card {
+  display: flex;
+  flex-direction: column;
+}
+.service-card h3 {
+  min-height: 94px;
+  line-height: 1.18;
+}
+.service-card > p {
+  min-height: 70px;
+  font-size: 14px;
+}
+.service-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 132px;
+  margin: 23px 0 0;
+  padding: 20px 0 0;
+  list-style: none;
+  border-top: 1px solid #d5dcd2;
+}
+.service-card-details li {
+  position: relative;
+  padding-left: 15px;
+  color: #465752;
+  font-size: 13px;
+  line-height: 1.35;
+}
+.service-card-details li::before {
+  position: absolute;
+  top: 0.55em;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  background: #d8aa2b;
+  content: '';
+}
+.service-card-link {
+  margin-top: auto;
+  padding-top: 25px;
+}
+.why-welldone {
+  border-top: 1px solid #d5dcd2;
+}
+.secondary-action {
+  border: 1px solid #71857b;
+  color: #f7f8ef;
+}
+.secondary-action:hover {
+  background: #284740;
+}
+.about-brand-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 50px;
+  min-height: 510px;
+  padding: 70px 12% !important;
+  overflow: hidden;
+  background-color: #eef1e7;
+  background-image:
+    linear-gradient(rgb(23 53 50 / 8%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(23 53 50 / 8%) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+.about-brand-panel::after {
+  position: absolute;
+  right: -13%;
+  bottom: -34%;
+  width: 55%;
+  aspect-ratio: 1;
+  border: 1px solid #d8aa2b;
+  content: '';
+  transform: rotate(45deg);
+}
+.about-brand-panel img {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 470px);
+  height: auto;
+  object-fit: contain;
+}
+.about-brand-panel > div {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 18px;
+  border-top: 1px solid #aab8a6;
+  color: #596961;
+  font:
+    11px var(--font-geist-mono),
+    monospace;
+  letter-spacing: 0.8px;
+}
+
+@media (max-width: 1000px) {
+  .hero-technical {
+    padding-inline: 6%;
+  }
+  .hero-service-index strong {
+    font-size: 15px;
+  }
+  .service-card h3 {
+    min-height: 115px;
+  }
+}
+
+@media (max-width: 900px) {
+  .site-header nav,
+  .header-phone {
+    display: none;
+  }
+  .mobile-nav {
+    display: block;
+  }
+  .site-header > .header-cta {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero-technical {
+    display: none;
+  }
+  .service-card h3,
+  .service-card > p,
+  .service-card-details {
+    min-height: 0;
+  }
+  .service-card-details {
+    padding-bottom: 4px;
+  }
+  .about-brand-panel {
+    min-height: 280px;
+    padding: 45px 8% !important;
+  }
+  .about-brand-panel > div {
+    flex-direction: column;
+    gap: 7px;
   }
 }

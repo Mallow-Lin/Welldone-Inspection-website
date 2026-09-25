@@ -10,7 +10,7 @@ export default function Privacy() {
       <p className="eyebrow dark">PRIVACY</p>
       <h1>Your project inquiry.</h1>
       <p>
-        The inquiry form sends the information you provide to WellDone
+        The inquiry form sends the information you provide to Welldone
         Inspection when online delivery is configured. This website does not
         include a separate customer database for inquiry details.
       </p>

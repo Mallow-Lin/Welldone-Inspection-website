@@ -5,7 +5,7 @@ import { services } from '@/lib/services';
 export const metadata: Metadata = {
   title: 'Request an Inspection or Get a Quote in NYC',
   description:
-    'Contact WellDone Inspection for NYC Special Inspections, Asbestos Surveys / ACP-5, and Engineering Reports. Call (917) 213-1886 or send your project details.',
+    'Contact Welldone Inspection for NYC Special Inspections, Asbestos Surveys / ACP-5, and Engineering Reports. Call (917) 213-1886 or send your project details.',
   alternates: { canonical: '/contact' },
 };
 export default async function Contact({

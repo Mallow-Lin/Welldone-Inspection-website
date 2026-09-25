@@ -17,7 +17,7 @@ export function MobileNav() {
         </summary>
         <div className="mobile-menu-panel">
           <div className="mobile-menu-heading">
-            <strong>WellDone Inspection</strong>
+            <strong>Welldone Inspection</strong>
             <span>NYC inspection &amp; engineering</span>
           </div>
           <nav aria-label="Mobile navigation">

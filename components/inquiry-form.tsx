@@ -100,7 +100,7 @@ export function InquiryForm({
     const title =
       services.find((s) => s.key === service)?.short ||
       'General project inquiry';
-    const body = `Hello WellDone Inspection,\n\nI would like to ${intent === 'inspection' ? 'request an inspection' : 'request a quote'}.\n\nService: ${title}\nName: ${field('name')}\nCompany: ${field('company', 'Not provided')}\nEmail: ${field('email')}\nPhone: ${field('phone', 'Not provided')}\nProject address: ${field('address')}\n\nProject details:\n${field('details', 'Please contact me to discuss.')}\n\nThank you.`;
+    const body = `Hello Welldone Inspection,\n\nI would like to ${intent === 'inspection' ? 'request an inspection' : 'request a quote'}.\n\nService: ${title}\nName: ${field('name')}\nCompany: ${field('company', 'Not provided')}\nEmail: ${field('email')}\nPhone: ${field('phone', 'Not provided')}\nProject address: ${field('address')}\n\nProject details:\n${field('details', 'Please contact me to discuss.')}\n\nThank you.`;
     const emailDraft = {
       body,
       href: `mailto:welldoneinspect@gmail.com?subject=${encodeURIComponent(`${intent === 'inspection' ? 'Inspection request' : 'Quote request'} — ${title}`)}&body=${encodeURIComponent(body)}`,
@@ -188,6 +188,29 @@ export function InquiryForm({
               maxLength={100}
             />
           </label>
+          <label htmlFor="inquiry-company">
+            Company
+            <Input
+              id="inquiry-company"
+              name="company"
+              autoComplete="organization"
+              placeholder="Company or organization"
+              maxLength={120}
+            />
+          </label>
+        </div>
+        <div className="form-grid">
+          <label htmlFor="inquiry-phone">
+            Phone number
+            <Input
+              id="inquiry-phone"
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              placeholder="Optional"
+              maxLength={40}
+            />
+          </label>
           <label htmlFor="inquiry-email">
             Email address <span>*</span>
             <Input
@@ -201,27 +224,6 @@ export function InquiryForm({
             />
           </label>
         </div>
-        <label htmlFor="inquiry-company">
-          Company
-          <Input
-            id="inquiry-company"
-            name="company"
-            autoComplete="organization"
-            placeholder="Company or organization"
-            maxLength={120}
-          />
-        </label>
-        <label htmlFor="inquiry-phone">
-          Phone number
-          <Input
-            id="inquiry-phone"
-            name="phone"
-            type="tel"
-            autoComplete="tel"
-            placeholder="Optional"
-            maxLength={40}
-          />
-        </label>
         <label htmlFor="service">
           Service needed <span>*</span>
         </label>
@@ -237,12 +239,10 @@ export function InquiryForm({
           </NativeSelectOption>
           {services.map((s) => (
             <NativeSelectOption key={s.key} value={s.key}>
-              {s.short}
+              {s.formLabel}
             </NativeSelectOption>
           ))}
-          <NativeSelectOption value="other">
-            Not sure — let’s discuss
-          </NativeSelectOption>
+          <NativeSelectOption value="other">Other</NativeSelectOption>
         </NativeSelect>
         <label htmlFor="inquiry-address">
           Project address <span>*</span>
@@ -256,7 +256,7 @@ export function InquiryForm({
           />
         </label>
         <label htmlFor="inquiry-details">
-          Tell us about your project
+          Project description
           <Textarea
             id="inquiry-details"
             name="details"
@@ -289,7 +289,7 @@ export function InquiryForm({
         <div className="draft-result form-success" aria-live="polite">
           <h3>Your request has been sent.</h3>
           <p>
-            Thank you. WellDone will review the project details and follow up
+            Thank you. Welldone will review the project details and follow up
             using the contact information provided.
           </p>
         </div>

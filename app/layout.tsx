@@ -18,16 +18,16 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_ORIGIN),
   title: {
     default:
-      'WellDone Inspection | NYC Special Inspections, Asbestos & Engineering',
-    template: '%s | WellDone Inspection',
+      'Welldone Inspection | NYC Special Inspections, Asbestos & Engineering',
+    template: '%s | Welldone Inspection',
   },
   description:
-    'NYC Special Inspections, Asbestos Surveys / ACP-5, and Engineering Reports & Assessments. Request an inspection or get a project quote from WellDone Inspection.',
+    'NYC Special Inspections, Asbestos Surveys / ACP-5, and Engineering Reports & Assessments. Request an inspection or get a project quote from Welldone Inspection.',
   icons: { icon: '/favicon.svg' },
   openGraph: {
     type: 'website',
-    siteName: 'WellDone Inspection',
-    title: 'WellDone Inspection — NYC Inspection & Engineering Services',
+    siteName: 'Welldone Inspection',
+    title: 'Welldone Inspection — NYC Inspection & Engineering Services',
     description:
       'NYC Special Inspections · Asbestos Surveys / ACP-5 · Engineering Reports',
     images: [
@@ -35,13 +35,13 @@ export const metadata: Metadata = {
         url: '/og.png',
         width: 1733,
         height: 907,
-        alt: 'WellDone Inspection — NYC Inspection and Engineering Services',
+        alt: 'Welldone Inspection — NYC Inspection and Engineering Services',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'WellDone Inspection — NYC Inspection & Engineering Services',
+    title: 'Welldone Inspection — NYC Inspection & Engineering Services',
     description:
       'NYC Special Inspections · Asbestos Surveys / ACP-5 · Engineering Reports',
     images: ['/og.png'],
@@ -69,7 +69,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'ProfessionalService',
-              name: 'WellDone Inspection, Inc.',
+              name: 'Welldone Inspection Inc.',
               url: SITE_ORIGIN,
               telephone: '+1-917-213-1886',
               email: 'welldoneinspect@gmail.com',

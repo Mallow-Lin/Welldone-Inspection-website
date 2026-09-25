@@ -6,13 +6,14 @@ import { services } from '@/lib/services';
 export function Header() {
   return (
     <header className="site-header">
-      <Link className="brand" href="/" aria-label="WellDone Inspection home">
+      <Link className="brand" href="/" aria-label="Welldone Inspection home">
         <Image src="/welldone-mark.png" alt="" width={54} height={54} />
         <span className="brand-type">
           WellDone<small>INSPECTION &amp; ENGINEERING</small>
         </span>
       </Link>
       <nav aria-label="Main navigation">
+        <Link href="/">Home</Link>
         <div className="services-nav-item">
           <Link href="/services">Services</Link>
           <div className="services-nav-panel">
@@ -70,7 +71,7 @@ export function Footer() {
           </address>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} WellDone Inspection, Inc.</span>
+          <span>© {new Date().getFullYear()} Welldone Inspection Inc.</span>
           <Link href="/privacy">Privacy</Link>
           <Link href="/contact">
             Start a conversation <ArrowUpRight size={14} />
