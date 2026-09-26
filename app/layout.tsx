@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Header, Footer } from '@/components/site-shell';
 import { StructuredData } from '@/components/structured-data';
-import { SITE_ORIGIN, IS_PREVIEW } from '@/lib/site';
+import { SITE_ORIGIN } from '@/lib/site';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
       'NYC Special Inspections · Asbestos Surveys / ACP-5 · Engineering Reports',
     images: ['/og.png'],
   },
-  robots: { index: !IS_PREVIEW, follow: !IS_PREVIEW },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({

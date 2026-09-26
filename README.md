@@ -20,28 +20,27 @@ pnpm build
 
 ## Contact form configuration
 
-The form posts to `/api/inquiry`. Email delivery is server-side so no private
-key is exposed to browser code. Copy `.env.example` to `.env.local` and set:
+The static form sends through the existing Gmail-connected EmailJS service.
+Copy `.env.example` to `.env.local` for local development. The browser build
+uses these public EmailJS identifiers:
 
-- `RESEND_API_KEY`: server-side Resend API key
-- `CONTACT_FORM_TO_EMAIL`: destination address
-- `CONTACT_FORM_FROM_EMAIL`: sender on a domain verified with Resend
+- `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
+- `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
+- `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
 
-If those variables are absent or delivery fails, the form presents a prepared
-email draft so the visitor can still contact Welldone. Do not prefix any of
-these variables with `NEXT_PUBLIC_`.
+The verified values were recovered from the latest implementation of the old
+Welldone site. These are intentionally public identifiers embedded in browser
+code, not private server credentials. If EmailJS is unavailable, the form
+presents a prepared email draft so the visitor can still contact Welldone.
 
-The form includes server-side validation, a hidden honeypot field, a minimum
-completion-time check, request-size limits, and same-site request screening.
-These are basic controls rather than a substitute for platform-level abuse
-monitoring.
+The form includes browser validation, a hidden honeypot field, a minimum
+completion-time check, and EmailJS browser rate limiting.
 
-## Vercel preview and release
+## Static GitHub Pages release
 
-See [`DEPLOYMENT.md`](./DEPLOYMENT.md) for the preview-deployment workflow,
-environment variables, Resend domain verification, and final production
-checklist. Vercel Preview deployments are automatically marked `noindex`; the
-Production environment is indexable.
+See [`GITHUB_PAGES.md`](./GITHUB_PAGES.md) for the static-export workflow,
+EmailJS configuration, custom-domain file, and release checklist. `pnpm build`
+generates the complete site in `out/`.
 
 ## Content and assets
 
@@ -56,5 +55,5 @@ Production environment is indexable.
 ## Release safety
 
 Redesign work belongs on the `redesign` branch. Do not merge it into the
-production branch, attach the production domain, or change DNS until the site
-owner approves the release.
+production branch or deploy it until the site owner approves the release. The
+existing Namecheap DNS remains unchanged.

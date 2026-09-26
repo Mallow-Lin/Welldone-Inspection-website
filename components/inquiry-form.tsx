@@ -1,5 +1,7 @@
 'use client';
+import emailjs from '@emailjs/browser';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState, type SubmitEvent } from 'react';
 import { flushSync } from 'react-dom';
 import { ArrowUpRight, Copy, Mail } from 'lucide-react';
@@ -11,6 +13,13 @@ import {
   NativeSelectOption,
 } from '@/components/ui/native-select';
 import { services } from '@/lib/services';
+
+const emailJsConfig = {
+  serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+  templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+  publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+};
+
 type ModelContext = {
   registerTool: (
     tool: {
@@ -24,7 +33,30 @@ type ModelContext = {
     options: { signal: AbortSignal },
   ) => void | Promise<void>;
 };
-export function InquiryForm({
+
+export function InquiryForm() {
+  const searchParams = useSearchParams();
+  const intent =
+    searchParams.get('intent') === 'inspection' ? 'inspection' : 'quote';
+  const requestedService = searchParams.get('service');
+  const initialService = services.some(
+    (service) => service.key === requestedService,
+  )
+    ? requestedService!
+    : intent === 'inspection'
+      ? 'special-inspection'
+      : '';
+
+  return (
+    <InquiryFormFields
+      key={`${initialService}:${intent}`}
+      initialService={initialService}
+      intent={intent}
+    />
+  );
+}
+
+function InquiryFormFields({
   initialService,
   intent,
 }: {
@@ -109,38 +141,59 @@ export function InquiryForm({
     };
     setCopyStatus('');
     setDraft(emailDraft);
-    try {
-      const response = await fetch('/api/inquiry', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          intent,
-          service,
-          name: field('name'),
-          company: field('company'),
-          email: field('email'),
-          phone: field('phone'),
-          address: field('address'),
-          details: field('details'),
-          website: field('website'),
-          source: `${window.location.pathname}${window.location.search}`,
-          startedAt: formStartedAt.current,
-        }),
-      });
-      if (response.ok) {
-        setSubmitStatus('sent');
-        return;
-      }
-      if (response.status === 400) {
-        const result = (await response.json().catch(() => null)) as {
-          error?: string;
-        } | null;
-        setFormError(
-          result?.error || 'Please review the required project information.',
-        );
-      }
+
+    const website = field('website');
+    const completionTime = Date.now() - formStartedAt.current;
+    if (website || !formStartedAt.current || completionTime < 1_500) {
+      setSubmitStatus('sent');
+      return;
+    }
+
+    if (!services.some((item) => item.key === service) && service !== 'other') {
+      setFormError('Please select a valid service.');
+      setSubmitStatus('idle');
+      return;
+    }
+
+    const { serviceId, templateId, publicKey } = emailJsConfig;
+    if (!serviceId || !templateId || !publicKey) {
+      setFormError(
+        'Online submission is temporarily unavailable. Please use the prepared email option below.',
+      );
       setSubmitStatus('fallback');
+      return;
+    }
+
+    const source = `${window.location.pathname}${window.location.search}`;
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: field('name'),
+          email: field('email'),
+          phone: field('phone', 'Not provided'),
+          message: `${body}\n\nSource page: ${source}`,
+          company: field('company', 'Not provided'),
+          service: title,
+          address: field('address'),
+          details: field('details', 'Not provided'),
+          source,
+        },
+        {
+          publicKey,
+          blockHeadless: true,
+          limitRate: {
+            id: 'welldone-contact-form',
+            throttle: 10_000,
+          },
+        },
+      );
+      setSubmitStatus('sent');
     } catch {
+      setFormError(
+        'We could not send your request online. Please use the prepared email option below.',
+      );
       setSubmitStatus('fallback');
     }
   }

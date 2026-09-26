@@ -1,27 +1,14 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Phone, Mail, MapPin, ArrowUpRight } from 'lucide-react';
 import { InquiryForm } from '@/components/inquiry-form';
-import { services } from '@/lib/services';
 export const metadata: Metadata = {
   title: 'Request an Inspection or Get a Quote in NYC',
   description:
     'Contact Welldone Inspection for NYC Special Inspections, Asbestos Surveys / ACP-5, and Engineering Reports. Call (917) 213-1886 or send your project details.',
   alternates: { canonical: '/contact' },
 };
-export default async function Contact({
-  searchParams,
-}: {
-  searchParams: Promise<{ service?: string; intent?: string }>;
-}) {
-  const query = await searchParams;
-  const intent = query.intent === 'inspection' ? 'inspection' : 'quote';
-  const initialService = services.some(
-    (service) => service.key === query.service,
-  )
-    ? query.service!
-    : intent === 'inspection'
-      ? 'special-inspection'
-      : '';
+export default function Contact() {
   return (
     <section className="section contact-page">
       <div>
@@ -60,11 +47,21 @@ export default async function Contact({
           </div>
         </div>
       </div>
-      <InquiryForm
-        key={`${initialService}:${intent}`}
-        initialService={initialService}
-        intent={intent}
-      />
+      <Suspense fallback={<InquiryFormFallback />}>
+        <InquiryForm />
+      </Suspense>
     </section>
+  );
+}
+
+function InquiryFormFallback() {
+  return (
+    <div className="inquiry-panel" aria-busy="true">
+      <p className="eyebrow dark">PROJECT INQUIRY</p>
+      <h2>Get a project quote</h2>
+      <p className="form-explanation">
+        Share your project information and we’ll review your request.
+      </p>
+    </div>
   );
 }
