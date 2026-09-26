@@ -14,11 +14,7 @@ export default function Services() {
     <>
       <section className="section page-heading">
         <p className="eyebrow dark">OUR SERVICES · NEW YORK CITY</p>
-        <h1>
-          Three ways to move
-          <br />
-          your project forward.
-        </h1>
+        <h1>Inspection &amp; Engineering Services for NYC Projects</h1>
         <p>
           Inspection expertise, environmental assessment support, and
           engineering insight—organized around what your property needs.

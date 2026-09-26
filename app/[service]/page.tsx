@@ -45,6 +45,10 @@ export default async function ServicePage({
   const s = services.find((x) => x.slug === service);
   if (!s) notFound();
   if (s.key === 'special-inspection') return <SpecialInspectionsPage />;
+  const commonReasons =
+    'commonReasons' in s && Array.isArray(s.commonReasons)
+      ? s.commonReasons
+      : [];
   return (
     <>
       <section className="service-hero section">
@@ -102,6 +106,26 @@ export default async function ServicePage({
           ))}
         </div>
       </section>
+      {commonReasons.length > 0 && (
+        <section className="section common-reasons">
+          <div>
+            <p className="eyebrow dark">PRACTICAL ENGINEERING SUPPORT</p>
+            <h2>Common Reasons Clients Contact Us</h2>
+            <p className="body-copy">
+              The appropriate assessment and report scope depends on the
+              observed condition, available information, and intended use.
+            </p>
+          </div>
+          <ul>
+            {commonReasons.map((reason) => (
+              <li key={reason}>
+                <Check size={17} />
+                {reason}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       <section className="section prepare-band">
         <div>
           <p className="eyebrow dark">GETTING STARTED</p>

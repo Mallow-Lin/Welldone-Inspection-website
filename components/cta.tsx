@@ -17,7 +17,9 @@ export function CTA({
 }) {
   const actionLabel =
     label ||
-    (href.includes('intent=inspection') ? 'Request inspection' : 'Get a quote');
+    (href.includes('intent=inspection')
+      ? 'Request an inspection'
+      : 'Get a quote');
   return (
     <section className="section cta-band">
       <div>

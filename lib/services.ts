@@ -6,29 +6,29 @@ export const services = [
     short: 'NYC Special Inspections',
     formLabel: 'Special Inspection',
     homeItems: [
-      'TR1 / TR8',
-      'Structural Steel',
-      'Welding & Bolting',
-      'Concrete & Masonry',
-      'Post-Installed Anchors',
+      'TR1 Special Inspections',
+      'Structural Steel · Welding · Bolting',
+      'Concrete · Masonry · Anchors',
+      'Testing / Related DOB Services',
+      'TR8 Energy Code Progress Inspections',
     ],
     label: 'INSPECTIONS & TESTING',
     title: 'NYC Special Inspection Services',
     seoTitle: 'NYC Special Inspection Services',
     description:
-      'NYC special inspection services for structural steel, welding, bolting, concrete, masonry, post-installed anchors, TR1, TR8, and construction projects.',
+      'NYC TR1 special inspections, testing and related DOB services, and TR8 energy code progress inspections for construction projects.',
     headline: 'Build with confidence.\nInspect with expertise.',
     intro:
       'Special inspections and testing for New York City construction projects. Bring us your plans and inspection requirements—we’ll help define the scope and next steps.',
     card: 'Special inspections and testing for construction, alterations, and building systems.',
-    cta: 'Request inspection',
+    cta: 'Request an inspection',
     scope: [
       [
         'TR1 · Special inspections',
-        'Structural steel, welding, high-strength bolting, concrete, masonry, post-installed anchors, soils and foundations, wood framing, building systems, and envelope inspections, as applicable.',
+        'Structural steel, welding, high-strength bolting, concrete, masonry, post-installed anchors, soils and foundations, wood framing, building systems, and enclosure inspections, as applicable.',
       ],
       [
-        'TR2 / TR3 · Concrete',
+        'TR2 / TR3 · Testing & related DOB services',
         'Concrete sampling and testing, plus concrete design mix support for your project requirements.',
       ],
       [
@@ -36,8 +36,8 @@ export const services = [
         'Pile driving and drilling inspections, including steel H-piles, micropiles, helical piles, timber piles, and drilled caissons.',
       ],
       [
-        'TR8 · Energy compliance',
-        'Energy code compliance inspections aligned with the applicable project scope.',
+        'TR8 · Energy Code Progress Inspections',
+        'Energy Code Progress Inspections aligned with the applicable project scope and listed TR8 requirements.',
       ],
     ],
     audience: 'For owners, developers, architects, and contractors',
@@ -69,8 +69,8 @@ export const services = [
     slug: 'asbestos-survey-acp5',
     key: 'asbestos-acp5',
     number: '02',
-    short: 'Asbestos Survey / Inspection / ACP-5',
-    formLabel: 'Asbestos Survey / ACP-5',
+    short: 'Asbestos Survey / Inspection / ACP-5 Support',
+    formLabel: 'Asbestos Survey / ACP-5 Support',
     homeItems: [
       'Site Survey & Inspection',
       'Material Sampling',
@@ -79,13 +79,13 @@ export const services = [
       'ACP-5 Support When Applicable',
     ],
     label: 'SURVEYS & DOCUMENTATION',
-    title: 'NYC Asbestos Survey, Inspection & ACP-5 Services',
-    seoTitle: 'NYC Asbestos Survey, Inspection & ACP-5 Services',
+    title: 'NYC Asbestos Survey, Inspection & ACP-5 Support',
+    seoTitle: 'NYC Asbestos Survey, Inspection & ACP-5 Support',
     description:
       'NYC asbestos surveys, inspections, sampling, reporting, and ACP-5 project support for renovation and demolition scopes when applicable.',
     headline: 'Know the conditions.\nPlan your next step.',
     intro:
-      'Asbestos survey and ACP-5 support for planned renovations and alterations in NYC. Start with a clear picture of the areas affected by your work.',
+      'Asbestos survey, inspection, and ACP-5-related project support for planned renovations and alterations in NYC, when applicable to the work scope.',
     card: 'Asbestos surveys and assessment documentation for planned renovations and alterations.',
     cta: 'Get a quote',
     scope: [
@@ -99,7 +99,7 @@ export const services = [
       ],
       [
         'Reporting & ACP-5 support',
-        'Document findings and determine whether an ACP-5 Asbestos Assessment Report is the appropriate filing based on the survey and work scope.',
+        'Document survey findings and coordinate ACP-5-related next steps when applicable. Required documentation depends on the findings and project scope.',
       ],
       [
         'Renovation & demolition coordination',
@@ -123,7 +123,7 @@ export const services = [
       ],
       [
         'Will every survey result in an ACP-5?',
-        'No. The findings and proposed work determine the filing path. Some projects require asbestos abatement and different documentation.',
+        'No. Applicable documentation depends on the survey findings and proposed work. Some projects may require asbestos abatement and different documentation.',
       ],
       [
         'What should I send for a quote?',
@@ -181,6 +181,17 @@ export const services = [
       'Property address and areas of concern',
       'Photos and existing drawings, if available',
       'Purpose of the report and intended recipient',
+    ],
+    commonReasons: [
+      'Cracks in walls, slabs, foundations, or masonry',
+      'Structural damage or deterioration',
+      'Construction defects',
+      'Settlement or movement concerns',
+      'Existing building conditions',
+      'Repair recommendations',
+      'Damage evaluation',
+      'Documentation requested by project stakeholders',
+      'Signed and sealed engineering reports when applicable',
     ],
     faqs: [
       [

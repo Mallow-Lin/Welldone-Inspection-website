@@ -34,7 +34,7 @@ export function Header() {
         <span>(917) 213-1886</span>
       </a>
       <Link className="header-cta" href="/contact?intent=inspection">
-        Request inspection <ArrowUpRight size={18} />
+        Request an inspection <ArrowUpRight size={18} />
       </Link>
       <MobileNav />
     </header>

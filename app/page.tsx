@@ -13,7 +13,7 @@ export const metadata = {
 };
 
 const qualifications = [
-  'Licensed P.E. — NY + Multiple States',
+  'Licensed Professional Engineer — NY + 13 Additional States',
   'NYC DOB-registered Special Inspection Agency',
   'AWS Certified Welding Inspector',
   'ICC Master of Special Inspection',
@@ -96,7 +96,7 @@ export default function Home() {
 
       <div className="credential-strip" aria-label="Professional credentials">
         <span>ENGINEER-LED. DETAIL-DRIVEN.</span>
-        <span>Multi-State Licensed Professional Engineer</span>
+        <span>Licensed Professional Engineer — NY + 13 Additional States</span>
         <span>AWS · ICC · ACI</span>
         <span>MWBE Certified</span>
       </div>
@@ -197,8 +197,9 @@ export default function Home() {
           <div>
             <h2>Selected Professional Experience</h2>
             <p>
-              Selected professional experience reflecting the engineering and
-              inspection background behind Welldone.
+              Selected professional experience of James Jiang, P.E. and the
+              engineering and inspection background behind Welldone Inspection
+              Inc.
             </p>
           </div>
           <Link className="text-link dark" href="/projects">

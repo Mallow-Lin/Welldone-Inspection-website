@@ -27,9 +27,9 @@ export default async function Contact({
       <div>
         <p className="eyebrow dark">LET’S GET YOUR PROJECT STARTED</p>
         <h1>
-          Tell us what
+          Tell us about
           <br />
-          you’re building.
+          your project.
         </h1>
         <p className="contact-intro">
           Request an inspection, ask for a quote, or talk through an engineering

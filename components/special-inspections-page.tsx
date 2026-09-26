@@ -9,7 +9,7 @@ const quoteLink = '/contact?service=special-inspection&intent=quote';
 const serviceCategories = [
   {
     number: '01',
-    label: 'STRUCTURAL',
+    label: 'SPECIAL INSPECTIONS · STRUCTURAL',
     title: 'Structural steel & connections',
     description:
       'Field inspection for structural work identified in the project documents and inspection requirements.',
@@ -23,38 +23,24 @@ const serviceCategories = [
   },
   {
     number: '02',
-    label: 'CONCRETE & MASONRY',
-    title: 'Concrete, masonry & material testing',
+    label: 'SPECIAL INSPECTIONS · CONSTRUCTION',
+    title: 'Concrete, masonry & site work',
     description:
-      'Inspection and testing support for concrete and masonry work, as applicable to the project scope.',
+      'Field inspection for construction and site work identified in the project documents.',
     items: [
       'Concrete placement and reinforcing steel',
       'Masonry construction',
-      'TR2 concrete sampling and testing',
-      'TR3 concrete design mix support',
-      'Grout, mortar, core, and soil testing',
+      'Soils and footing conditions',
+      'Excavation and underpinning',
+      'Wood framing and shear walls',
     ],
   },
   {
     number: '03',
-    label: 'SOILS & FOUNDATIONS',
-    title: 'Excavation, footings & deep foundations',
+    label: 'SPECIAL INSPECTIONS · BUILDING SYSTEMS',
+    title: 'Building systems, enclosure & fire protection',
     description:
-      'Observation of subsurface and foundation work listed for inspection on the project.',
-    items: [
-      'Soils and footing conditions',
-      'Excavation and underpinning',
-      'TR5 pile driving and drilling',
-      'Steel H-piles and micropiles',
-      'Helical piles, timber piles, and drilled caissons',
-    ],
-  },
-  {
-    number: '04',
-    label: 'BUILDING SYSTEMS',
-    title: 'Systems, enclosure & fire protection',
-    description:
-      'Applicable inspections for building systems and enclosure work identified in the approved scope.',
+      'Additional verified TR1 categories when identified in the approved project scope.',
     items: [
       'Mechanical, plumbing, and electrical systems',
       'Sprinkler and standpipe systems',
@@ -64,9 +50,23 @@ const serviceCategories = [
     ],
   },
   {
+    number: '04',
+    label: 'TESTING / RELATED DOB SERVICES',
+    title: 'Testing, mix design & deep foundations',
+    description:
+      'Testing and related DOB services coordinated according to the project’s listed requirements.',
+    items: [
+      'TR2 concrete sampling and testing',
+      'TR3 concrete design mix support',
+      'TR5 pile driving and drilling',
+      'Grout, mortar, core, and soil testing',
+      'Steel H-piles, micropiles, helical piles, timber piles, and drilled caissons',
+    ],
+  },
+  {
     number: '05',
-    label: 'ENERGY CODE',
-    title: 'TR8 energy code progress inspections',
+    label: 'PROGRESS INSPECTIONS',
+    title: 'TR8 Energy Code Progress Inspections',
     description:
       'Progress inspection and documentation for energy-code items identified for the project.',
     items: [
@@ -114,7 +114,7 @@ const projectInformation = [
 
 const credentials = [
   'NYC DOB-registered Special Inspection Agency',
-  'Multi-State Licensed Professional Engineer',
+  'Licensed Professional Engineer — NY + 13 Additional States',
   'AWS Certified Welding Inspector',
   'ICC credentials',
   'ACI credentials',
@@ -208,7 +208,7 @@ export function SpecialInspectionsPage() {
               </div>
               <div>
                 <dt>TR8</dt>
-                <dd>Energy Code Inspections</dd>
+                <dd>Energy Code Progress Inspections</dd>
               </div>
             </dl>
           </aside>
@@ -246,13 +246,13 @@ export function SpecialInspectionsPage() {
 
       <section className="section special-categories">
         <div className="special-section-heading">
-          <p className="eyebrow dark">INSPECTION CATEGORIES</p>
+          <p className="eyebrow dark">SERVICES BY CATEGORY</p>
           <div>
-            <h2>Special inspections organized around the work.</h2>
+            <h2>Inspection, testing, and progress inspection services.</h2>
             <p>
-              Available services include the verified categories below.
-              Project-specific scope is confirmed from current drawings and
-              listed requirements.
+              Special Inspections, testing and related DOB services, and TR8
+              Progress Inspections are shown separately below. Project-specific
+              scope is confirmed from current drawings and listed requirements.
             </p>
           </div>
         </div>

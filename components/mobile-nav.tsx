@@ -48,10 +48,10 @@ export function MobileContactBar() {
         <Phone size={17} /> Call
       </a>
       <Link href="/contact?intent=quote">
-        Get quote <ArrowUpRight size={16} />
+        Get a quote <ArrowUpRight size={16} />
       </Link>
       <Link href="/contact?intent=inspection">
-        Request inspection <ArrowUpRight size={16} />
+        Request an inspection <ArrowUpRight size={16} />
       </Link>
     </div>
   );

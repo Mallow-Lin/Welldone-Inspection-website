@@ -14,9 +14,11 @@ export default function About() {
       <section className="section page-heading">
         <p className="eyebrow dark">ABOUT WELLDONE</p>
         <h1>
-          Small team focus.
+          Engineer-led.
           <br />
-          Serious expertise.
+          Detail-driven.
+          <br />
+          Built for NYC projects.
         </h1>
         <p>
           A New York City inspection and engineering practice built on technical
@@ -24,39 +26,40 @@ export default function About() {
         </p>
       </section>
       <section className="about-feature">
-        <div className="about-brand-panel">
+        <figure className="about-founder-portrait">
           <Image
-            src="/welldone-logo.png"
-            alt="Welldone Inspection Inc."
-            width={1280}
-            height={688}
-            sizes="(max-width: 680px) 82vw, 42vw"
+            src="/images/team/james-jiang-pe.webp"
+            alt="James Jiang, P.E."
+            width={800}
+            height={1000}
+            sizes="(max-width: 680px) 100vw, 46vw"
             loading="eager"
           />
-          <div>
-            <span>NEW YORK CITY</span>
-            <span>INSPECTION + ENGINEERING</span>
-          </div>
-        </div>
+          <figcaption>
+            <strong>James Jiang, P.E.</strong>
+            <span>FOUNDER · PROFESSIONAL ENGINEER</span>
+          </figcaption>
+        </figure>
         <div>
           <p className="eyebrow">ENGINEER-LED, FROM THE START</p>
           <h2>
-            Experience that
+            Engineering experience
             <br />
-            reaches the field.
+            applied in the field.
           </h2>
           <p>
             Welldone Inspection Inc. is a New York City–based, DOB-registered
             Special Inspection Agency led by James Jiang, P.E.
           </p>
           <p>
-            Our founder brings over 10 years of experience in structural
-            engineering and construction oversight. That background informs how
-            we approach inspections, assess conditions, and communicate
-            findings.
+            James Jiang’s professional background combines structural and
+            geotechnical engineering, construction oversight, and field
+            inspection. His multi-state P.E. licensure and verified inspection
+            credentials support a detail-driven approach to NYC projects.
           </p>
           <div className="signature">
-            James Jiang, P.E.<span>DIRECTOR · WELLDONE INSPECTION</span>
+            James Jiang, P.E.
+            <span>FOUNDER · PROFESSIONAL ENGINEER</span>
           </div>
         </div>
       </section>
@@ -73,8 +76,8 @@ export default function About() {
           <li className="pe-license-item">
             <Check size={16} />
             <span>
-              Licensed Professional Engineer in <strong>NY</strong>, NJ, CT, PA,
-              FL, KY, TX, VA, MA, MD, UT, MS, LA, and AL
+              Licensed Professional Engineer — <strong>NY</strong>, NJ, CT, PA,
+              FL, KY, TX, VA, MA, MD, UT, MS, LA, AL
             </span>
           </li>
           {[

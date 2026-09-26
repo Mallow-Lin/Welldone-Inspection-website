@@ -154,9 +154,7 @@ export function InquiryForm({
           : 'Get a project quote'}
       </h2>
       <p className="form-explanation">
-        Share the project address, service, and scope. If online delivery is not
-        configured yet, you can still send the prepared inquiry from your email
-        app.
+        Share your project information and we’ll review your request.
       </p>
       <form
         onSubmit={submit}
@@ -276,8 +274,8 @@ export function InquiryForm({
           {submitStatus === 'sending'
             ? 'Sending…'
             : intent === 'inspection'
-              ? 'Request inspection'
-              : 'Request quote'}{' '}
+              ? 'Request an inspection'
+              : 'Get a quote'}{' '}
           <ArrowUpRight size={18} />
         </Button>
         <p className="form-note">
@@ -296,10 +294,10 @@ export function InquiryForm({
       )}
       {draft && submitStatus === 'fallback' && (
         <div className="draft-result" aria-live="polite">
-          <h3>Send the prepared email to complete your request.</h3>
+          <h3>Complete your request by email.</h3>
           <p>
-            Online delivery is not configured in this preview. Open your email
-            app, review the details, and send the message to our team.
+            Review the prepared project details, then send them to our team from
+            your email app.
           </p>
           <a className="action primary" href={draft.href}>
             <Mail size={17} />

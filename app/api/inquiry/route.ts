@@ -62,7 +62,7 @@ export async function POST(request: Request) {
   const from = process.env.CONTACT_FORM_FROM_EMAIL;
   if (!apiKey || !to || !from) {
     return NextResponse.json(
-      { error: 'Online email delivery is not configured.' },
+      { error: 'Online submission is temporarily unavailable.' },
       { status: 503 },
     );
   }

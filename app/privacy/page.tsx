@@ -10,14 +10,9 @@ export default function Privacy() {
       <p className="eyebrow dark">PRIVACY</p>
       <h1>Your project inquiry.</h1>
       <p>
-        The inquiry form sends the information you provide to Welldone
-        Inspection when online delivery is configured. This website does not
-        include a separate customer database for inquiry details.
-      </p>
-      <p>
-        If online delivery is unavailable, the form prepares an email draft on
-        your device. You can review and edit that message before sending it to
-        welldoneinspect@gmail.com through your own email provider.
+        Information submitted through the inquiry form is used by Welldone
+        Inspection to review your project request, respond to your questions,
+        and coordinate requested services.
       </p>
       <p>
         Include only the information needed to discuss your project. Please do
