@@ -56,7 +56,7 @@ pnpm install
 pnpm lint
 pnpm exec tsc --noEmit
 pnpm build
-python3 -m http.server 3001 --directory out
+pnpm preview
 ```
 
 Do not merge or deploy until the site owner approves the static build.

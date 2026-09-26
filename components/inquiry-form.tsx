@@ -2,7 +2,7 @@
 import emailjs from '@emailjs/browser';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useRef, useState, type SubmitEvent } from 'react';
+import { useEffect, useState, type SubmitEvent } from 'react';
 import { flushSync } from 'react-dom';
 import { ArrowUpRight, Copy, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -15,9 +15,9 @@ import {
 import { services } from '@/lib/services';
 
 const emailJsConfig = {
-  serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-  templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-  publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+  serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_47zticx',
+  templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_sajp3xc',
+  publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'CRGs6SWFjOm9s5AOr',
 };
 
 type ModelContext = {
@@ -72,9 +72,7 @@ function InquiryFormFields({
   const [submitStatus, setSubmitStatus] = useState<
     'idle' | 'sending' | 'sent' | 'fallback'
   >('idle');
-  const formStartedAt = useRef(0);
   useEffect(() => {
-    formStartedAt.current = Date.now();
     const context = (document as Document & { modelContext?: ModelContext })
       .modelContext;
     if (!context?.registerTool) return;
@@ -119,14 +117,25 @@ function InquiryFormFields({
   }, []);
   async function submit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const data = new FormData(form);
     const field = (name: string, fallback = '') => {
       const value = data.get(name);
       return typeof value === 'string' ? value.trim() || fallback : fallback;
     };
-    if (!field('name') || !field('email') || !field('address')) {
+    const email = field('email');
+    if (
+      !field('name') ||
+      !email ||
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
+      !field('address') ||
+      (!services.some((item) => item.key === service) && service !== 'other')
+    ) {
       setDraft(null);
-      setFormError('Please enter your name, email, and project address.');
+      setFormError(
+        'Please enter your name, a valid email, project address, and service needed.',
+      );
+      setSubmitStatus('idle');
       return;
     }
     setFormError('');
@@ -140,17 +149,9 @@ function InquiryFormFields({
       href: `mailto:welldoneinspect@gmail.com?subject=${encodeURIComponent(`${intent === 'inspection' ? 'Inspection request' : 'Quote request'} — ${title}`)}&body=${encodeURIComponent(body)}`,
     };
     setCopyStatus('');
-    setDraft(emailDraft);
 
     const website = field('website');
-    const completionTime = Date.now() - formStartedAt.current;
-    if (website || !formStartedAt.current || completionTime < 1_500) {
-      setSubmitStatus('sent');
-      return;
-    }
-
-    if (!services.some((item) => item.key === service) && service !== 'other') {
-      setFormError('Please select a valid service.');
+    if (website) {
       setSubmitStatus('idle');
       return;
     }
@@ -158,8 +159,9 @@ function InquiryFormFields({
     const { serviceId, templateId, publicKey } = emailJsConfig;
     if (!serviceId || !templateId || !publicKey) {
       setFormError(
-        'Online submission is temporarily unavailable. Please use the prepared email option below.',
+        "We couldn't send your request. Please try again or contact us directly.",
       );
+      setDraft(emailDraft);
       setSubmitStatus('fallback');
       return;
     }
@@ -189,11 +191,15 @@ function InquiryFormFields({
           },
         },
       );
+      form.reset();
+      setService(initialService);
+      setDraft(null);
       setSubmitStatus('sent');
     } catch {
       setFormError(
-        'We could not send your request online. Please use the prepared email option below.',
+        "We couldn't send your request. Please try again or contact us directly.",
       );
+      setDraft(emailDraft);
       setSubmitStatus('fallback');
     }
   }
@@ -223,6 +229,7 @@ function InquiryFormFields({
       </p>
       <form
         onSubmit={submit}
+        noValidate
         aria-busy={submitStatus === 'sending'}
         onChange={() => {
           setDraft(null);
@@ -338,7 +345,7 @@ function InquiryFormFields({
           disabled={submitStatus === 'sending'}
         >
           {submitStatus === 'sending'
-            ? 'Sending…'
+            ? 'Sending...'
             : intent === 'inspection'
               ? 'Request an inspection'
               : 'Get a quote'}{' '}
@@ -351,11 +358,7 @@ function InquiryFormFields({
       </form>
       {submitStatus === 'sent' && (
         <div className="draft-result form-success" aria-live="polite">
-          <h3>Your request has been sent.</h3>
-          <p>
-            Thank you. Welldone will review the project details and follow up
-            using the contact information provided.
-          </p>
+          <h3>Thank you. Your request has been sent successfully.</h3>
         </div>
       )}
       {draft && submitStatus === 'fallback' && (

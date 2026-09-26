@@ -33,8 +33,8 @@ Welldone site. These are intentionally public identifiers embedded in browser
 code, not private server credentials. If EmailJS is unavailable, the form
 presents a prepared email draft so the visitor can still contact Welldone.
 
-The form includes browser validation, a hidden honeypot field, a minimum
-completion-time check, and EmailJS browser rate limiting.
+The form includes visible browser-side validation, a hidden honeypot field, and
+EmailJS browser rate limiting.
 
 ## Static GitHub Pages release
 
