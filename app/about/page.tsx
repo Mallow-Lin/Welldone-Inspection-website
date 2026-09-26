@@ -32,7 +32,7 @@ export default function About() {
             alt="James Jiang, P.E."
             width={800}
             height={1000}
-            sizes="(max-width: 680px) 100vw, 46vw"
+            sizes="(max-width: 680px) 76vw, (max-width: 1000px) 300px, 320px"
             loading="eager"
           />
           <figcaption>
