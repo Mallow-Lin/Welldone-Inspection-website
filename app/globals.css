@@ -2332,6 +2332,9 @@ a {
   .header-phone {
     display: none;
   }
+  .site-header .mobile-menu-panel nav {
+    display: flex;
+  }
   .mobile-nav {
     display: block;
   }

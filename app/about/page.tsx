@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Check } from 'lucide-react';
 import Image from 'next/image';
 import { CTA } from '@/components/cta';
+import { StructuredData } from '@/components/structured-data';
+import { SITE_ORIGIN } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'About Our NYC Inspection & Engineering Practice',
   description:
@@ -11,6 +13,38 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <>
+      <StructuredData
+        data={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'Person',
+              '@id': `${SITE_ORIGIN}/about#james-jiang`,
+              name: 'James Jiang, P.E.',
+              jobTitle: 'Professional Engineer',
+              url: `${SITE_ORIGIN}/about`,
+              worksFor: { '@id': `${SITE_ORIGIN}/#organization` },
+            },
+            {
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'Home',
+                  item: SITE_ORIGIN,
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'About',
+                  item: `${SITE_ORIGIN}/about`,
+                },
+              ],
+            },
+          ],
+        }}
+      />
       <section className="section page-heading">
         <p className="eyebrow dark">ABOUT WELLDONE</p>
         <h1>
@@ -33,7 +67,6 @@ export default function About() {
             width={800}
             height={1000}
             sizes="(max-width: 680px) 76vw, (max-width: 1000px) 300px, 320px"
-            loading="eager"
           />
           <figcaption>
             <strong>James Jiang, P.E.</strong>
@@ -52,10 +85,10 @@ export default function About() {
             Special Inspection Agency led by James Jiang, P.E.
           </p>
           <p>
-            James Jiang’s professional background combines structural and
-            geotechnical engineering, construction oversight, and field
-            inspection. His multi-state P.E. licensure and verified inspection
-            credentials support a detail-driven approach to NYC projects.
+            James Jiang’s professional background combines structural
+            engineering, construction oversight, and field inspection. His
+            multi-state P.E. licensure and verified inspection credentials
+            support a detail-driven approach to NYC projects.
           </p>
           <div className="signature">
             James Jiang, P.E.
@@ -81,12 +114,12 @@ export default function About() {
             </span>
           </li>
           {[
-            'Structural and geotechnical background',
+            'Structural engineering and construction oversight background',
             'AWS Certified Welding Inspector',
             'ICC Master of Special Inspection',
             'ICC concrete, masonry, welding, bolting, and mechanical certifications',
             'ACI concrete inspection and testing credentials',
-            'LEED AP · PMI Project Management Professionals',
+            'LEED AP and project management credentials',
             'MWBE-certified business',
           ].map((t) => (
             <li key={t}>

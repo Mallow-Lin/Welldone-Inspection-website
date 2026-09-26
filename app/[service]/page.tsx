@@ -6,6 +6,8 @@ import { services, inquiryLink } from '@/lib/services';
 import { FAQ } from '@/components/faq';
 import { CTA } from '@/components/cta';
 import { SpecialInspectionsPage } from '@/components/special-inspections-page';
+import { StructuredData } from '@/components/structured-data';
+import { SITE_ORIGIN } from '@/lib/site';
 
 export function generateStaticParams() {
   return services.map((s) => ({ service: s.slug }));
@@ -23,16 +25,24 @@ export async function generateMetadata({
     description: s.description,
     alternates: { canonical: `/${s.slug}` },
     openGraph: {
+      type: 'website',
       title: s.seoTitle,
       description: s.description,
       url: `/${s.slug}`,
-      images: [],
+      images: [
+        {
+          url: '/og.png',
+          width: 1733,
+          height: 907,
+          alt: 'Welldone Inspection — NYC Inspection and Engineering Services',
+        },
+      ],
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title: s.seoTitle,
       description: s.description,
-      images: [],
+      images: ['/og.png'],
     },
   };
 }
@@ -44,13 +54,59 @@ export default async function ServicePage({
   const { service } = await params;
   const s = services.find((x) => x.slug === service);
   if (!s) notFound();
-  if (s.key === 'special-inspection') return <SpecialInspectionsPage />;
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Service',
+        '@id': `${SITE_ORIGIN}/${s.slug}#service`,
+        name: s.title,
+        description: s.description,
+        serviceType: s.short,
+        url: `${SITE_ORIGIN}/${s.slug}`,
+        provider: { '@id': `${SITE_ORIGIN}/#organization` },
+        areaServed: { '@type': 'City', name: 'New York City' },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: SITE_ORIGIN,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Services',
+            item: `${SITE_ORIGIN}/services`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: s.short,
+            item: `${SITE_ORIGIN}/${s.slug}`,
+          },
+        ],
+      },
+    ],
+  };
+  if (s.key === 'special-inspection') {
+    return (
+      <>
+        <StructuredData data={structuredData} />
+        <SpecialInspectionsPage />
+      </>
+    );
+  }
   const commonReasons =
     'commonReasons' in s && Array.isArray(s.commonReasons)
       ? s.commonReasons
       : [];
   return (
     <>
+      <StructuredData data={structuredData} />
       <section className="service-hero section">
         <div className="breadcrumbs">
           <Link href="/">Home</Link>

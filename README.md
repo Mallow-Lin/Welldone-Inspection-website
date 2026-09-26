@@ -1,7 +1,7 @@
 # Welldone Inspection website redesign
 
-Phase 1 rebuild for Welldone Inspection Inc. using TypeScript, the Next.js App
-Router API, Tailwind CSS, and reusable React components.
+Rebuild for Welldone Inspection Inc. using TypeScript, the Next.js App Router,
+Tailwind CSS, and reusable React components.
 
 ## Local development
 
@@ -31,6 +31,18 @@ If those variables are absent or delivery fails, the form presents a prepared
 email draft so the visitor can still contact Welldone. Do not prefix any of
 these variables with `NEXT_PUBLIC_`.
 
+The form includes server-side validation, a hidden honeypot field, a minimum
+completion-time check, request-size limits, and same-site request screening.
+These are basic controls rather than a substitute for platform-level abuse
+monitoring.
+
+## Vercel preview and release
+
+See [`DEPLOYMENT.md`](./DEPLOYMENT.md) for the preview-deployment workflow,
+environment variables, Resend domain verification, and final production
+checklist. Vercel Preview deployments are automatically marked `noindex`; the
+Production environment is indexable.
+
 ## Content and assets
 
 - `public/welldone-logo.png` and `public/welldone-mark.png` are localized
@@ -44,4 +56,5 @@ these variables with `NEXT_PUBLIC_`.
 ## Release safety
 
 Redesign work belongs on the `redesign` branch. Do not merge it into the
-production branch or deploy it until the site owner approves the design.
+production branch, attach the production domain, or change DNS until the site
+owner approves the release.

@@ -16,7 +16,7 @@ export const services = [
     title: 'NYC Special Inspection Services',
     seoTitle: 'NYC Special Inspection Services',
     description:
-      'NYC TR1 special inspections, testing and related DOB services, and TR8 energy code progress inspections for construction projects.',
+      'NYC special inspection services including TR1 inspections, structural steel, welding, concrete, masonry, and TR8 Energy Code Progress Inspections.',
     headline: 'Build with confidence.\nInspect with expertise.',
     intro:
       'Special inspections and testing for New York City construction projects. Bring us your plans and inspection requirements—we’ll help define the scope and next steps.',

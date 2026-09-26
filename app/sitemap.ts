@@ -9,8 +9,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/about',
     '/projects',
     '/contact',
+    '/privacy',
   ].map((path) => ({
     url: `${SITE_ORIGIN}${path}`,
-    priority: path === '' ? 1 : 0.8,
+    priority: path === '' ? 1 : path === '/privacy' ? 0.3 : 0.8,
   }));
 }

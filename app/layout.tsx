@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Header, Footer } from '@/components/site-shell';
+import { StructuredData } from '@/components/structured-data';
 import { SITE_ORIGIN, IS_PREVIEW } from '@/lib/site';
 
 const geistSans = Geist({
@@ -63,26 +64,29 @@ export default function RootLayout({
           Skip to content
         </a>
         <Header />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'ProfessionalService',
-              name: 'Welldone Inspection Inc.',
-              url: SITE_ORIGIN,
-              telephone: '+1-917-213-1886',
-              email: 'welldoneinspect@gmail.com',
-              address: {
-                '@type': 'PostalAddress',
-                streetAddress: '10 Halletts Point',
-                addressLocality: 'Queens',
-                addressRegion: 'NY',
-                postalCode: '11102',
-                addressCountry: 'US',
-              },
-              areaServed: 'New York City',
-            }).replace(/</g, '\\u003c'),
+        <StructuredData
+          data={{
+            '@context': 'https://schema.org',
+            '@type': ['ProfessionalService', 'LocalBusiness'],
+            '@id': `${SITE_ORIGIN}/#organization`,
+            name: 'Welldone Inspection Inc.',
+            url: SITE_ORIGIN,
+            logo: `${SITE_ORIGIN}/welldone-logo.png`,
+            image: `${SITE_ORIGIN}/og.png`,
+            telephone: '+1-917-213-1886',
+            email: 'welldoneinspect@gmail.com',
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: '10 Halletts Point',
+              addressLocality: 'Queens',
+              addressRegion: 'NY',
+              postalCode: '11102',
+              addressCountry: 'US',
+            },
+            areaServed: {
+              '@type': 'City',
+              name: 'New York City',
+            },
           }}
         />
         <main id="main">{children}</main>

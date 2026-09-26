@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useEffect, useState, type SubmitEvent } from 'react';
+import { useEffect, useRef, useState, type SubmitEvent } from 'react';
 import { flushSync } from 'react-dom';
 import { ArrowUpRight, Copy, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -40,7 +40,9 @@ export function InquiryForm({
   const [submitStatus, setSubmitStatus] = useState<
     'idle' | 'sending' | 'sent' | 'fallback'
   >('idle');
+  const formStartedAt = useRef(0);
   useEffect(() => {
+    formStartedAt.current = Date.now();
     const context = (document as Document & { modelContext?: ModelContext })
       .modelContext;
     if (!context?.registerTool) return;
@@ -121,11 +123,21 @@ export function InquiryForm({
           address: field('address'),
           details: field('details'),
           website: field('website'),
+          source: `${window.location.pathname}${window.location.search}`,
+          startedAt: formStartedAt.current,
         }),
       });
       if (response.ok) {
         setSubmitStatus('sent');
         return;
+      }
+      if (response.status === 400) {
+        const result = (await response.json().catch(() => null)) as {
+          error?: string;
+        } | null;
+        setFormError(
+          result?.error || 'Please review the required project information.',
+        );
       }
       setSubmitStatus('fallback');
     } catch {
@@ -158,6 +170,7 @@ export function InquiryForm({
       </p>
       <form
         onSubmit={submit}
+        aria-busy={submitStatus === 'sending'}
         onChange={() => {
           setDraft(null);
           setCopyStatus('');
@@ -263,7 +276,7 @@ export function InquiryForm({
             rows={5}
           />
         </label>
-        <p className="form-error" aria-live="polite">
+        <p className="form-error" id="inquiry-error" role="alert">
           {formError}
         </p>
         <Button

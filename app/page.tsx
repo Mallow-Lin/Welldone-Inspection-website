@@ -151,8 +151,8 @@ export default function Home() {
             <span>Applied in the field.</span>
           </h2>
           <p className="qualifications-copy">
-            Led by James Jiang, P.E., Welldone brings more than 10 years of
-            structural engineering and construction oversight experience to its
+            Led by James Jiang, P.E., Welldone brings structural engineering,
+            construction oversight, and field inspection experience to its
             inspection and engineering-related work.
           </p>
           <Link href="/about" className="text-link">
@@ -166,7 +166,6 @@ export default function Home() {
             width={800}
             height={1000}
             sizes="(max-width: 680px) 65vw, (max-width: 1000px) 22vw, 19vw"
-            loading="eager"
           />
           <figcaption>James Jiang, P.E.</figcaption>
         </figure>

@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       ...(IS_PREVIEW ? { disallow: '/' } : { allow: '/' }),
     },
-    sitemap: `${SITE_ORIGIN}/sitemap.xml`,
+    ...(!IS_PREVIEW && { sitemap: `${SITE_ORIGIN}/sitemap.xml` }),
   };
 }

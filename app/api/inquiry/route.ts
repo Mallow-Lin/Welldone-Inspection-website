@@ -8,7 +8,10 @@ const limits = {
   phone: 40,
   address: 250,
   details: 1800,
+  source: 300,
 } as const;
+
+const maximumRequestBytes = 25_000;
 
 type Inquiry = {
   intent?: unknown;
@@ -20,6 +23,8 @@ type Inquiry = {
   address?: unknown;
   details?: unknown;
   website?: unknown;
+  source?: unknown;
+  startedAt?: unknown;
 };
 
 function clean(value: unknown, limit: number) {
@@ -27,6 +32,17 @@ function clean(value: unknown, limit: number) {
 }
 
 export async function POST(request: Request) {
+  const contentType = request.headers.get('content-type') || '';
+  const contentLength = Number(request.headers.get('content-length') || 0);
+  const fetchSite = request.headers.get('sec-fetch-site');
+  if (
+    !contentType.toLowerCase().includes('application/json') ||
+    contentLength > maximumRequestBytes ||
+    fetchSite === 'cross-site'
+  ) {
+    return NextResponse.json({ error: 'Invalid request.' }, { status: 400 });
+  }
+
   let input: Inquiry;
   try {
     input = (await request.json()) as Inquiry;
@@ -35,6 +51,15 @@ export async function POST(request: Request) {
   }
 
   if (clean(input.website, 200)) {
+    return NextResponse.json({ ok: true });
+  }
+
+  const startedAt =
+    typeof input.startedAt === 'number' && Number.isFinite(input.startedAt)
+      ? input.startedAt
+      : 0;
+  const completionTime = Date.now() - startedAt;
+  if (!startedAt || completionTime < 1_500 || completionTime > 86_400_000) {
     return NextResponse.json({ ok: true });
   }
 
@@ -47,12 +72,23 @@ export async function POST(request: Request) {
     phone: clean(input.phone, limits.phone),
     address: clean(input.address, limits.address),
     details: clean(input.details, limits.details),
+    source: clean(input.source, limits.source),
   };
 
   const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inquiry.email);
   if (!inquiry.name || !validEmail || !inquiry.address) {
     return NextResponse.json(
       { error: 'Name, valid email, and project address are required.' },
+      { status: 400 },
+    );
+  }
+
+  const supportedService =
+    inquiry.service === 'other' ||
+    services.some((item) => item.key === inquiry.service);
+  if (!supportedService) {
+    return NextResponse.json(
+      { error: 'Please select a valid service.' },
       { status: 400 },
     );
   }
@@ -80,6 +116,7 @@ export async function POST(request: Request) {
     `Email: ${inquiry.email}`,
     `Phone: ${inquiry.phone || 'Not provided'}`,
     `Project address: ${inquiry.address}`,
+    `Source page: ${inquiry.source || 'Not provided'}`,
     '',
     'Project description:',
     inquiry.details || 'Not provided',
